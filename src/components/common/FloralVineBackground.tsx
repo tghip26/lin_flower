@@ -8,7 +8,7 @@ export const FloralVineBackground: React.FC = () => {
     <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden select-none">
       
       {/* Ambient Radial Floral Glows */}
-      <div className="absolute top-[2%] left-[-5%] w-[350px] sm:w-[550px] h-[350px] sm:h-[550px] bg-pink-300/30 rounded-full blur-3xl animate-pulse"></div>
+      <div className="absolute top-[1%] left-[-5%] w-[350px] sm:w-[550px] h-[350px] sm:h-[550px] bg-pink-300/30 rounded-full blur-3xl animate-pulse"></div>
       <div className="absolute top-[30%] right-[-8%] w-[400px] sm:w-[650px] h-[400px] sm:h-[650px] bg-amber-200/30 rounded-full blur-3xl"></div>
       <div className="absolute top-[60%] left-[-5%] w-[350px] sm:w-[550px] h-[350px] sm:h-[550px] bg-rose-200/30 rounded-full blur-3xl"></div>
       <div className="absolute top-[85%] right-[-5%] w-[350px] sm:w-[500px] h-[350px] sm:h-[500px] bg-pink-200/30 rounded-full blur-3xl"></div>
@@ -41,10 +41,10 @@ export const FloralVineBackground: React.FC = () => {
           </filter>
         </defs>
 
-        {/* Outer Glow Layer starting EXACTLY at Node 1 (70, 220) */}
+        {/* Outer Glow Layer starting EXACTLY at Node 1 (110, 165) beside LIN FLOWER */}
         <path
-          d="M 70,220 
-             C 140,380 40,620 180,940 
+          d="M 110,165 
+             C 160,280 50,560 180,940 
              S 1360,1240 1250,1540 
              S 110,1840 260,2240 
              S 1320,2640 1210,3040
@@ -56,10 +56,10 @@ export const FloralVineBackground: React.FC = () => {
           filter="url(#vineGlow)"
         />
 
-        {/* Primary Animated Vine Stem starting EXACTLY at Node 1 (70, 220) */}
+        {/* Primary Animated Vine Stem starting EXACTLY at Node 1 (110, 165) */}
         <motion.path
-          d="M 70,220 
-             C 140,380 40,620 180,940 
+          d="M 110,165 
+             C 160,280 50,560 180,940 
              S 1360,1240 1250,1540 
              S 110,1840 260,2240 
              S 1320,2640 1210,3040
@@ -70,10 +70,10 @@ export const FloralVineBackground: React.FC = () => {
           fill="none"
         />
 
-        {/* Secondary Gold Dotted Line starting at (70, 220) */}
+        {/* Secondary Gold Dotted Line starting at (110, 165) */}
         <path
-          d="M 70,220 
-             C 155,390 55,630 195,950 
+          d="M 110,165 
+             C 175,290 65,570 195,950 
              S 1375,1250 1265,1550 
              S 125,1850 275,2250 
              S 1335,2650 1225,3050"
@@ -87,15 +87,15 @@ export const FloralVineBackground: React.FC = () => {
         {/* Travelling Light Sparkle Particle along the vine path */}
         <circle r="5" fill="#ffffff" filter="url(#vineGlow)">
           <animateMotion
-            path="M 70,220 C 140,380 40,620 180,940 S 1360,1240 1250,1540 S 110,1840 260,2240 S 1320,2640 1210,3040 S 200,3240 300,3380"
+            path="M 110,165 C 160,280 50,560 180,940 S 1360,1240 1250,1540 S 110,1840 260,2240 S 1320,2640 1210,3040 S 200,3240 300,3380"
             dur="14s"
             repeatCount="indefinite"
           />
         </circle>
 
-        {/* NODE 1 - TOP FLOWER HEAD & GREEN LEAVES (LOCKED DIRECTLY AT 70, 220) */}
+        {/* NODE 1 - TOP FLOWER HEAD & GREEN LEAVES MOUNTED DIRECTLY AT (110, 165) BESIDE "LIN FLOWER" */}
         <motion.g
-          transform="translate(70, 220)"
+          transform="translate(110, 165)"
           animate={{ rotate: [0, 8, -8, 0], scale: [1, 1.06, 1] }}
           transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
         >

@@ -31,7 +31,7 @@ export default function HomePage() {
         <FloralVineBackground />
 
         {/* 1. Hero Banner Section */}
-        <section className="relative z-10 pt-8 pb-12">
+        <section className="relative z-10 pt-2 pb-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               
