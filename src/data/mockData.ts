@@ -1,4 +1,4 @@
-import { Category, Product, AddOn, Voucher, Review, Order, BlogPost, CustomOrderRequest } from '@/types';
+import { Category, Product, AddOn, Voucher, Review, Order, BlogPost, CustomOrderRequest, VietQRConfig, TelegramConfig } from '@/types';
 
 export const INITIAL_CATEGORIES: Category[] = [
   {
@@ -226,42 +226,6 @@ export const INITIAL_PRODUCTS: Product[] = [
     inStock: true,
     occasions: ['Cưới hỏi', 'Sự kiện'],
     flowerTypes: ['Hoa hồng', 'Hoa cẩm tú cầu', 'Hoa baby']
-  },
-  {
-    id: 'lf-007',
-    name: 'Bó Hoa Hướng Dương Năng Lượng Rạng Rỡ',
-    slug: 'bo-hoa-huong-duong-nang-luong',
-    categoryId: 'hoa-bo',
-    price: 420000,
-    originalPrice: 480000,
-    images: [
-      'https://images.unsplash.com/photo-1597848212624-a19eb35e2651?auto=format&fit=crop&q=80&w=800'
-    ],
-    description: 'Bó hoa hướng dương rực rỡ tượng trưng cho sự thành công, niềm tin và lời chúc tương lai tươi sáng.',
-    flowerComposition: '5 Bông hướng dương đại, Hoa thạch thảo tím, Lá cau',
-    isBestSeller: true,
-    isFeatured: false,
-    inStock: true,
-    occasions: ['Tốt nghiệp', 'Sinh nhật', 'Chúc mừng'],
-    flowerTypes: ['Hoa hướng dương']
-  },
-  {
-    id: 'lf-008',
-    name: 'Lẵng Hoa Cẩm Tú Cầu Pastel Dịu Dàng',
-    slug: 'lang-hoa-cam-tu-cau-pastel',
-    categoryId: 'lang-chuc-mung',
-    price: 790000,
-    originalPrice: 890000,
-    images: [
-      'https://images.unsplash.com/photo-1508615039623-a25605d2b022?auto=format&fit=crop&q=80&w=800'
-    ],
-    description: 'Lẵng hoa để bàn với cẩm tú cầu xanh mint và hoa hồng phớt dịu dàng, tạo không gian thư thái sang trọng.',
-    flowerComposition: 'Cẩm tú cầu Đà Lạt, Hoa hồng phớt, Hoa cát tường',
-    isBestSeller: false,
-    isFeatured: false,
-    inStock: true,
-    occasions: ['Sinh nhật', 'Tân gia', 'Kỷ niệm'],
-    flowerTypes: ['Hoa cẩm tú cầu', 'Hoa hồng']
   }
 ];
 
@@ -280,14 +244,6 @@ export const INITIAL_VOUCHERS: Voucher[] = [
     fixedDiscount: 50000,
     minOrderValue: 500000,
     description: 'Giảm trực tiếp 50.000đ cho khách hàng mới',
-    expiryDate: '2026-12-31',
-    active: true
-  },
-  {
-    code: 'FREESHIPBN',
-    fixedDiscount: 30000,
-    minOrderValue: 400000,
-    description: 'Ưu đãi phí giao hàng tại Bắc Ninh',
     expiryDate: '2026-12-31',
     active: true
   }
@@ -309,14 +265,6 @@ export const INITIAL_REVIEWS: Review[] = [
     rating: 5,
     comment: 'Giỏ trái cây đầy đặn, trái cây nhập khẩu ngọt lịm. Hoa đính kèm tươi nguyên 3 ngày vẫn đẹp. Dịch vụ tuyệt vời 10/10.',
     createdAt: '2026-08-03'
-  },
-  {
-    id: 'rev-3',
-    productId: 'lf-004',
-    customerName: 'Gia đình Bác Đức',
-    rating: 5,
-    comment: 'Bộ tráp rồng phượng làm vô cùng công phu, bạn bè 2 bên họ hàng ai cũng khen nức nở. Cảm ơn cửa hàng Lin Flower nhiều nhé!',
-    createdAt: '2026-08-04'
   }
 ];
 
@@ -359,67 +307,78 @@ export const INITIAL_ORDERS: Order[] = [
       { status: 'shipping', timestamp: '2026-08-05 09:15', note: 'Shipper Lin Flower đang giao hoa tới người nhận' }
     ],
     photoProofUrl: 'https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?auto=format&fit=crop&q=80&w=600'
-  },
-  {
-    id: 'LF-772109',
-    customerName: 'Lê Thanh Hương',
-    customerPhone: '0912345678',
-    recipientName: 'Công Ty Cổ Phần Thiên An',
-    recipientPhone: '0904112233',
-    recipientAddress: 'KCN Quế Võ 1, Huyện Quế Võ, Bắc Ninh',
-    deliveryDate: '2026-08-05',
-    deliveryTimeSlot: '10:00 - 12:00',
-    isAnonymous: false,
-    bannerText: 'Chúc Mừng Khai Trương Hồng Phát - Công Ty Thiên An',
-    items: [
-      {
-        id: 'cart-item-2',
-        product: INITIAL_PRODUCTS[1],
-        quantity: 1,
-        selectedSize: { name: 'Tiêu chuẩn', priceMultiplier: 1.0, description: 'Kích thước tiêu chuẩn' },
-        selectedAddOns: [],
-      }
-    ],
-    subtotal: 1250000,
-    discount: 125000,
-    voucherCode: 'LINFLOWER10',
-    shippingFee: 0,
-    totalPrice: 1125000,
-    paymentMethod: 'momo',
-    paymentStatus: 'paid',
-    orderStatus: 'completed',
-    createdAt: '2026-08-04T15:20:00Z',
-    statusHistory: [
-      { status: 'pending', timestamp: '2026-08-04 15:20', note: 'Đã nhận đơn' },
-      { status: 'processing', timestamp: '2026-08-04 16:00', note: 'Đang cắm hoa' },
-      { status: 'shipping', timestamp: '2026-08-05 09:30', note: 'Đang giao hoa' },
-      { status: 'completed', timestamp: '2026-08-05 10:15', note: 'Giao hoa thành công' }
-    ]
   }
 ];
 
 export const INITIAL_BLOG_POSTS: BlogPost[] = [
   {
     id: 'blog-1',
-    title: 'Cách Giữ Hoa Tươi Lâu Đến 10 Ngày Đơn Giản Tại Nhà',
+    title: 'Bí Quyết Giữ Bình Hoa Tươi Rực Rỡ Đến 10 Ngày Tại Nhà',
     slug: 'cach-giu-hoa-tuoi-lau-tai-nha',
-    excerpt: 'Mẹo nhỏ cắt gốc xéo 45 độ, pha dung dịch dưỡng hoa và vị trí đặt hoa giúp bình hoa của bạn luôn tươi rực rỡ.',
-    content: 'Để hoa tươi lâu, bạn nên tỉa bớt lá ngập trong nước, cắt cành hoa góc 45 độ bằng kéo sắc và thay nước bình 2 ngày/lần. Có thể thêm 1 thìa đường nhỏ hoặc vài giọt nước chanh để nuôi hoa...',
+    excerpt: 'Mẹo cắt gốc xéo 45 độ, pha dung dịch dưỡng hoa thần thánh và chọn vị trí đặt bình hoa tránh héo quắt đơn giản nhất.',
+    content: `
+Hoa tươi mang lại sức sống và hương thơm ngọt ngào cho không gian sống. Tuy nhiên, nếu không chăm sóc đúng cách, hoa rất dễ bị héo chỉ sau 2-3 ngày. Dưới đây là bí quyết giữ hoa tươi đến 10 ngày từ các nghệ nhânLin Flower:
+
+### 1. Cắt Gốc Xéo 45 Độ Trong Nước
+Khi mua hoa về hoặc nhận bó hoa từ Lin Flower, hãy nhúng phần gốc cành hoa vào một chậu nước sạch rồi dùng kéo thật sắc cắt chéo một góc 45 độ. Lược bỏ bớt lá ngập nước để tránh vi khuẩn phân hủy làm đục nước.
+
+### 2. Dung Dịch Dưỡng Hoa Tự Nhiên
+Pha vào bình nước sạch 1 thìa đường nhỏ (giúp cung cấp dưỡng chất cho hoa) và 2-3 giọt nước chanh tươi hoặc giấm trắng (giúp kháng khuẩn tiêu diệt vi sinh vật gây thối gốc).
+
+### 3. Vị Trí Đặt Bình Hoa
+Tránh đặt hoa gần quạt gió thổi trực tiếp, điều hòa lạnh hoặc ánh nắng mặt trời gay gắt. Nhiệt độ mát mẻ khoảng 22-25 độ C là môi trường lý tưởng nhất để hoa duy trì độ tươi và màu sắc rạng rỡ.
+    `,
     coverImage: 'https://images.unsplash.com/photo-1563241527-3004b7be0ffd?auto=format&fit=crop&q=80&w=800',
     author: 'Lin Flower Master Florist',
-    category: 'Mẹo Hay Chọn Hoa',
-    createdAt: '2026-08-02'
+    category: 'Mẹo Chăm Hoa',
+    readTime: '4 phút đọc',
+    createdAt: '2026-08-02',
+    tags: ['Hoa Tươi', 'Mẹo Chăm Hoa', 'Bảo Quản Hoa', 'Lin Flower']
   },
   {
     id: 'blog-2',
-    title: 'Ý Nghĩa Số Lượng Bông Hoa Hồng Khi Tặng Người Thượng',
+    title: 'Giải Mã Ý Nghĩa Số Lượng Bông Hoa Hồng Khi Tặng Người Yêu',
     slug: 'y-nghia-so-luong-hoa-hong',
-    excerpt: 'Tặng 1 bông là "Em là duy nhất", 9 bông là "Tình yêu vĩnh cửu", 99 bông là "Yêu em trọn đời"...',
-    content: 'Số lượng bông hoa hồng mang nhiều thông điệp lãng mạn vô cùng tinh tế. Hãy cùng Lin Flower giải mã ý nghĩa các con số khi chọn quà nhé...',
+    excerpt: 'Tặng 1 bông là "Em là duy nhất", 9 bông là "Tình yêu vĩnh cửu", 99 bông là "Yêu em trọn đời"... Bỏ túi ngay bí kíp chọn hoa tình yêu.',
+    content: `
+Hoa hồng luôn được mệnh danh là nữ hoàng của các loài hoa tình yêu. Nhưng bạn có biết số lượng bông hoa hồng trong một bó hoa cũng chứa đựng những thông điệp lãng mạn vô cùng tinh tế?
+
+- **1 Bông**: "Em là duy nhất trong trái tim anh."
+- **9 Bông**: "Anh yêu em vĩnh cửu, không bao giờ thay đổi."
+- **11 Bông**: "Anh chỉ yêu duy nhất một mình em."
+- **20 Bông**: "Tình yêu chân thành xuất phát từ con tim."
+- **99 Bông**: "Tình yêu chúng ta trường tồn cùng thời gian."
+
+Hãy chọn số lượng bông hoa phù hợp tại Lin Flower để nhắn gửi trọn vẹn tâm tư tới nửa kia của bạn nhé!
+    `,
     coverImage: 'https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?auto=format&fit=crop&q=80&w=800',
-    author: 'Lin Flower',
+    author: 'Lin Flower Editor',
     category: 'Cẩm Nang Tình Yêu',
-    createdAt: '2026-08-03'
+    readTime: '3 phút đọc',
+    createdAt: '2026-08-03',
+    tags: ['Hoa Hồng', 'Tình Yêu', 'Bó Hoa Sinh Nhật', 'Ý Nghĩa Hoa']
+  },
+  {
+    id: 'blog-3',
+    title: 'Kinh Nghiệm Chọn Lẵng Hoa Khai Trương Hồng Phát Mang Lại Tài Lộc',
+    slug: 'kinh-nghiem-chon-hoa-khai-truong',
+    excerpt: 'Lựa chọn lẵng hoa chúc mừng khai trương với tông màu may mắn Đỏ - Vàng - Cam đem lại nhiều tài lộc và đại thành công cho gia chủ.',
+    content: `
+Khai trương cửa hàng, công ty là sự kiện trọng đại mở đầu cho chặng đường kinh doanh hồng phát. Chọn lẵng hoa khai trương đúng phong thủy sẽ mang lại nguồn năng lượng tích cực và tài lộc dồi dào.
+
+### Tông Màu May Mắn Cho Lẵng Hoa Khai Trương
+- **Tông Màu Đỏ**: Tượng trưng cho sự may mắn, nhiệt huyết và quyết tâm chiến thắng.
+- **Tông Màu Vàng**: Tượng trưng cho tiền tài, sự thịnh vượng và quý phái (Hoa Hướng Dương, Hoa Lan Hồ Điệp Vàng).
+- **Tông Màu Cam**: Sự khởi đầu năng động, sáng tạo và may mắn liên tiếp.
+
+Lin Flower miễn phí in băng rôn chúc mừng khai trương chữ nổi sang trọng cho mọi lẵng hoa!
+    `,
+    coverImage: 'https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&q=80&w=800',
+    author: 'Lin Flower Expert',
+    category: 'Hoa Sự Kiện',
+    readTime: '5 phút đọc',
+    createdAt: '2026-08-04',
+    tags: ['Khai Trương', 'Lẵng Hoa Chúc Mừng', 'Bắc Ninh', 'Phong Thủy']
   }
 ];
 
@@ -436,3 +395,19 @@ export const INITIAL_CUSTOM_REQUESTS: CustomOrderRequest[] = [
     createdAt: '2026-08-04'
   }
 ];
+
+export const INITIAL_VIETQR_CONFIG: VietQRConfig = {
+  accountNo: '0363819228',
+  accountName: 'LIN FLOWER - BAC NINH',
+  bankCode: 'MBBANK',
+  bankName: 'Ngân Hàng Quân Đội (MB Bank)',
+  enabled: true
+};
+
+export const INITIAL_TELEGRAM_CONFIG: TelegramConfig = {
+  botToken: '7123456789:AAF_mock_token_lin_flower_bot',
+  chatId: '-100987654321',
+  enabled: true,
+  notifyOnNewOrder: true,
+  notifyOnStatusChange: true
+};

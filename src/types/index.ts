@@ -129,5 +129,23 @@ export interface BlogPost {
   coverImage: string;
   author: string;
   category: string;
+  readTime: string;
   createdAt: string;
+  tags: string[];
+}
+
+export interface VietQRConfig {
+  accountNo: string;
+  accountName: string;
+  bankCode: string;
+  bankName: string;
+  enabled: boolean;
+}
+
+export interface TelegramConfig {
+  botToken: string;
+  chatId: string;
+  enabled: boolean;
+  notifyOnNewOrder: boolean;
+  notifyOnStatusChange: boolean;
 }

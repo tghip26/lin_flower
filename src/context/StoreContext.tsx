@@ -3,11 +3,13 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { 
   Product, Category, CartItem, Order, Voucher, Review, 
-  CustomOrderRequest, UserRole, OrderStatus, SizeOption, AddOn 
+  CustomOrderRequest, UserRole, OrderStatus, SizeOption, AddOn,
+  BlogPost, VietQRConfig, TelegramConfig
 } from '@/types';
 import { 
   INITIAL_CATEGORIES, INITIAL_PRODUCTS, INITIAL_VOUCHERS, 
-  INITIAL_REVIEWS, INITIAL_ORDERS, INITIAL_CUSTOM_REQUESTS, INITIAL_ADD_ONS 
+  INITIAL_REVIEWS, INITIAL_ORDERS, INITIAL_CUSTOM_REQUESTS, 
+  INITIAL_BLOG_POSTS, INITIAL_VIETQR_CONFIG, INITIAL_TELEGRAM_CONFIG 
 } from '@/data/mockData';
 
 interface StoreContextType {
@@ -57,6 +59,19 @@ interface StoreContextType {
   // Reviews
   reviews: Review[];
   addReview: (review: Omit<Review, 'id' | 'createdAt'>) => void;
+
+  // Blog Posts
+  blogPosts: BlogPost[];
+  addBlogPost: (post: Omit<BlogPost, 'id' | 'createdAt'>) => BlogPost;
+  updateBlogPost: (id: string, post: Partial<BlogPost>) => void;
+  deleteBlogPost: (id: string) => void;
+
+  // Integrations Configs
+  vietQRConfig: VietQRConfig;
+  updateVietQRConfig: (config: Partial<VietQRConfig>) => void;
+  telegramConfig: TelegramConfig;
+  updateTelegramConfig: (config: Partial<TelegramConfig>) => void;
+  sendTelegramNotification: (text: string) => Promise<{ success: boolean; message: string }>;
 }
 
 const StoreContext = createContext<StoreContextType | undefined>(undefined);
@@ -64,7 +79,7 @@ const StoreContext = createContext<StoreContextType | undefined>(undefined);
 const LOCAL_STORAGE_PREFIX = 'lin_flower_';
 
 export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  // State initialization with localStorage fallback
+  // State initialization
   const [userRole, setUserRoleState] = useState<UserRole>('customer');
   const [products, setProducts] = useState<Product[]>(INITIAL_PRODUCTS);
   const [categories] = useState<Category[]>(INITIAL_CATEGORIES);
@@ -75,6 +90,10 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [appliedVoucher, setAppliedVoucher] = useState<Voucher | null>(null);
   const [reviews, setReviews] = useState<Review[]>(INITIAL_REVIEWS);
   const [customRequests, setCustomRequests] = useState<CustomOrderRequest[]>(INITIAL_CUSTOM_REQUESTS);
+  
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>(INITIAL_BLOG_POSTS);
+  const [vietQRConfig, setVietQRConfig] = useState<VietQRConfig>(INITIAL_VIETQR_CONFIG);
+  const [telegramConfig, setTelegramConfig] = useState<TelegramConfig>(INITIAL_TELEGRAM_CONFIG);
 
   // Load from localStorage on mount
   useEffect(() => {
@@ -94,8 +113,14 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       const savedRole = localStorage.getItem(LOCAL_STORAGE_PREFIX + 'role');
       if (savedRole) setUserRoleState(savedRole as UserRole);
 
-      const savedRequests = localStorage.getItem(LOCAL_STORAGE_PREFIX + 'custom_requests');
-      if (savedRequests) setCustomRequests(JSON.parse(savedRequests));
+      const savedBlogs = localStorage.getItem(LOCAL_STORAGE_PREFIX + 'blogs');
+      if (savedBlogs) setBlogPosts(JSON.parse(savedBlogs));
+
+      const savedVietQR = localStorage.getItem(LOCAL_STORAGE_PREFIX + 'vietqr');
+      if (savedVietQR) setVietQRConfig(JSON.parse(savedVietQR));
+
+      const savedTelegram = localStorage.getItem(LOCAL_STORAGE_PREFIX + 'telegram');
+      if (savedTelegram) setTelegramConfig(JSON.parse(savedTelegram));
     } catch (e) {
       console.error('Failed to parse localStorage data', e);
     }
@@ -119,8 +144,16 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   }, [orders]);
 
   useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_PREFIX + 'custom_requests', JSON.stringify(customRequests));
-  }, [customRequests]);
+    localStorage.setItem(LOCAL_STORAGE_PREFIX + 'blogs', JSON.stringify(blogPosts));
+  }, [blogPosts]);
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_PREFIX + 'vietqr', JSON.stringify(vietQRConfig));
+  }, [vietQRConfig]);
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_PREFIX + 'telegram', JSON.stringify(telegramConfig));
+  }, [telegramConfig]);
 
   const setUserRole = (role: UserRole) => {
     setUserRoleState(role);
@@ -251,6 +284,35 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   const isInWishlist = (productId: string) => wishlist.includes(productId);
 
+  // Telegram helper
+  const sendTelegramNotification = async (text: string) => {
+    if (!telegramConfig.enabled || !telegramConfig.botToken || !telegramConfig.chatId) {
+      return { success: false, message: 'Telegram chưa bật hoặc thiếu Token/Chat ID' };
+    }
+
+    try {
+      const url = `https://api.telegram.org/bot${telegramConfig.botToken}/sendMessage`;
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id: telegramConfig.chatId,
+          text,
+          parse_mode: 'HTML',
+        }),
+      });
+
+      const resData = await response.json();
+      if (resData.ok) {
+        return { success: true, message: 'Gửi tin nhắn Telegram thành công!' };
+      } else {
+        return { success: false, message: `Telegram Error: ${resData.description || 'Lỗi gửi tin'}` };
+      }
+    } catch (error: any) {
+      return { success: false, message: `Lỗi kết nối API Telegram: ${error?.message || error}` };
+    }
+  };
+
   // Orders operations
   const placeOrder = (orderData: Omit<Order, 'id' | 'createdAt' | 'orderStatus' | 'statusHistory'>) => {
     const randomNum = Math.floor(100000 + Math.random() * 900000);
@@ -274,6 +336,25 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
     setOrders((prev) => [newOrder, ...prev]);
     clearCart();
+
+    // Trigger Telegram Notification
+    if (telegramConfig.enabled && telegramConfig.notifyOnNewOrder) {
+      const msg = `
+<b>🌸 ĐƠN HÀNG MỚI TẠI LIN FLOWER!</b>
+---------------------------------
+<b>Mã đơn:</b> ${newOrder.id}
+<b>Người đặt:</b> ${newOrder.customerName} (${newOrder.customerPhone})
+<b>Người nhận:</b> ${newOrder.recipientName} (${newOrder.recipientPhone})
+<b>Địa chỉ giao:</b> ${newOrder.recipientAddress}
+<b>Hẹn giao:</b> ${newOrder.deliveryDate} (${newOrder.deliveryTimeSlot})
+<b>Tổng tiền:</b> <b>${newOrder.totalPrice.toLocaleString('vi-VN')}đ</b>
+<b>Thanh toán:</b> ${newOrder.paymentMethod.toUpperCase()} (${newOrder.paymentStatus})
+---------------------------------
+💌 <i>${newOrder.cardMessage ? `Lời chúc: "${newOrder.cardMessage}"` : 'Khách không kèm lời chúc'}</i>
+      `;
+      sendTelegramNotification(msg);
+    }
+
     return newOrder;
   };
 
@@ -287,13 +368,27 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
           timestamp: formattedNow,
           note: note || `Cập nhật trạng thái đơn hàng sang ${status.toUpperCase()}`
         };
-        return {
+        const updatedOrder = {
           ...o,
           orderStatus: status,
           statusHistory: [...o.statusHistory, newLog],
           photoProofUrl: photoProofUrl || o.photoProofUrl,
-          paymentStatus: status === 'completed' ? 'paid' : o.paymentStatus
+          paymentStatus: status === 'completed' ? ('paid' as PaymentStatus) : o.paymentStatus
         };
+
+        // Notify Telegram on status change
+        if (telegramConfig.enabled && telegramConfig.notifyOnStatusChange) {
+          const statusText = status === 'processing' ? '🌸 Đang cắm hoa' : status === 'shipping' ? '🚚 Đang giao hàng' : status === 'completed' ? '✅ Giao thành công' : '❌ Đã hủy';
+          const msg = `
+<b>🔔 CẬP NHẬT TRẠNG THÁI ĐƠN: ${orderId}</b>
+<b>Trạng thái mới:</b> ${statusText}
+<b>Khách hàng:</b> ${updatedOrder.customerName} (${updatedOrder.customerPhone})
+<b>Ghi chú:</b> ${note || 'Cập nhật từ hệ thống'}
+          `;
+          sendTelegramNotification(msg);
+        }
+
+        return updatedOrder;
       })
     );
   };
@@ -315,6 +410,20 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       createdAt: new Date().toLocaleDateString('vi-VN')
     };
     setCustomRequests((prev) => [newReq, ...prev]);
+
+    if (telegramConfig.enabled) {
+      const msg = `
+<b>🎨 YÊU CẦU THIẾT KẾ HOA MỚI!</b>
+<b>Mã yêu cầu:</b> ${newReq.id}
+<b>Khách hàng:</b> ${newReq.customerName} (${newReq.phone})
+<b>Ngân sách:</b> ${newReq.budget}
+<b>Tone màu:</b> ${newReq.mainColor}
+<b>Dịp:</b> ${newReq.occasion}
+<b>Ghi chú:</b> ${newReq.note}
+      `;
+      sendTelegramNotification(msg);
+    }
+
     return newReq;
   };
 
@@ -332,6 +441,36 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       createdAt: new Date().toLocaleDateString('vi-VN')
     };
     setReviews((prev) => [rev, ...prev]);
+  };
+
+  // Blog Posts
+  const addBlogPost = (newPost: Omit<BlogPost, 'id' | 'createdAt'>) => {
+    const post: BlogPost = {
+      ...newPost,
+      id: `blog-${Date.now()}`,
+      createdAt: new Date().toLocaleDateString('vi-VN')
+    };
+    setBlogPosts((prev) => [post, ...prev]);
+    return post;
+  };
+
+  const updateBlogPost = (id: string, postData: Partial<BlogPost>) => {
+    setBlogPosts((prev) =>
+      prev.map((b) => (b.id === id ? { ...b, ...postData } : b))
+    );
+  };
+
+  const deleteBlogPost = (id: string) => {
+    setBlogPosts((prev) => prev.filter((b) => b.id !== id));
+  };
+
+  // Integrations Configs
+  const updateVietQRConfig = (config: Partial<VietQRConfig>) => {
+    setVietQRConfig((prev) => ({ ...prev, ...config }));
+  };
+
+  const updateTelegramConfig = (config: Partial<TelegramConfig>) => {
+    setTelegramConfig((prev) => ({ ...prev, ...config }));
   };
 
   return (
@@ -368,6 +507,15 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         updateCustomRequestStatus,
         reviews,
         addReview,
+        blogPosts,
+        addBlogPost,
+        updateBlogPost,
+        deleteBlogPost,
+        vietQRConfig,
+        updateVietQRConfig,
+        telegramConfig,
+        updateTelegramConfig,
+        sendTelegramNotification,
       }}
     >
       {children}

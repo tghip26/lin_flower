@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { 
   LayoutDashboard, ShoppingCart, Package, Shield, 
-  Tag, ArrowLeft, UserCheck, Lock, Sparkles, CheckCircle2 
+  Tag, ArrowLeft, UserCheck, Lock, Sparkles, QrCode, BookOpen 
 } from 'lucide-react';
 import { useStore } from '@/context/StoreContext';
 
@@ -36,7 +36,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
           <button
             onClick={() => setUserRole(userRole === 'admin' ? 'staff' : 'admin')}
-            className="text-xs bg-stone-800 hover:bg-stone-700 text-amber-200 px-3 py-1.5 rounded-xl font-bold border border-amber-300/30 transition-all flex items-center gap-1"
+            className="text-xs bg-stone-800 hover:bg-stone-700 text-amber-200 px-3 py-1.5 rounded-xl font-bold border border-amber-300/30 transition-all flex items-center gap-1 active:scale-95"
           >
             <UserCheck className="w-3.5 h-3.5" />
             <span>Đổi sang {userRole === 'admin' ? 'Nhân Viên' : 'Admin'}</span>
@@ -77,6 +77,22 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               </Link>
 
               <Link
+                href="/admin/integrations"
+                className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-all ${pathname === '/admin/integrations' ? 'bg-brand-600 text-white font-bold shadow-sm' : 'hover:bg-stone-800 text-stone-400 hover:text-white'}`}
+              >
+                <QrCode className="w-4 h-4 text-amber-300" />
+                <span className="text-amber-200">Tích Hợp QR & Telegram</span>
+              </Link>
+
+              <Link
+                href="/admin/blogs"
+                className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-all ${pathname === '/admin/blogs' ? 'bg-brand-600 text-white font-bold shadow-sm' : 'hover:bg-stone-800 text-stone-400 hover:text-white'}`}
+              >
+                <BookOpen className="w-4 h-4" />
+                <span>Quản Lý Cẩm Nang</span>
+              </Link>
+
+              <Link
                 href="/admin/roles"
                 className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-all ${pathname === '/admin/roles' ? 'bg-brand-600 text-white font-bold shadow-sm' : 'hover:bg-stone-800 text-stone-400 hover:text-white'}`}
               >
@@ -101,18 +117,17 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 <div className="font-bold flex items-center gap-1">
                   <Sparkles className="w-3.5 h-3.5 text-amber-400" /> Admin (Toàn Quyền)
                 </div>
-                <div>• Xem doanh thu & báo cáo</div>
-                <div>• Thêm/sửa/xóa sản phẩm hoa</div>
-                <div>• Quản lý tài khoản & phân quyền</div>
+                <div>• Quản lý QR & Telegram Bot</div>
+                <div>• Đăng/Sửa/Xóa bài cẩm nang</div>
+                <div>• Báo cáo doanh thu & Kho hoa</div>
               </div>
             ) : (
               <div className="bg-blue-950/60 p-3 rounded-xl border border-blue-500/30 text-blue-200 text-[11px] space-y-1">
                 <div className="font-bold flex items-center gap-1">
                   <Lock className="w-3.5 h-3.5 text-blue-400" /> Nhân Viên (Staff)
                 </div>
-                <div>• Xem & cập nhật trạng thái đơn</div>
-                <div>• Xem danh sách kho sản phẩm</div>
-                <div className="text-stone-400 italic">× Bị giới hạn doanh thu & phân quyền</div>
+                <div>• Xem & cập nhật đơn hàng</div>
+                <div>• Xem kho sản phẩm hoa</div>
               </div>
             )}
           </div>
