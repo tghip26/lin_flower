@@ -165,7 +165,7 @@ export const AIChatbotWidget: React.FC = () => {
 
   return (
     <>
-      {/* Sleek Premium Floating AI Chatbot Trigger Button */}
+      {/* Redesigned Sleek & Compact Floating Button on BOTTOM-RIGHT Corner */}
       <AnimatePresence>
         {!isOpen && (
           <motion.div
@@ -174,30 +174,26 @@ export const AIChatbotWidget: React.FC = () => {
             exit={{ scale: 0, opacity: 0 }}
             className="fixed bottom-6 right-6 z-40 flex items-center"
           >
-            {/* Outer Pulse Glow */}
-            <span className="absolute inset-0 rounded-full bg-pink-500/40 opacity-75 animate-ping pointer-events-none"></span>
+            {/* Soft Glowing Ring */}
+            <span className="absolute inset-0 rounded-full bg-pink-500/40 opacity-70 animate-ping pointer-events-none"></span>
 
             <motion.button
-              whileHover={{ scale: 1.08 }}
-              whileTap={{ scale: 0.92 }}
+              whileHover={{ scale: 1.06 }}
+              whileTap={{ scale: 0.94 }}
               onClick={() => setIsOpen(true)}
-              className="relative flex items-center gap-3 bg-gradient-to-r from-stone-900 via-brand-900 to-stone-900 text-white px-4.5 py-3.5 rounded-full shadow-2xl shadow-rose-900/40 border-2 border-brand-300/80 active:scale-95 transition-all cursor-pointer group"
+              className="relative flex items-center gap-2 bg-gradient-to-r from-stone-900 via-brand-900 to-stone-900 text-white px-3.5 py-2.5 rounded-full shadow-xl shadow-rose-950/30 border border-brand-300/80 active:scale-95 transition-all cursor-pointer group backdrop-blur-md"
             >
-              <div className="relative">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-brand-600 to-amber-400 p-0.5 shadow-inner">
-                  <div className="w-full h-full rounded-full bg-stone-900 flex items-center justify-center text-amber-300">
-                    <Bot className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-                  </div>
-                </div>
-                <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-400 rounded-full border-2 border-stone-900"></span>
+              <div className="relative flex items-center justify-center w-7 h-7 bg-brand-600 text-amber-200 rounded-full shadow-inner">
+                <Bot className="w-4 h-4 group-hover:rotate-12 transition-transform" />
+                <span className="absolute -bottom-0.5 -right-0.5 w-2 h-2 bg-green-400 rounded-full border border-stone-900"></span>
               </div>
 
               <div className="text-left hidden sm:block">
-                <div className="text-xs font-serif font-extrabold text-white flex items-center gap-1">
-                  <span>Trợ Lý AI Lin Flower</span>
-                  <Sparkles className="w-3.5 h-3.5 text-amber-400 animate-spin" />
+                <div className="text-xs font-serif font-bold text-white flex items-center gap-1">
+                  <span>Tư Vấn AI</span>
+                  <Sparkles className="w-3 h-3 text-amber-400 animate-spin" />
                 </div>
-                <div className="text-[10px] text-pink-200 font-medium">Tư vấn chọn hoa • Phản hồi 24/7</div>
+                <div className="text-[10px] text-pink-200 font-medium">Hỗ trợ 24/7</div>
               </div>
             </motion.button>
           </motion.div>

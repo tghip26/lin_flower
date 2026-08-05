@@ -112,44 +112,37 @@ export const LuckyWheelModal: React.FC = () => {
 
   return (
     <>
-      {/* Sleek Premium Floating Gift Wheel Trigger Button */}
+      {/* Redesigned Sleek & Compact Floating Button on BOTTOM-LEFT Corner */}
       <AnimatePresence>
         {!isOpen && (
           <motion.div
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
-            className="fixed bottom-24 right-6 z-40 flex items-center"
+            className="fixed bottom-6 left-6 z-40 flex items-center"
           >
-            {/* Outer Glowing Pulse Ring */}
-            <span className="absolute inset-0 rounded-full bg-gradient-to-r from-amber-400 to-pink-500 opacity-60 animate-ping pointer-events-none"></span>
+            {/* Soft Glowing Ring */}
+            <span className="absolute inset-0 rounded-full bg-amber-400/40 opacity-70 animate-ping pointer-events-none"></span>
 
             <motion.button
-              whileHover={{ scale: 1.08 }}
-              whileTap={{ scale: 0.92 }}
+              whileHover={{ scale: 1.06 }}
+              whileTap={{ scale: 0.94 }}
               onClick={() => setIsOpen(true)}
-              className="relative flex items-center gap-2.5 bg-gradient-to-r from-amber-400 via-amber-500 to-rose-500 text-stone-950 px-4 py-3 rounded-full shadow-2xl shadow-pink-500/40 border-2 border-amber-200/90 active:scale-95 transition-all cursor-pointer group"
+              className="relative flex items-center gap-2 bg-gradient-to-r from-amber-400 via-amber-500 to-rose-500 text-stone-950 px-3.5 py-2.5 rounded-full shadow-xl shadow-amber-500/30 border border-amber-200/90 active:scale-95 transition-all cursor-pointer group backdrop-blur-md"
             >
-              <div className="relative flex items-center justify-center">
-                <Disc className="w-6 h-6 text-stone-950 animate-[spin_8s_linear_infinite]" />
-                <Gift className="w-3.5 h-3.5 text-rose-700 absolute inset-0 m-auto" />
+              <div className="relative flex items-center justify-center w-7 h-7 bg-stone-950 text-amber-300 rounded-full shadow-inner">
+                <Disc className="w-4 h-4 animate-[spin_8s_linear_infinite]" />
               </div>
 
               <div className="text-left hidden sm:block">
-                <div className="text-xs font-serif font-black text-stone-950 uppercase tracking-wide flex items-center gap-1">
-                  <span>Vòng Quay Lộc Xuân</span>
+                <div className="text-xs font-serif font-black text-stone-950 flex items-center gap-1">
+                  <span>Vòng Quay Lộc</span>
                   <Sparkles className="w-3 h-3 text-rose-800" />
                 </div>
                 <div className="text-[10px] text-stone-900 font-bold">
-                  {spinsLeftToday > 0 ? '🎁 1 Lượt quay miễn phí' : '🔒 Đã quay hôm nay'}
+                  {spinsLeftToday > 0 ? '🎁 Còn 1 lượt quay' : '🔒 Đã quay hôm nay'}
                 </div>
               </div>
-
-              {spinsLeftToday > 0 && (
-                <span className="w-5 h-5 bg-stone-950 text-amber-300 rounded-full text-[10px] font-extrabold flex items-center justify-center border border-amber-400 shadow-sm ml-1">
-                  1
-                </span>
-              )}
             </motion.button>
           </motion.div>
         )}
