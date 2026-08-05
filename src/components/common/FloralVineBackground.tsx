@@ -43,13 +43,15 @@ export const FloralVineBackground: React.FC = () => {
           </filter>
         </defs>
 
-        {/* Mobile Main Vine Stem */}
+        {/* Mobile Main Vine Stem - Pronounced S-Curve Right From The Top (Y=-20) */}
         <path
-          d="M 15,-20 
-             C 45,180 25,420 50,820 
-             S 350,1220 330,1520 
-             S 25,1840 60,2240 
-             S 350,2640 320,3040"
+          d="M 20,-20 
+             C 180,60 330,140 300,260 
+             C 270,380 30,420 60,540 
+             C 90,660 340,700 320,840 
+             S 40,1240 60,1540 
+             S 340,1840 310,2240 
+             S 40,2640 60,3040"
           stroke="#f43f5e"
           strokeWidth="6"
           strokeOpacity="0.2"
@@ -58,24 +60,28 @@ export const FloralVineBackground: React.FC = () => {
         />
 
         <motion.path
-          d="M 15,-20 
-             C 45,180 25,420 50,820 
-             S 350,1220 330,1520 
-             S 25,1840 60,2240 
-             S 350,2640 320,3040"
+          d="M 20,-20 
+             C 180,60 330,140 300,260 
+             C 270,380 30,420 60,540 
+             C 90,660 340,700 320,840 
+             S 40,1240 60,1540 
+             S 340,1840 310,2240 
+             S 40,2640 60,3040"
           stroke="url(#treeBranchGradMob)"
           strokeWidth="3.5"
           strokeLinecap="round"
           fill="none"
         />
 
-        {/* Gold Dotted Mobile Line */}
+        {/* Gold Dotted Mobile Line - Following S-Curve */}
         <path
-          d="M 15,-20 
-             C 50,190 30,430 55,830 
-             S 355,1230 335,1530 
-             S 30,1850 65,2250 
-             S 355,2650 325,3050"
+          d="M 20,-20 
+             C 185,70 335,150 305,270 
+             C 275,390 35,430 65,550 
+             C 95,670 345,710 325,850 
+             S 45,1250 65,1550 
+             S 345,1850 315,2250 
+             S 45,2650 65,3050"
           stroke="#fbbf24"
           strokeWidth="1.5"
           strokeDasharray="6 8"
@@ -83,40 +89,39 @@ export const FloralVineBackground: React.FC = () => {
           fill="none"
         />
 
-        {/* Light Sparkle Particle Mobile */}
+        {/* Light Sparkle Particle Mobile - Gliding Along S-Curve */}
         <circle r="4" fill="#ffffff" filter="url(#vineGlowMob)">
           <animateMotion
-            path="M 15,-20 C 45,180 25,420 50,820 S 350,1220 330,1520 S 25,1840 60,2240 S 350,2640 320,3040"
+            path="M 20,-20 C 180,60 330,140 300,260 C 270,380 30,420 60,540 C 90,660 340,700 320,840 S 40,1240 60,1540 S 340,1840 310,2240 S 40,2640 60,3040"
             dur="14s"
             repeatCount="indefinite"
           />
         </circle>
 
         {/* ========================================== */}
-        {/* LUSH MOBILE HERO FLORAL BRANCHES & BLOSSOMS */}
+        {/* LUSH MOBILE S-CURVE FLORAL BRANCHES & BLOSSOMS */}
         {/* ========================================== */}
 
-        {/* Mobile Hero Branch 1 (Near Top Badge "Tiệm Hoa Tươi Hàng Đầu") */}
-        <g transform="translate(25, 130)">
-          <path d="M 0,0 C 25,-10 45,10 65,15" stroke="url(#treeBranchGradMob)" strokeWidth="2.5" fill="none" />
-          <path d="M 25,-8 C 20,-18 35,-20 38,-8 Z" fill="url(#leafGradMob)" fillOpacity="0.85" />
-          <path d="M 45,5 C 55,-8 68,0 60,12 Z" fill="url(#leafGradMob)" fillOpacity="0.85" />
-          <g transform="translate(65, 15)">
-            <circle r="14" fill="#f43f5e" opacity="0.35" filter="url(#vineGlowMob)" />
+        {/* Mobile S-Curve Branch 1 (Top Wave Crest near LIN FLOWER Title, X=300, Y=260) */}
+        <g transform="translate(300, 260)">
+          <path d="M 0,0 C -25,-10 -45,10 -65,15" stroke="url(#treeBranchGradMob)" strokeWidth="2.5" fill="none" />
+          <path d="M -25,-8 C -20,-18 -35,-20 -38,-8 Z" fill="url(#leafGradMob)" fillOpacity="0.85" />
+          <path d="M -45,5 C -55,-8 -68,0 -60,12 Z" fill="url(#leafGradMob)" fillOpacity="0.85" />
+          <g transform="translate(-65, 15)">
+            <circle r="15" fill="#f43f5e" opacity="0.35" filter="url(#vineGlowMob)" />
             {[0, 45, 90, 135, 180, 225, 270, 315].map((angle, i) => {
               const rad = (angle * Math.PI) / 180;
-              return <circle key={i} cx={8 * Math.cos(rad)} cy={8 * Math.sin(rad)} r="5" fill="#fda4af" />;
+              return <circle key={i} cx={8.5 * Math.cos(rad)} cy={8.5 * Math.sin(rad)} r="5" fill="#fda4af" />;
             })}
             <circle r="4.5" fill="#fbbf24" stroke="#f59e0b" strokeWidth="1" />
           </g>
         </g>
 
-        {/* Mobile Hero Branch 2 (Beside LIN FLOWER Title) */}
-        <g transform="translate(35, 270)">
-          <path d="M 0,0 C 30,-10 60,15 85,25" stroke="url(#treeBranchGradMob)" strokeWidth="2.5" fill="none" />
-          <path d="M 35,-6 C 30,-16 45,-18 48,-6 Z" fill="url(#leafGradMob)" fillOpacity="0.85" />
-          <path d="M 60,8 C 70,-5 82,2 75,15 Z" fill="url(#leafGradMob)" fillOpacity="0.85" />
-          <g transform="translate(85, 25)">
+        {/* Mobile S-Curve Branch 2 (Middle S-Curve Wave Trough, X=60, Y=540) */}
+        <g transform="translate(60, 540)">
+          <path d="M 0,0 C 25,-10 50,15 70,25" stroke="url(#treeBranchGradMob)" strokeWidth="2.5" fill="none" />
+          <path d="M 25,-6 C 20,-16 35,-18 38,-6 Z" fill="url(#leafGradMob)" fillOpacity="0.85" />
+          <g transform="translate(70, 25)">
             <circle r="16" fill="#f43f5e" opacity="0.35" filter="url(#vineGlowMob)" />
             {[0, 45, 90, 135, 180, 225, 270, 315].map((angle, i) => {
               const rad = (angle * Math.PI) / 180;
@@ -127,25 +132,11 @@ export const FloralVineBackground: React.FC = () => {
           </g>
         </g>
 
-        {/* Mobile Hero Branch 3 (Beside Text Box "Chuyên cung cấp...") */}
-        <g transform="translate(28, 440)">
-          <path d="M 0,0 C 25,-10 50,12 70,20" stroke="url(#treeBranchGradMob)" strokeWidth="2" fill="none" />
-          <path d="M 30,-5 C 25,-15 40,-16 42,-5 Z" fill="url(#leafGradMob)" fillOpacity="0.85" />
-          <g transform="translate(70, 20)">
-            <circle r="12" fill="#ec4899" opacity="0.4" />
-            {[0, 72, 144, 216, 288].map((angle, i) => {
-              const rad = (angle * Math.PI) / 180;
-              return <circle key={i} cx={6 * Math.cos(rad)} cy={6 * Math.sin(rad)} r="4" fill="#f472b6" />;
-            })}
-            <circle r="3.5" fill="#fef08a" />
-          </g>
-        </g>
-
-        {/* Mobile Hero Branch 4 (Beside CTA Buttons "Xem Tất Cả Mẫu Hoa") */}
-        <g transform="translate(38, 620)">
-          <path d="M 0,0 C 30,-8 55,10 75,20" stroke="url(#treeBranchGradMob)" strokeWidth="2.5" fill="none" />
-          <path d="M 35,-6 C 30,-16 45,-18 48,-6 Z" fill="url(#leafGradMob)" fillOpacity="0.85" />
-          <g transform="translate(75, 20)">
+        {/* Mobile S-Curve Branch 3 (Lower S-Curve Wave Crest near CTA Buttons, X=320, Y=840) */}
+        <g transform="translate(320, 840)">
+          <path d="M 0,0 C -25,-10 -50,12 -70,20" stroke="url(#treeBranchGradMob)" strokeWidth="2" fill="none" />
+          <path d="M -30,-5 C -25,-15 -40,-16 -42,-5 Z" fill="url(#leafGradMob)" fillOpacity="0.85" />
+          <g transform="translate(-70, 20)">
             <circle r="14" fill="#fbbf24" opacity="0.35" filter="url(#vineGlowMob)" />
             {[0, 60, 120, 180, 240, 300].map((angle, i) => {
               const rad = (angle * Math.PI) / 180;
@@ -155,35 +146,8 @@ export const FloralVineBackground: React.FC = () => {
           </g>
         </g>
 
-        {/* Mobile Hero Right Side Branch (Opposite side near LIN FLOWER title) */}
-        <g transform="translate(340, 340)">
-          <path d="M 0,0 C -25,-10 -50,10 -70,20" stroke="url(#treeBranchGradMob)" strokeWidth="2.5" fill="none" />
-          <path d="M -30,-5 C -25,-15 -40,-16 -42,-5 Z" fill="url(#leafGradMob)" fillOpacity="0.85" />
-          <g transform="translate(-70, 20)">
-            <circle r="14" fill="#be185d" opacity="0.35" filter="url(#vineGlowMob)" />
-            {[0, 60, 120, 180, 240, 300].map((angle, i) => {
-              const rad = (angle * Math.PI) / 180;
-              return <circle key={i} cx={7 * Math.cos(rad)} cy={7 * Math.sin(rad)} r="4.5" fill="#fb7185" />;
-            })}
-            <circle r="4" fill="#9d174d" />
-          </g>
-        </g>
-
-        {/* Mobile Side Branch (Flower Finder Wizard Section) */}
-        <g transform="translate(50, 850)">
-          <path d="M 0,0 C 25,-5 45,10 60,18" stroke="url(#treeBranchGradMob)" strokeWidth="2" fill="none" />
-          <g transform="translate(60, 18)">
-            <circle r="12" fill="#e63963" opacity="0.35" />
-            {[0, 72, 144, 216, 288].map((angle, i) => {
-              const rad = (angle * Math.PI) / 180;
-              return <circle key={i} cx={6 * Math.cos(rad)} cy={6 * Math.sin(rad)} r="4" fill="#f472b6" />;
-            })}
-            <circle r="3.5" fill="#fef08a" />
-          </g>
-        </g>
-
-        {/* Mobile Side Branch (Categories section) */}
-        <g transform="translate(330, 1520)">
+        {/* Mobile S-Curve Branch 4 (Categories section, X=310, Y=2240) */}
+        <g transform="translate(310, 2240)">
           <path d="M 0,0 C -20,-5 -35,5 -45,10" stroke="url(#treeBranchGradMob)" strokeWidth="2" fill="none" />
           <g transform="translate(-45, 10)">
             <circle r="12" fill="#fbbf24" opacity="0.35" />
