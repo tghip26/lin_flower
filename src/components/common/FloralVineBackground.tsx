@@ -8,12 +8,12 @@ export const FloralVineBackground: React.FC = () => {
     <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden select-none">
       
       {/* Ambient Radial Floral Glows */}
-      <div className="absolute top-[1%] left-[-5%] w-[350px] sm:w-[550px] h-[350px] sm:h-[550px] bg-pink-300/30 rounded-full blur-3xl animate-pulse"></div>
+      <div className="absolute top-[0%] left-[-5%] w-[350px] sm:w-[550px] h-[350px] sm:h-[550px] bg-pink-300/30 rounded-full blur-3xl animate-pulse"></div>
       <div className="absolute top-[30%] right-[-8%] w-[400px] sm:w-[650px] h-[400px] sm:h-[650px] bg-amber-200/30 rounded-full blur-3xl"></div>
       <div className="absolute top-[60%] left-[-5%] w-[350px] sm:w-[550px] h-[350px] sm:h-[550px] bg-rose-200/30 rounded-full blur-3xl"></div>
       <div className="absolute top-[85%] right-[-5%] w-[350px] sm:w-[500px] h-[350px] sm:h-[500px] bg-pink-200/30 rounded-full blur-3xl"></div>
 
-      {/* Main Integrated Flowing Floral Vine SVG with C1/C2 Silk-Smooth Tangent Continuity */}
+      {/* Main Integrated Flowing Floral Vine SVG with Flower Mounted at Vine Tip (100, 80) */}
       <svg
         className="w-full h-full min-h-[3400px] absolute inset-0 opacity-90"
         viewBox="0 0 1440 3400"
@@ -41,10 +41,10 @@ export const FloralVineBackground: React.FC = () => {
           </filter>
         </defs>
 
-        {/* Outer Glow Layer - 100% Silk-Smooth Bezier Curve without any sharp kinks */}
+        {/* Outer Glow Layer - Vine stem starts EXACTLY at (100, 80) */}
         <path
-          d="M 120,100 
-             C 200,220 140,360 240,480 
+          d="M 100,80 
+             C 160,200 120,380 240,480 
              S 120,780 220,980 
              S 1280,1380 1200,1580 
              S 120,2040 240,2280 
@@ -56,10 +56,10 @@ export const FloralVineBackground: React.FC = () => {
           filter="url(#vineGlow)"
         />
 
-        {/* Primary Animated Vine Stem - Silk-Smooth Continuous Curve */}
+        {/* Primary Animated Vine Stem - Starts EXACTLY at (100, 80) from the Flower Center */}
         <motion.path
-          d="M 120,100 
-             C 200,220 140,360 240,480 
+          d="M 100,80 
+             C 160,200 120,380 240,480 
              S 120,780 220,980 
              S 1280,1380 1200,1580 
              S 120,2040 240,2280 
@@ -70,10 +70,10 @@ export const FloralVineBackground: React.FC = () => {
           fill="none"
         />
 
-        {/* Secondary Gold Dotted Line - Silk-Smooth Curve */}
+        {/* Secondary Gold Dotted Line - Starts at (100, 80) */}
         <path
-          d="M 120,100 
-             C 215,230 155,370 255,490 
+          d="M 100,80 
+             C 175,210 135,390 255,490 
              S 135,790 235,990 
              S 1295,1390 1215,1590 
              S 135,2050 255,2290 
@@ -85,22 +85,22 @@ export const FloralVineBackground: React.FC = () => {
           fill="none"
         />
 
-        {/* Travelling Light Sparkle Particle along the Silk-Smooth Vine */}
+        {/* Travelling Light Sparkle Particle starting from vine tip (100, 80) */}
         <circle r="5" fill="#ffffff" filter="url(#vineGlow)">
           <animateMotion
-            path="M 120,100 C 200,220 140,360 240,480 S 120,780 220,980 S 1280,1380 1200,1580 S 120,2040 240,2280 S 1280,2840 1200,3080"
+            path="M 100,80 C 160,200 120,380 240,480 S 120,780 220,980 S 1280,1380 1200,1580 S 120,2040 240,2280 S 1280,2840 1200,3080"
             dur="14s"
             repeatCount="indefinite"
           />
         </circle>
 
-        {/* NODE 1 - FULLY VISIBLE BLOOMING ROSE FLOWER HEAD MOUNTED DIRECTLY ON THE CONTINUOUS VINE AT (180, 290) NEAR LIN FLOWER */}
+        {/* NODE 1 - FLOWER HEAD & LEAVES MOUNTED DIRECTLY AT THE VERY START TIP OF THE VINE STEM (100, 80) */}
         <motion.g
-          transform="translate(180, 290)"
+          transform="translate(100, 80)"
           animate={{ rotate: [0, 8, -8, 0], scale: [1, 1.06, 1] }}
           transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
         >
-          {/* Green Leaves branching around the stem junction */}
+          {/* Green Leaves radiating underneath flower base */}
           <path
             d="M 0,0 C -35,25 -45,-15 -20,-35 Z"
             fill="url(#leafGrad)"
@@ -118,30 +118,30 @@ export const FloralVineBackground: React.FC = () => {
           />
 
           {/* Soft Pink Glow Filter */}
-          <circle r="30" fill="#f43f5e" opacity="0.35" filter="url(#vineGlow)" />
+          <circle r="26" fill="#f43f5e" opacity="0.35" filter="url(#vineGlow)" />
           
-          {/* Outer Layer Rounded Rose Petals (Distortion-free) */}
+          {/* Outer Layer Rounded Rose Petals (100% distortion-free & fully visible) */}
           {[0, 45, 90, 135, 180, 225, 270, 315].map((angle, i) => {
             const rad = (angle * Math.PI) / 180;
-            const px = 15 * Math.cos(rad);
-            const py = 15 * Math.sin(rad);
+            const px = 14 * Math.cos(rad);
+            const py = 14 * Math.sin(rad);
             return (
-              <circle key={i} cx={px} cy={py} r="10" fill="#fda4af" />
+              <circle key={i} cx={px} cy={py} r="9" fill="#fda4af" />
             );
           })}
 
           {/* Inner Layer Accent Petals */}
           {[22.5, 67.5, 112.5, 157.5, 202.5, 247.5, 292.5, 337.5].map((angle, i) => {
             const rad = (angle * Math.PI) / 180;
-            const px = 8 * Math.cos(rad);
-            const py = 8 * Math.sin(rad);
+            const px = 7 * Math.cos(rad);
+            const py = 7 * Math.sin(rad);
             return (
-              <circle key={i} cx={px} cy={py} r="6.5" fill="#f472b6" />
+              <circle key={i} cx={px} cy={py} r="5.5" fill="#f472b6" />
             );
           })}
 
           {/* Yellow Center Core */}
-          <circle r="9" fill="#fbbf24" stroke="#f59e0b" strokeWidth="2" />
+          <circle r="8" fill="#fbbf24" stroke="#f59e0b" strokeWidth="2" />
         </motion.g>
 
         {/* SWAYING LEAF BRANCH 1 */}
