@@ -25,22 +25,22 @@ export default function HomePage() {
 
   return (
     <PageTransition>
-      <div className="relative space-y-20 pb-20 overflow-hidden">
+      <div className="relative space-y-10 sm:space-y-20 pb-16 sm:pb-20 overflow-hidden">
         
         {/* Background Glowing Floral Vine SVG Path Spanning Top to Bottom */}
         <FloralVineBackground />
 
         {/* 1. Hero Banner Section */}
-        <section className="relative z-10 pt-2 pb-12">
+        <section className="relative z-10 pt-0 sm:pt-2 pb-8 sm:pb-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
               
               {/* Left Content */}
               <motion.div 
                 initial={{ opacity: 0, x: -25 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, ease: 'easeOut' }}
-                className="lg:col-span-7 space-y-6 text-center lg:text-left"
+                className="lg:col-span-7 space-y-4 sm:space-y-6 text-center lg:text-left"
               >
                 <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-md text-brand-800 text-xs sm:text-sm font-bold px-4 py-2 rounded-full border border-brand-200 shadow-md">
                   <Sparkles className="w-4 h-4 text-amber-500 animate-spin" />
