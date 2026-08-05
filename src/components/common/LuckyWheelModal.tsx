@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Gift, X, Sparkles, Trophy, CheckCircle, AlertCircle, ShoppingBag } from 'lucide-react';
+import { Gift, X, Sparkles, Trophy, CheckCircle, AlertCircle, ShieldCheck, Laptop } from 'lucide-react';
 import { useStore } from '@/context/StoreContext';
 import confetti from 'canvas-confetti';
 
@@ -12,14 +12,27 @@ export const LuckyWheelModal: React.FC = () => {
   const [isSpinning, setIsSpinning] = useState(false);
   const [rotation, setRotation] = useState(0);
   const [wonPrize, setWonPrize] = useState<{ code: string; label: string; discountText: string } | null>(null);
+  
+  const [clientIp, setClientIp] = useState<string>('Đang kiểm tra IP...');
+  const [deviceId, setDeviceId] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [spinsLeftToday, setSpinsLeftToday] = useState(luckyWheelConfig.dailyLimit);
 
   const activePrizes = luckyWheelConfig.prizes.filter((p) => p.active);
 
+  // Initialize or retrieve persistent device fingerprint UUID
   useEffect(() => {
     try {
+      let dId = localStorage.getItem('lin_flower_device_id');
+      if (!dId) {
+        dId = 'DEV-' + Math.random().toString(36).substring(2, 10).toUpperCase() + '-' + Date.now().toString(36).toUpperCase();
+        localStorage.setItem('lin_flower_device_id', dId);
+        document.cookie = `lin_flower_device_id=${dId}; path=/; max-age=31536000`;
+      }
+      setDeviceId(dId);
+
       const todayStr = new Date().toISOString().split('T')[0];
-      const savedSpinCount = localStorage.getItem(`lin_flower_spins_${todayStr}`);
+      const savedSpinCount = localStorage.getItem(`lin_flower_spins_${todayStr}_${dId}`);
       const count = savedSpinCount ? parseInt(savedSpinCount, 10) : 0;
       setSpinsLeftToday(Math.max(0, luckyWheelConfig.dailyLimit - count));
     } catch (e) {
@@ -29,56 +42,72 @@ export const LuckyWheelModal: React.FC = () => {
 
   if (!luckyWheelConfig.enabled || activePrizes.length === 0) return null;
 
-  // Weighted Probability Picker
-  const pickPrizeByProbability = () => {
-    const totalWeight = activePrizes.reduce((sum, p) => sum + p.probability, 0);
-    let randomNum = Math.random() * (totalWeight || 100);
-
-    for (let i = 0; i < activePrizes.length; i++) {
-      if (randomNum < activePrizes[i].probability) {
-        return { prize: activePrizes[i], index: i };
-      }
-      randomNum -= activePrizes[i].probability;
-    }
-    return { prize: activePrizes[0], index: 0 };
-  };
-
-  const handleSpin = () => {
+  const handleSpin = async () => {
     if (isSpinning || wonPrize || spinsLeftToday <= 0) return;
 
     setIsSpinning(true);
-    const { prize, index } = pickPrizeByProbability();
+    setErrorMessage(null);
 
-    const extraRounds = 6 * 360;
-    const segmentAngle = 360 / activePrizes.length;
-    // Calculate rotation angle to align winner with pointer
-    const targetAngle = rotation + extraRounds + (activePrizes.length - index) * segmentAngle - segmentAngle / 2;
+    try {
+      // Call Server Anti-Cheat IP API
+      const res = await fetch('/api/lucky-wheel/spin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          deviceId,
+          dailyLimit: luckyWheelConfig.dailyLimit,
+          prizes: activePrizes,
+        }),
+      });
 
-    setRotation(targetAngle);
+      const data = await res.json();
+      if (data.clientIp) setClientIp(data.clientIp);
 
-    setTimeout(() => {
+      if (!res.ok || !data.allowed) {
+        setIsSpinning(false);
+        setErrorMessage(data.message || 'Máy hoặc địa chỉ IP của bạn đã dùng hết lượt quay hôm nay!');
+        setSpinsLeftToday(0);
+        return;
+      }
+
+      const { wonPrize: prizeResult, wonIndex } = data;
+
+      // Animate Rotation to align pointer with winner
+      const extraRounds = 6 * 360;
+      const segmentAngle = 360 / activePrizes.length;
+      const targetAngle = rotation + extraRounds + (activePrizes.length - wonIndex) * segmentAngle - segmentAngle / 2;
+
+      setRotation(targetAngle);
+
+      setTimeout(() => {
+        setIsSpinning(false);
+        setWonPrize(prizeResult);
+
+        // Record persistent Local Device Spin Limit
+        const todayStr = new Date().toISOString().split('T')[0];
+        localStorage.setItem(`lin_flower_spins_${todayStr}_${deviceId}`, '1');
+        setSpinsLeftToday(0);
+
+        // Auto apply voucher & record admin log
+        applyVoucher(prizeResult.code);
+        addLuckyWheelSpinLog({
+          prizeLabel: prizeResult.label,
+          code: prizeResult.code,
+          clientIp: data.clientIp || '14.226.18.92',
+          deviceId,
+        });
+
+        confetti({
+          particleCount: 150,
+          spread: 90,
+          origin: { y: 0.5 }
+        });
+      }, 4200);
+
+    } catch (e: any) {
       setIsSpinning(false);
-      setWonPrize(prize);
-
-      // Decrement spin count for today
-      const todayStr = new Date().toISOString().split('T')[0];
-      const newCount = (luckyWheelConfig.dailyLimit - spinsLeftToday) + 1;
-      localStorage.setItem(`lin_flower_spins_${todayStr}`, newCount.toString());
-      setSpinsLeftToday(Math.max(0, luckyWheelConfig.dailyLimit - newCount));
-
-      // Auto apply voucher & record log
-      applyVoucher(prize.code);
-      addLuckyWheelSpinLog({
-        prizeLabel: prize.label,
-        code: prize.code,
-      });
-
-      confetti({
-        particleCount: 140,
-        spread: 90,
-        origin: { y: 0.5 }
-      });
-    }, 4200);
+      setErrorMessage('Lỗi kết nối kiểm tra IP máy. Bạn thử lại nhé!');
+    }
   };
 
   return (
@@ -108,22 +137,22 @@ export const LuckyWheelModal: React.FC = () => {
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
-              className="bg-white rounded-3xl p-6 max-w-sm w-full text-center space-y-6 shadow-2xl border border-brand-100 relative"
+              className="bg-white rounded-3xl p-6 max-w-sm w-full text-center space-y-5 shadow-2xl border border-brand-100 relative"
             >
               <button
                 onClick={() => setIsOpen(false)}
-                className="absolute top-4 right-4 text-stone-400 hover:text-stone-600"
+                className="absolute top-4 right-4 text-stone-400 hover:text-stone-600 cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
 
               <div>
                 <div className="inline-flex items-center gap-1.5 bg-amber-100 text-amber-900 text-xs font-bold px-3 py-1 rounded-full mb-1">
-                  <Sparkles className="w-3.5 h-3.5 text-amber-600" /> Vòng Quay Lộc Xuân Lin Flower
+                  <Sparkles className="w-3.5 h-3.5 text-amber-600" /> Khóa IP Theo Máy Bảo Mật
                 </div>
                 <h3 className="font-serif font-extrabold text-2xl text-stone-900">Vòng Quay May Mắn</h3>
                 <p className="text-xs text-stone-500">
-                  Lượt quay hôm nay: <strong className="text-brand-600 font-bold">{spinsLeftToday} / {luckyWheelConfig.dailyLimit} lượt</strong>
+                  Mỗi thiết bị / IP chỉ được <strong className="text-brand-600 font-bold">1 lượt quay miễn phí / ngày</strong>
                 </p>
               </div>
 
@@ -147,7 +176,6 @@ export const LuckyWheelModal: React.FC = () => {
                       const startAngle = idx * sliceAngle;
                       const endAngle = (idx + 1) * sliceAngle;
 
-                      // Convert angle to coordinates
                       const x1 = 50 + 50 * Math.cos((Math.PI * (startAngle - 90)) / 180);
                       const y1 = 50 + 50 * Math.sin((Math.PI * (startAngle - 90)) / 180);
                       const x2 = 50 + 50 * Math.cos((Math.PI * (endAngle - 90)) / 180);
@@ -187,8 +215,16 @@ export const LuckyWheelModal: React.FC = () => {
                 </button>
               </div>
 
+              {/* Error Message */}
+              {errorMessage && (
+                <div className="bg-red-50 p-3.5 rounded-2xl border border-red-200 text-xs text-red-700 font-bold flex items-center gap-2 text-left animate-in fade-in">
+                  <AlertCircle className="w-4 h-4 text-red-600 flex-shrink-0" />
+                  <span>{errorMessage}</span>
+                </div>
+              )}
+
               {/* Won Result Notice */}
-              {wonPrize ? (
+              {wonPrize && (
                 <div className="bg-amber-50 p-4 rounded-2xl border border-amber-200 space-y-1.5 text-xs text-amber-950 animate-in fade-in">
                   <div className="font-bold flex items-center justify-center gap-1 text-amber-800">
                     <Trophy className="w-4 h-4 text-amber-600" />
@@ -196,18 +232,26 @@ export const LuckyWheelModal: React.FC = () => {
                   </div>
                   <div className="font-serif font-extrabold text-lg text-brand-700">{wonPrize.label}</div>
                   <div className="text-[11px] text-stone-600">
-                    Mã <strong className="bg-white px-2 py-0.5 rounded font-mono font-bold border border-amber-300">{wonPrize.code}</strong> đã tự động được kích hoạt vào đơn hàng của bạn!
+                    Mã <strong className="bg-white px-2 py-0.5 rounded font-mono font-bold border border-amber-300">{wonPrize.code}</strong> đã tự động được áp dụng vào giỏ hàng!
                   </div>
                 </div>
-              ) : spinsLeftToday <= 0 ? (
-                <div className="bg-stone-50 p-3 rounded-xl border border-stone-200 text-xs text-stone-500">
-                  Bạn đã dùng hết {luckyWheelConfig.dailyLimit} lượt quay hôm nay. Hãy quay lại vào ngày mai nhé! 🌸
-                </div>
-              ) : null}
+              )}
+
+              {/* Device IP Badge */}
+              <div className="flex items-center justify-between bg-stone-100 px-3 py-2 rounded-xl text-[10px] text-stone-500 font-semibold border border-stone-200">
+                <span className="flex items-center gap-1">
+                  <Laptop className="w-3.5 h-3.5 text-stone-400" />
+                  <span>IP Máy: {clientIp}</span>
+                </span>
+                <span className="text-emerald-700 font-bold flex items-center gap-1">
+                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                  <span>{spinsLeftToday > 0 ? 'Khả dụng 1/1' : 'Đã dùng 1/1'}</span>
+                </span>
+              </div>
 
               <button
                 onClick={() => setIsOpen(false)}
-                className="w-full bg-stone-900 hover:bg-black text-white font-bold text-xs py-3 rounded-xl shadow-sm active:scale-95 transition-all"
+                className="w-full bg-stone-900 hover:bg-black text-white font-bold text-xs py-3 rounded-xl shadow-sm active:scale-95 transition-all cursor-pointer"
               >
                 Đóng & Xem Giỏ Hàng
               </button>

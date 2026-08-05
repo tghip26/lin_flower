@@ -186,4 +186,6 @@ export interface LuckyWheelSpinLog {
   prizeLabel: string;
   code: string;
   timestamp: string;
+  clientIp?: string;
+  deviceId?: string;
 }

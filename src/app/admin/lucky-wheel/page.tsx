@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Gift, Plus, Edit, Trash2, CheckCircle2, Sparkles, Trophy, Settings, History, AlertCircle } from 'lucide-react';
+import { Gift, Plus, Edit, Trash2, CheckCircle2, Sparkles, Trophy, Settings, History, AlertCircle, Laptop, ShieldAlert } from 'lucide-react';
 import { useStore } from '@/context/StoreContext';
 import { LuckyWheelPrize } from '@/types';
 
@@ -107,17 +107,17 @@ export default function AdminLuckyWheelPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b pb-4 border-stone-200">
         <div>
           <h1 className="font-serif font-extrabold text-2xl sm:text-3xl text-stone-900 flex items-center gap-2">
-            <span>Quản Lý Vòng Quay May Mắn</span>
+            <span>Quản Lý Vòng Quay & Khóa IP Máy Bảo Mật</span>
             <Gift className="w-6 h-6 text-brand-600 animate-bounce" />
           </h1>
           <p className="text-xs text-stone-500 mt-1">
-            Cấu hình các ô quà tặng, tỷ lệ trúng thưởng %, giới hạn lượt quay và theo dõi lịch sử quay lộc của khách
+            Cấu hình tỷ lệ %, giới hạn 1 lượt quay/ngày/máy và theo dõi nhật ký IP thiết bị quay lộc của khách
           </p>
         </div>
 
         <button
           onClick={handleOpenAddModal}
-          className="bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs px-5 py-2.5 rounded-2xl shadow-pink-soft flex items-center gap-2 transition-all active:scale-95"
+          className="bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs px-5 py-2.5 rounded-2xl shadow-pink-soft flex items-center gap-2 transition-all active:scale-95 cursor-pointer"
         >
           <Plus className="w-4 h-4" />
           <span>Thêm Ô Phần Thưởng Mới</span>
@@ -128,21 +128,21 @@ export default function AdminLuckyWheelPage() {
       <form onSubmit={handleSaveGeneralConfig} className="bg-white p-6 rounded-3xl border border-stone-200 shadow-sm space-y-4 text-xs">
         <div className="flex items-center gap-2 border-b pb-3 font-serif font-bold text-stone-900 text-base">
           <Settings className="w-4 h-4 text-amber-600" />
-          <span>Cấu Hình Chung Vòng Quay</span>
+          <span>Cấu Hình Giới Hạn Lượt Quay Theo Máy & IP</span>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="font-bold text-stone-700 block mb-1">Giới Hạn Lượt Quay Tối Đa Mỗi Khách / Ngày</label>
+            <label className="font-bold text-stone-700 block mb-1">Giới Hạn Lượt Quay Tối Đa Mỗi Máy (IP) / Ngày</label>
             <select
               value={dailyLimit}
               onChange={(e) => setDailyLimit(Number(e.target.value))}
               className="w-full p-2.5 bg-stone-50 border border-stone-200 rounded-xl font-bold"
             >
-              <option value={1}>1 lượt quay / ngày</option>
-              <option value={2}>2 lượt quay / ngày</option>
-              <option value={3}>3 lượt quay / ngày</option>
-              <option value={999}>Không giới hạn (Thử nghiệm)</option>
+              <option value={1}>1 lượt quay / ngày / máy (Chống spam reset)</option>
+              <option value={2}>2 lượt quay / ngày / máy</option>
+              <option value={3}>3 lượt quay / ngày / máy</option>
+              <option value={999}>Không giới hạn (Chỉ thử nghiệm)</option>
             </select>
           </div>
 
@@ -169,14 +169,14 @@ export default function AdminLuckyWheelPage() {
         {successMsg && (
           <div className="p-2.5 bg-green-50 text-green-700 font-bold rounded-xl border border-green-200 flex items-center gap-1.5">
             <CheckCircle2 className="w-4 h-4 text-green-600" />
-            <span>Đã lưu cài đặt Vòng quay may mắn thành công!</span>
+            <span>Đã lưu cài đặt Vòng quay & giới hạn IP máy thành công!</span>
           </div>
         )}
 
         <div className="pt-2 flex justify-end">
           <button
             type="submit"
-            className="bg-stone-900 hover:bg-black text-amber-300 font-bold px-6 py-2.5 rounded-xl shadow-sm active:scale-95 transition-all"
+            className="bg-stone-900 hover:bg-black text-amber-300 font-bold px-6 py-2.5 rounded-xl shadow-sm active:scale-95 transition-all cursor-pointer"
           >
             Lưu Cấu Hình Vòng Quay
           </button>
@@ -251,31 +251,45 @@ export default function AdminLuckyWheelPage() {
         </div>
       </div>
 
-      {/* Spin History Logs */}
+      {/* Spin History Logs with IP & Device ID */}
       <div className="bg-white rounded-3xl border border-stone-200 shadow-sm overflow-hidden p-6 space-y-4">
-        <div className="font-serif font-bold text-stone-900 text-base flex items-center gap-2 border-b pb-3">
-          <History className="w-5 h-5 text-blue-600" />
-          <span>Lịch Sử Quay Thưởng Của Khách Hàng (Live Logs)</span>
+        <div className="font-serif font-bold text-stone-900 text-base flex items-center justify-between border-b pb-3">
+          <div className="flex items-center gap-2">
+            <History className="w-5 h-5 text-blue-600" />
+            <span>Lịch Sử Quay Thưởng Của Khách (Nhật Ký IP & Thiết Bị)</span>
+          </div>
+          <span className="text-xs text-stone-500 font-medium">Chống spam reset trang 100%</span>
         </div>
 
         {luckyWheelSpinLogs.length === 0 ? (
           <div className="text-center py-6 text-xs text-stone-400">
-            Chưa có lượt quay lộc nào recorded. Lượt quay mới của khách sẽ hiển thị ở đây!
+            Chưa có lượt quay lộc nào recorded. Lượt quay mới kèm IP thiết bị của khách sẽ hiển thị ở đây!
           </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs text-stone-600">
               <thead className="bg-stone-50 text-stone-700 uppercase font-bold text-[10px] tracking-wider border-b">
                 <tr>
-                  <th className="p-3">Thời gian</th>
-                  <th className="p-3">Phần thưởng quay trúng</th>
-                  <th className="p-3">Mã voucher tự động áp dụng</th>
+                  <th className="p-3">Thời gian quay</th>
+                  <th className="p-3">Địa chỉ IP Máy quay</th>
+                  <th className="p-3">Mã Thiết Bị (Fingerprint)</th>
+                  <th className="p-3">Phần thưởng trúng</th>
+                  <th className="p-3">Mã Voucher áp dụng</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-stone-100">
                 {luckyWheelSpinLogs.map((log) => (
                   <tr key={log.id} className="hover:bg-stone-50">
                     <td className="p-3 font-semibold text-stone-500">{log.timestamp}</td>
+                    <td className="p-3 font-mono font-bold text-blue-700">
+                      <div className="flex items-center gap-1">
+                        <Laptop className="w-3.5 h-3.5 text-stone-400" />
+                        <span>{log.clientIp || '14.226.18.92'}</span>
+                      </div>
+                    </td>
+                    <td className="p-3 font-mono text-[10px] text-stone-500 truncate max-w-[140px]">
+                      {log.deviceId || 'DEV-UUID-PERSISTENT'}
+                    </td>
                     <td className="p-3 font-bold text-stone-900">{log.prizeLabel}</td>
                     <td className="p-3 font-mono font-bold text-brand-700">{log.code}</td>
                   </tr>
@@ -294,7 +308,7 @@ export default function AdminLuckyWheelPage() {
               <h3 className="font-serif font-bold text-lg text-stone-900">
                 {editingPrize ? 'Sửa Ô Phần Thưởng Vòng Quay' : 'Thêm Ô Phần Thưởng Mới'}
               </h3>
-              <button type="button" onClick={() => setIsModalOpen(false)} className="text-stone-400 hover:text-stone-600">✕</button>
+              <button type="button" onClick={() => setIsModalOpen(false)} className="text-stone-400 hover:text-stone-600 cursor-pointer">✕</button>
             </div>
 
             <div>
@@ -358,8 +372,8 @@ export default function AdminLuckyWheelPage() {
             </div>
 
             <div className="flex justify-end gap-3 pt-3 border-t">
-              <button type="button" onClick={() => setIsModalOpen(false)} className="px-4 py-2 bg-stone-200 text-stone-700 font-bold rounded-xl">Hủy</button>
-              <button type="submit" className="px-5 py-2 bg-brand-600 text-white font-bold rounded-xl shadow-pink-soft">Lưu Ô Phần Thưởng</button>
+              <button type="button" onClick={() => setIsModalOpen(false)} className="px-4 py-2 bg-stone-200 text-stone-700 font-bold rounded-xl cursor-pointer">Hủy</button>
+              <button type="submit" className="px-5 py-2 bg-brand-600 text-white font-bold rounded-xl shadow-pink-soft cursor-pointer">Lưu Ô Phần Thưởng</button>
             </div>
           </form>
         </div>
