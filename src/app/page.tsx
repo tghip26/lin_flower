@@ -10,6 +10,7 @@ import {
 import { useStore } from '@/context/StoreContext';
 import { ProductCard } from '@/components/products/ProductCard';
 import { PageTransition } from '@/components/common/PageTransition';
+import { FlowerFinderWizard } from '@/components/common/FlowerFinderWizard';
 
 export default function HomePage() {
   const { products, categories, reviews } = useStore();
@@ -148,6 +149,11 @@ export default function HomePage() {
 
             </div>
           </div>
+        </section>
+
+        {/* FLOWER FINDER WIZARD TOOL */}
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <FlowerFinderWizard />
         </section>
 
         {/* FLOWER MENU SECTION (Visual Match of Prompt Banner) */}

@@ -149,3 +149,18 @@ export interface TelegramConfig {
   notifyOnNewOrder: boolean;
   notifyOnStatusChange: boolean;
 }
+
+export interface GeminiConfig {
+  apiKey: string;
+  model: string;
+  systemPrompt: string;
+  enabled: boolean;
+}
+
+export interface ChatMessage {
+  id: string;
+  sender: 'user' | 'bot';
+  text: string;
+  timestamp: string;
+  suggestedProducts?: Product[];
+}

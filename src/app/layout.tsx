@@ -3,10 +3,12 @@ import type { Metadata } from 'next';
 import { StoreProvider } from '@/context/StoreContext';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
+import { AIChatbotWidget } from '@/components/chat/AIChatbotWidget';
+import { LuckyWheelModal } from '@/components/common/LuckyWheelModal';
 
 export const metadata: Metadata = {
   title: 'Lin Flower - Trao Trọn Yêu Thương, Gửi Trọn Tâm Ý ♡',
-  description: 'Cửa hàng hoa tươi Lin Flower tại Quế Võ, Bắc Ninh. Chuyên tráp cưới hỏi, giỏ trái cây, lẵng khai trương, hoa bó sinh nhật và trang trí sự kiện trọn gói. Hotline: 0363 819 228.',
+  description: 'Cửa hàng hoa tươi Lin Flower tại Quế Võ, Bắc Ninh. Chuyên tráp cưới hỏi, giỏ trái cây, lẵng khai trương, bó hoa sinh nhật và trang trí sự kiện trọn gói. Hotline: 0363 819 228.',
   keywords: ['Lin Flower', 'Hoa tươi Bắc Ninh', 'Tráp cưới hỏi Phố Mới', 'Giỏ trái cây Bắc Ninh', 'Lẵng hoa khai trương Quế Võ', 'Hoa tươi Phố Mới Quế Võ'],
 };
 
@@ -24,6 +26,8 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
+          <AIChatbotWidget />
+          <LuckyWheelModal />
         </StoreProvider>
       </body>
     </html>

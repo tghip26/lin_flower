@@ -1,4 +1,4 @@
-import { Category, Product, AddOn, Voucher, Review, Order, BlogPost, CustomOrderRequest, VietQRConfig, TelegramConfig } from '@/types';
+import { Category, Product, AddOn, Voucher, Review, Order, BlogPost, CustomOrderRequest, VietQRConfig, TelegramConfig, GeminiConfig } from '@/types';
 
 export const INITIAL_CATEGORIES: Category[] = [
   {
@@ -317,7 +317,7 @@ export const INITIAL_BLOG_POSTS: BlogPost[] = [
     slug: 'cach-giu-hoa-tuoi-lau-tai-nha',
     excerpt: 'Mẹo cắt gốc xéo 45 độ, pha dung dịch dưỡng hoa thần thánh và chọn vị trí đặt bình hoa tránh héo quắt đơn giản nhất.',
     content: `
-Hoa tươi mang lại sức sống và hương thơm ngọt ngào cho không gian sống. Tuy nhiên, nếu không chăm sóc đúng cách, hoa rất dễ bị héo chỉ sau 2-3 ngày. Dưới đây là bí quyết giữ hoa tươi đến 10 ngày từ các nghệ nhânLin Flower:
+Hoa tươi mang lại sức sống và hương thơm ngọt ngào cho không gian sống. Tuy nhiên, nếu không chăm sóc đúng cách, hoa rất dễ bị héo chỉ sau 2-3 ngày. Dưới đây là bí quyết giữ hoa tươi đến 10 ngày từ các nghệ nhân Lin Flower:
 
 ### 1. Cắt Gốc Xéo 45 Độ Trong Nước
 Khi mua hoa về hoặc nhận bó hoa từ Lin Flower, hãy nhúng phần gốc cành hoa vào một chậu nước sạch rồi dùng kéo thật sắc cắt chéo một góc 45 độ. Lược bỏ bớt lá ngập nước để tránh vi khuẩn phân hủy làm đục nước.
@@ -357,28 +357,6 @@ Hãy chọn số lượng bông hoa phù hợp tại Lin Flower để nhắn g�
     readTime: '3 phút đọc',
     createdAt: '2026-08-03',
     tags: ['Hoa Hồng', 'Tình Yêu', 'Bó Hoa Sinh Nhật', 'Ý Nghĩa Hoa']
-  },
-  {
-    id: 'blog-3',
-    title: 'Kinh Nghiệm Chọn Lẵng Hoa Khai Trương Hồng Phát Mang Lại Tài Lộc',
-    slug: 'kinh-nghiem-chon-hoa-khai-truong',
-    excerpt: 'Lựa chọn lẵng hoa chúc mừng khai trương với tông màu may mắn Đỏ - Vàng - Cam đem lại nhiều tài lộc và đại thành công cho gia chủ.',
-    content: `
-Khai trương cửa hàng, công ty là sự kiện trọng đại mở đầu cho chặng đường kinh doanh hồng phát. Chọn lẵng hoa khai trương đúng phong thủy sẽ mang lại nguồn năng lượng tích cực và tài lộc dồi dào.
-
-### Tông Màu May Mắn Cho Lẵng Hoa Khai Trương
-- **Tông Màu Đỏ**: Tượng trưng cho sự may mắn, nhiệt huyết và quyết tâm chiến thắng.
-- **Tông Màu Vàng**: Tượng trưng cho tiền tài, sự thịnh vượng và quý phái (Hoa Hướng Dương, Hoa Lan Hồ Điệp Vàng).
-- **Tông Màu Cam**: Sự khởi đầu năng động, sáng tạo và may mắn liên tiếp.
-
-Lin Flower miễn phí in băng rôn chúc mừng khai trương chữ nổi sang trọng cho mọi lẵng hoa!
-    `,
-    coverImage: 'https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&q=80&w=800',
-    author: 'Lin Flower Expert',
-    category: 'Hoa Sự Kiện',
-    readTime: '5 phút đọc',
-    createdAt: '2026-08-04',
-    tags: ['Khai Trương', 'Lẵng Hoa Chúc Mừng', 'Bắc Ninh', 'Phong Thủy']
   }
 ];
 
@@ -410,4 +388,11 @@ export const INITIAL_TELEGRAM_CONFIG: TelegramConfig = {
   enabled: true,
   notifyOnNewOrder: true,
   notifyOnStatusChange: true
+};
+
+export const INITIAL_GEMINI_CONFIG: GeminiConfig = {
+  apiKey: '',
+  model: 'gemini-1.5-flash',
+  systemPrompt: 'Bạn là Trợ lý Tư vấn Hoa Tươi Lin Flower tại Quế Võ, Bắc Ninh. Hãy tư vấn nhiệt tình, lãng mạn, chu đáo các mẫu hoa sinh nhật, lẵng hoa khai trương, giỏ trái cây, tráp cưới và mẹo giữ hoa tươi cho khách hàng.',
+  enabled: true
 };

@@ -4,12 +4,12 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import { 
   Product, Category, CartItem, Order, Voucher, Review, 
   CustomOrderRequest, UserRole, OrderStatus, SizeOption, AddOn,
-  BlogPost, VietQRConfig, TelegramConfig, PaymentStatus
+  BlogPost, VietQRConfig, TelegramConfig, PaymentStatus, GeminiConfig
 } from '@/types';
 import { 
   INITIAL_CATEGORIES, INITIAL_PRODUCTS, INITIAL_VOUCHERS, 
   INITIAL_REVIEWS, INITIAL_ORDERS, INITIAL_CUSTOM_REQUESTS, 
-  INITIAL_BLOG_POSTS, INITIAL_VIETQR_CONFIG, INITIAL_TELEGRAM_CONFIG 
+  INITIAL_BLOG_POSTS, INITIAL_VIETQR_CONFIG, INITIAL_TELEGRAM_CONFIG, INITIAL_GEMINI_CONFIG 
 } from '@/data/mockData';
 
 interface StoreContextType {
@@ -72,6 +72,8 @@ interface StoreContextType {
   telegramConfig: TelegramConfig;
   updateTelegramConfig: (config: Partial<TelegramConfig>) => void;
   sendTelegramNotification: (text: string) => Promise<{ success: boolean; message: string }>;
+  geminiConfig: GeminiConfig;
+  updateGeminiConfig: (config: Partial<GeminiConfig>) => void;
 }
 
 const StoreContext = createContext<StoreContextType | undefined>(undefined);
@@ -94,6 +96,7 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>(INITIAL_BLOG_POSTS);
   const [vietQRConfig, setVietQRConfig] = useState<VietQRConfig>(INITIAL_VIETQR_CONFIG);
   const [telegramConfig, setTelegramConfig] = useState<TelegramConfig>(INITIAL_TELEGRAM_CONFIG);
+  const [geminiConfig, setGeminiConfig] = useState<GeminiConfig>(INITIAL_GEMINI_CONFIG);
 
   // Load from localStorage on mount
   useEffect(() => {
@@ -121,6 +124,9 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
       const savedTelegram = localStorage.getItem(LOCAL_STORAGE_PREFIX + 'telegram');
       if (savedTelegram) setTelegramConfig(JSON.parse(savedTelegram));
+
+      const savedGemini = localStorage.getItem(LOCAL_STORAGE_PREFIX + 'gemini');
+      if (savedGemini) setGeminiConfig(JSON.parse(savedGemini));
     } catch (e) {
       console.error('Failed to parse localStorage data', e);
     }
@@ -154,6 +160,10 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_PREFIX + 'telegram', JSON.stringify(telegramConfig));
   }, [telegramConfig]);
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_PREFIX + 'gemini', JSON.stringify(geminiConfig));
+  }, [geminiConfig]);
 
   const setUserRole = (role: UserRole) => {
     setUserRoleState(role);
@@ -473,6 +483,10 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     setTelegramConfig((prev) => ({ ...prev, ...config }));
   };
 
+  const updateGeminiConfig = (config: Partial<GeminiConfig>) => {
+    setGeminiConfig((prev) => ({ ...prev, ...config }));
+  };
+
   return (
     <StoreContext.Provider
       value={{
@@ -516,6 +530,8 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         telegramConfig,
         updateTelegramConfig,
         sendTelegramNotification,
+        geminiConfig,
+        updateGeminiConfig,
       }}
     >
       {children}
