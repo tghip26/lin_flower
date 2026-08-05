@@ -281,6 +281,22 @@ export const INITIAL_REVIEWS: Review[] = [
     rating: 5,
     comment: 'Giỏ trái cây đầy đặn, trái cây nhập khẩu ngọt lịm. Hoa đính kèm tươi nguyên 3 ngày vẫn đẹp. Dịch vụ tuyệt vời 10/10.',
     createdAt: '2026-08-03'
+  },
+  {
+    id: 'rev-3',
+    productId: 'lf-004',
+    customerName: 'Chị Thu Trang (Phố Mới, Quế Võ)',
+    rating: 5,
+    comment: 'Bộ tráp cưới 7 lễ rồng phượng của Lin Flower siêu lộng lẫy! Họ nhà trai và nhà gái ai cũng khen nức nở vì vừa sang vừa tỉ mỉ.',
+    createdAt: '2026-08-04'
+  },
+  {
+    id: 'rev-4',
+    productId: 'lf-002',
+    customerName: 'Anh Đức Anh (Từ Sơn, Bắc Ninh)',
+    rating: 5,
+    comment: 'Lẵng hoa khai trương màu sắc phối rực rỡ hồng phát. Nhân viên tư vấn nhiệt tình, giao hoa chuẩn giờ tận nơi!',
+    createdAt: '2026-08-05'
   }
 ];
 

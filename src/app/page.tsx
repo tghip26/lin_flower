@@ -176,8 +176,8 @@ export default function HomePage() {
                   onClick={() => setActiveTab(tab.id)}
                   className={`px-4.5 py-2.5 rounded-full text-xs font-semibold transition-all cursor-pointer ${
                     activeTab === tab.id
-                      ? 'bg-brand-600 text-white shadow-md scale-105 font-bold'
-                      : 'bg-white/90 hover:bg-white text-stone-700 border border-stone-200'
+                      ? 'bg-gradient-to-r from-brand-600 to-rose-600 text-white shadow-md scale-105 font-bold'
+                      : 'bg-white hover:bg-pink-50 text-stone-700 border border-pink-200/80 shadow-xs'
                   }`}
                 >
                   {tab.label}
@@ -204,13 +204,14 @@ export default function HomePage() {
             </AnimatePresence>
           </div>
 
-          <div className="text-center pt-4">
+          {/* RADIANT NON-BLACK BUTTON */}
+          <div className="text-center pt-6">
             <Link
               href="/products"
-              className="inline-flex items-center gap-2.5 bg-stone-900 hover:bg-black text-amber-300 font-semibold text-sm px-8.5 py-4 rounded-full shadow-xl transition-all active:scale-95 tracking-wide"
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-brand-600 via-rose-500 to-amber-500 hover:from-brand-700 hover:to-amber-600 text-white font-bold text-base px-9 py-4 rounded-full shadow-pink-soft hover:shadow-pink-glow active:scale-95 transition-all tracking-wide"
             >
               <span>Xem Tất Cả 100+ Mẫu Hoa Lin Flower</span>
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-5 h-5" />
             </Link>
           </div>
         </section>
@@ -224,33 +225,33 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* 4. CUSTOM DESIGN CTA BANNER */}
+        {/* 4. CUSTOM DESIGN CTA BANNER (WARM LUXURY ROSE & BURGUNDY GRADIENT - 0% PITCH BLACK) */}
         <section className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gradient-to-r from-stone-950 via-brand-950 to-stone-950 text-white rounded-3xl p-8 sm:p-12 shadow-2xl border border-amber-500/20 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8">
+          <div className="bg-gradient-to-r from-brand-800 via-rose-800 to-brand-900 text-white rounded-3xl p-8 sm:p-12 shadow-2xl border border-pink-300/30 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="space-y-4 max-w-2xl text-center md:text-left z-10">
-              <span className="bg-amber-400/20 text-amber-300 border border-amber-400/40 text-xs font-bold px-4 py-1.5 rounded-full inline-block tracking-wider uppercase">
+              <span className="bg-amber-400/20 text-amber-200 border border-amber-300/40 text-xs font-bold px-4 py-1.5 rounded-full inline-block tracking-wider uppercase">
                 ✨ Dịch Vụ Thiết Kế Hoa Độc Bản
               </span>
               <h2 className="font-serif font-bold text-3xl sm:text-4xl lg:text-5xl text-white leading-tight">
                 Bạn Muốn Đặt Hoa Theo Mẫu Riêng Hoặc Ngân Sách Tùy Chọn?
               </h2>
-              <p className="text-stone-300 text-xs sm:text-sm leading-relaxed font-normal">
+              <p className="text-rose-100 text-xs sm:text-sm leading-relaxed font-normal">
                 Gửi ảnh mẫu hoa bạn thích hoặc ngân sách mong muốn. Nghệ nhân hoa tươi Lin Flower sẽ thiết kế riêng và gửi ảnh duyệt thực tế trước khi giao!
               </p>
               <div className="pt-2 flex flex-wrap gap-4 justify-center md:justify-start text-xs font-medium">
-                <span className="flex items-center gap-1.5 text-pink-200"><CheckCircle2 className="w-4 h-4 text-green-400" /> Duyệt ảnh chụp hoa thực tế</span>
-                <span className="flex items-center gap-1.5 text-pink-200"><CheckCircle2 className="w-4 h-4 text-green-400" /> Tặng kèm thiệp & băng rôn</span>
-                <span className="flex items-center gap-1.5 text-pink-200"><CheckCircle2 className="w-4 h-4 text-green-400" /> Miễn phí vận chuyển</span>
+                <span className="flex items-center gap-1.5 text-pink-100"><CheckCircle2 className="w-4 h-4 text-emerald-400" /> Duyệt ảnh chụp hoa thực tế</span>
+                <span className="flex items-center gap-1.5 text-pink-100"><CheckCircle2 className="w-4 h-4 text-emerald-400" /> Tặng kèm thiệp & băng rôn</span>
+                <span className="flex items-center gap-1.5 text-pink-100"><CheckCircle2 className="w-4 h-4 text-emerald-400" /> Miễn phí vận chuyển</span>
               </div>
             </div>
 
             <div className="z-10 flex-shrink-0">
               <Link
                 href="/custom-order"
-                className="inline-flex items-center gap-2.5 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-stone-950 font-serif font-bold text-base px-8.5 py-4 rounded-full shadow-2xl active:scale-95 transition-all tracking-wide"
+                className="inline-flex items-center gap-2.5 bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 hover:from-amber-400 hover:to-amber-600 text-stone-950 font-serif font-bold text-base px-8.5 py-4 rounded-full shadow-lg shadow-amber-400/20 active:scale-95 transition-all tracking-wide"
               >
                 <span>Gửi Mẫu Đặt Hoa Ngay</span>
-                <ArrowRight className="w-5 h-5" />
+                <ArrowRight className="w-5 h-5 text-stone-950" />
               </Link>
             </div>
           </div>
@@ -265,7 +266,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* 5. CUSTOMER REVIEWS */}
+        {/* 5. CUSTOMER REVIEWS (PERFECT 3-COLUMN SPACING & RATIO BALANCED) */}
         <section className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           <div className="text-center space-y-2">
             <span className="text-xs font-bold text-brand-600 uppercase tracking-widest flex items-center justify-center gap-1.5">
@@ -276,21 +277,23 @@ export default function HomePage() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6.5">
             {reviews.slice(0, 3).map((rev) => (
-              <div key={rev.id} className="bg-white/95 backdrop-blur-md p-6.5 rounded-3xl border border-pink-100/80 shadow-xs space-y-3.5 relative hover:shadow-md transition-shadow">
-                <div className="flex items-center justify-between">
-                  <div className="flex text-amber-400">
-                    {[...Array(rev.rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-amber-400" />
-                    ))}
+              <div key={rev.id} className="bg-white/95 backdrop-blur-md p-6.5 rounded-3xl border border-pink-200/80 shadow-sm hover:shadow-xl hover:border-pink-300 transition-all space-y-4 flex flex-col justify-between">
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between border-b border-pink-100 pb-3">
+                    <div className="flex text-amber-400">
+                      {[...Array(rev.rating)].map((_, i) => (
+                        <Star key={i} className="w-4 h-4 fill-amber-400" />
+                      ))}
+                    </div>
+                    <span className="text-[11px] text-stone-400 font-mono">{rev.createdAt}</span>
                   </div>
-                  <span className="text-[10px] text-stone-400 font-mono">{rev.createdAt}</span>
+                  <p className="text-xs sm:text-sm text-stone-700 italic leading-relaxed font-normal">"{rev.comment}"</p>
                 </div>
-                <p className="text-xs sm:text-sm text-stone-700 italic leading-relaxed font-normal">"{rev.comment}"</p>
                 <div className="pt-3 border-t border-stone-100 flex items-center justify-between text-xs">
                   <span className="font-bold text-stone-900">{rev.customerName}</span>
-                  <span className="text-brand-600 font-semibold">✓ Khách mua thực tế</span>
+                  <span className="text-brand-600 font-semibold bg-pink-50 px-2.5 py-1 rounded-full border border-pink-200/60">✓ Khách mua thực tế</span>
                 </div>
               </div>
             ))}
