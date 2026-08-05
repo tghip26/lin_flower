@@ -164,3 +164,26 @@ export interface ChatMessage {
   timestamp: string;
   suggestedProducts?: Product[];
 }
+
+export interface LuckyWheelPrize {
+  id: string;
+  code: string;
+  label: string;
+  discountText: string;
+  color: string;
+  probability: number; // 0 - 100%
+  active: boolean;
+}
+
+export interface LuckyWheelConfig {
+  enabled: boolean;
+  dailyLimit: number;
+  prizes: LuckyWheelPrize[];
+}
+
+export interface LuckyWheelSpinLog {
+  id: string;
+  prizeLabel: string;
+  code: string;
+  timestamp: string;
+}

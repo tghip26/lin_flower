@@ -1,4 +1,4 @@
-import { Category, Product, AddOn, Voucher, Review, Order, BlogPost, CustomOrderRequest, VietQRConfig, TelegramConfig, GeminiConfig } from '@/types';
+import { Category, Product, AddOn, Voucher, Review, Order, BlogPost, CustomOrderRequest, VietQRConfig, TelegramConfig, GeminiConfig, LuckyWheelConfig } from '@/types';
 
 export const INITIAL_CATEGORIES: Category[] = [
   {
@@ -246,6 +246,22 @@ export const INITIAL_VOUCHERS: Voucher[] = [
     description: 'Giảm trực tiếp 50.000đ cho khách hàng mới',
     expiryDate: '2026-12-31',
     active: true
+  },
+  {
+    code: 'FREESHIPBN',
+    fixedDiscount: 30000,
+    minOrderValue: 200000,
+    description: 'Miễn phí vận chuyển toàn tỉnh Bắc Ninh',
+    expiryDate: '2026-12-31',
+    active: true
+  },
+  {
+    code: 'THIEP3D',
+    fixedDiscount: 20000,
+    minOrderValue: 100000,
+    description: 'Tặng thiệp chúc mừng 3D cao cấp',
+    expiryDate: '2026-12-31',
+    active: true
   }
 ];
 
@@ -395,4 +411,15 @@ export const INITIAL_GEMINI_CONFIG: GeminiConfig = {
   model: 'gemini-1.5-flash',
   systemPrompt: 'Bạn là Trợ lý Tư vấn Hoa Tươi Lin Flower tại Quế Võ, Bắc Ninh. Hãy tư vấn nhiệt tình, lãng mạn, chu đáo các mẫu hoa sinh nhật, lẵng hoa khai trương, giỏ trái cây, tráp cưới và mẹo giữ hoa tươi cho khách hàng.',
   enabled: true
+};
+
+export const INITIAL_LUCKY_WHEEL_CONFIG: LuckyWheelConfig = {
+  enabled: true,
+  dailyLimit: 1,
+  prizes: [
+    { id: 'p1', code: 'LINFLOWER10', label: 'Giảm 10% Tổng Đơn', discountText: 'Giảm 10% tối đa 100.000đ', color: '#e63963', probability: 40, active: true },
+    { id: 'p2', code: 'XINCHAO', label: 'Giảm Trực Tiếp 50.000đ', discountText: 'Trừ 50k cho đơn từ 500k', color: '#d97706', probability: 30, active: true },
+    { id: 'p3', code: 'FREESHIPBN', label: 'Miễn Phí Vận Chuyển 0đ', discountText: 'Free ship toàn tỉnh Bắc Ninh', color: '#10b981', probability: 20, active: true },
+    { id: 'p4', code: 'THIEP3D', label: 'Tặng Thiệp 3D Cao Cấp', discountText: 'Tặng thiệp mừng 3D hoa nổi', color: '#8b5cf6', probability: 10, active: true }
+  ]
 };

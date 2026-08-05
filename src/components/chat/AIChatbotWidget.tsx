@@ -2,22 +2,23 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageCircle, X, Send, Sparkles, PhoneCall, Bot, User, RefreshCw, ShoppingBag } from 'lucide-react';
+import { MessageCircle, X, Send, Sparkles, PhoneCall, Bot, User, RefreshCw, ShoppingBag, Plus, Check } from 'lucide-react';
 import { useStore } from '@/context/StoreContext';
-import { ChatMessage } from '@/types';
+import { ChatMessage, Product } from '@/types';
 
 export const AIChatbotWidget: React.FC = () => {
-  const { geminiConfig, products } = useStore();
+  const { geminiConfig, products, addToCart } = useStore();
   const [isOpen, setIsOpen] = useState(false);
   const [inputText, setInputText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [addedItemIds, setAddedItemIds] = useState<string[]>([]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: 'welcome-msg',
       sender: 'bot',
-      text: '🌸 **Xin chào bạn thân yêu!** Mình là Trợ lý AI của **Lin Flower**. Bạn đang tìm hoa cho dịp Sinh nhật, Khai trương hay Cưới hỏi để mình hỗ trợ ngay ạ? 💕',
+      text: '🌸 **Xin chào bạn thân yêu!** Mình là Trợ lý AI của **Lin Flower**. Bạn đang tìm hoa cho dịp Sinh nhật, Khai trương hay Cưới hỏi để mình tư vấn & thêm vào giỏ hàng ngay nhé! 💕',
       timestamp: new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' }),
     }
   ]);
@@ -33,6 +34,26 @@ export const AIChatbotWidget: React.FC = () => {
   }, [messages, isOpen]);
 
   if (!geminiConfig.enabled) return null;
+
+  const matchProductsFromText = (text: string): Product[] => {
+    const lower = text.toLowerCase();
+    let matched: Product[] = [];
+
+    if (lower.includes('hồng đỏ') || lower.includes('sinh nhật') || lower.includes('tình yêu')) {
+      matched.push(products.find(p => p.id === 'lf-001') || products[0]);
+    }
+    if (lower.includes('khai trương') || lower.includes('lẵng')) {
+      matched.push(products.find(p => p.id === 'lf-002') || products[1]);
+    }
+    if (lower.includes('trái cây') || lower.includes('giỏ')) {
+      matched.push(products.find(p => p.id === 'lf-003') || products[2]);
+    }
+    if (lower.includes('tráp') || lower.includes('cưới')) {
+      matched.push(products.find(p => p.id === 'lf-004') || products[3]);
+    }
+
+    return matched.filter(Boolean);
+  };
 
   const handleSendMessage = async (textToSend?: string) => {
     const prompt = textToSend || inputText;
@@ -64,11 +85,14 @@ export const AIChatbotWidget: React.FC = () => {
       const data = await res.json();
       const botText = data.text || 'Rất tiếc, trợ lý AI đang quá tải. Bạn vui lòng gọi hotline 0363 819 228 để shop hỗ trợ ngay nhé!';
 
+      const suggestedProducts = matchProductsFromText(botText + ' ' + prompt);
+
       const botMsg: ChatMessage = {
         id: `bot-${Date.now()}`,
         sender: 'bot',
         text: botText,
         timestamp: new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' }),
+        suggestedProducts: suggestedProducts.length > 0 ? suggestedProducts : undefined
       };
 
       setMessages((prev) => [...prev, botMsg]);
@@ -85,6 +109,14 @@ export const AIChatbotWidget: React.FC = () => {
     }
   };
 
+  const handleQuickAddToCart = (p: Product) => {
+    addToCart(p);
+    setAddedItemIds((prev) => [...prev, p.id]);
+    setTimeout(() => {
+      setAddedItemIds((prev) => prev.filter(id => id !== p.id));
+    }, 2500);
+  };
+
   return (
     <>
       {/* Floating Trigger Button */}
@@ -95,14 +127,14 @@ export const AIChatbotWidget: React.FC = () => {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
             onClick={() => setIsOpen(true)}
-            className="fixed bottom-6 right-6 z-40 flex items-center gap-2.5 bg-gradient-to-r from-brand-600 to-brand-500 hover:from-brand-700 hover:to-brand-600 text-white px-4 py-3 rounded-full shadow-2xl glow-effect active:scale-95 transition-all border-2 border-white/40"
+            className="fixed bottom-6 right-6 z-40 flex items-center gap-2.5 bg-gradient-to-r from-brand-600 to-brand-500 hover:from-brand-700 hover:to-brand-600 text-white px-4 py-3 rounded-full shadow-2xl glow-effect active:scale-95 transition-all border-2 border-white/40 cursor-pointer"
           >
             <div className="relative">
               <Bot className="w-6 h-6 text-amber-200 animate-bounce" />
               <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-green-400 rounded-full border-2 border-white"></span>
             </div>
             <div className="text-left hidden sm:block">
-              <div className="text-xs font-serif font-bold text-white">Tư Vấn Hoa AI</div>
+              <div className="text-xs font-serif font-bold text-white">Tư Vấn AI Thông Minh</div>
               <div className="text-[10px] text-brand-100">Lin Flower Assistant</div>
             </div>
           </motion.button>
@@ -117,7 +149,7 @@ export const AIChatbotWidget: React.FC = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.25, ease: 'easeOut' }}
-            className="fixed bottom-6 right-4 sm:right-6 z-50 w-[calc(100vw-2rem)] sm:w-96 h-[520px] bg-white rounded-3xl shadow-2xl border border-brand-100 flex flex-col overflow-hidden"
+            className="fixed bottom-6 right-4 sm:right-6 z-50 w-[calc(100vw-2rem)] sm:w-96 h-[540px] bg-white rounded-3xl shadow-2xl border border-brand-100 flex flex-col overflow-hidden"
           >
             {/* Header */}
             <div className="bg-gradient-to-r from-stone-900 via-brand-900 to-stone-900 text-white p-4 flex items-center justify-between shadow-md">
@@ -144,16 +176,45 @@ export const AIChatbotWidget: React.FC = () => {
             </div>
 
             {/* Chat Body Messages */}
-            <div className="flex-1 p-4 overflow-y-auto space-y-3.5 bg-stone-50/50">
+            <div className="flex-1 p-4 overflow-y-auto space-y-4 bg-stone-50/50">
               {messages.map((msg) => (
                 <div
                   key={msg.id}
                   className={`flex flex-col ${msg.sender === 'user' ? 'items-end' : 'items-start'}`}
                 >
-                  <div className={`max-w-[85%] p-3 rounded-2xl text-xs leading-relaxed space-y-1 ${msg.sender === 'user' ? 'bg-gradient-to-r from-brand-600 to-brand-500 text-white rounded-br-none shadow-sm' : 'bg-white text-stone-800 border border-stone-200 shadow-sm rounded-bl-none'}`}>
+                  <div className={`max-w-[85%] p-3.5 rounded-2xl text-xs leading-relaxed space-y-2 ${msg.sender === 'user' ? 'bg-gradient-to-r from-brand-600 to-brand-500 text-white rounded-br-none shadow-sm' : 'bg-white text-stone-800 border border-stone-200 shadow-sm rounded-bl-none'}`}>
                     <div className="whitespace-pre-line font-medium">
                       {msg.text}
                     </div>
+
+                    {/* Embedded Suggested Products Card */}
+                    {msg.suggestedProducts && msg.suggestedProducts.length > 0 && (
+                      <div className="pt-2 border-t border-stone-100 space-y-2">
+                        <div className="text-[10px] font-bold text-brand-700 uppercase tracking-wider">
+                          🌸 Mẫu hoa gợi ý chọn nhanh:
+                        </div>
+                        {msg.suggestedProducts.map((p) => {
+                          const isAdded = addedItemIds.includes(p.id);
+                          return (
+                            <div key={p.id} className="bg-brand-50/60 p-2 rounded-xl border border-brand-200 flex items-center justify-between gap-2">
+                              <img src={p.images[0]} alt="" className="w-10 h-10 object-cover rounded-lg flex-shrink-0" />
+                              <div className="flex-1 min-w-0">
+                                <div className="font-bold text-[11px] text-stone-900 truncate">{p.name}</div>
+                                <div className="font-serif font-bold text-brand-700 text-[10px]">{p.price.toLocaleString('vi-VN')}đ</div>
+                              </div>
+                              <button
+                                onClick={() => handleQuickAddToCart(p)}
+                                className={`px-2.5 py-1 rounded-lg text-[10px] font-bold flex items-center gap-1 transition-all active:scale-95 ${isAdded ? 'bg-green-600 text-white' : 'bg-brand-600 text-white shadow-pink-soft'}`}
+                              >
+                                {isAdded ? <Check className="w-3 h-3" /> : <Plus className="w-3 h-3" />}
+                                <span>{isAdded ? 'Đã thêm' : 'Thêm giỏ'}</span>
+                              </button>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
+
                     <div className={`text-[9px] text-right font-normal ${msg.sender === 'user' ? 'text-brand-200' : 'text-stone-400'}`}>
                       {msg.timestamp}
                     </div>
@@ -162,9 +223,9 @@ export const AIChatbotWidget: React.FC = () => {
               ))}
 
               {isLoading && (
-                <div className="flex items-center gap-2 text-xs text-stone-500 bg-white p-3 rounded-2xl border border-stone-200 max-w-[70%]">
+                <div className="flex items-center gap-2 text-xs text-stone-500 bg-white p-3 rounded-2xl border border-stone-200 max-w-[75%] shadow-sm">
                   <RefreshCw className="w-3.5 h-3.5 animate-spin text-brand-600" />
-                  <span>Trợ lý Lin Flower đang suy nghĩ câu trả lời...</span>
+                  <span>Trợ lý Lin Flower đang tìm hoa phù hợp...</span>
                 </div>
               )}
               <div ref={messagesEndRef} />
@@ -176,12 +237,12 @@ export const AIChatbotWidget: React.FC = () => {
                 '🎂 Hoa tặng sinh nhật',
                 '🎉 Lẵng hoa khai trương',
                 '🍇 Giỏ trái cây biếu',
-                '🌸 Mẹo giữ hoa tươi'
+                '🌸 Mẹo giữ hoa tươi lâu'
               ].map((chip, idx) => (
                 <button
                   key={idx}
                   onClick={() => handleSendMessage(chip)}
-                  className="bg-brand-50 hover:bg-brand-100 text-brand-700 px-2.5 py-1 rounded-full border border-brand-200/60 font-medium active:scale-95 transition-all"
+                  className="bg-brand-50 hover:bg-brand-100 text-brand-700 px-2.5 py-1 rounded-full border border-brand-200/60 font-medium active:scale-95 transition-all cursor-pointer"
                 >
                   {chip}
                 </button>
@@ -206,7 +267,7 @@ export const AIChatbotWidget: React.FC = () => {
               <button
                 type="submit"
                 disabled={!inputText.trim() || isLoading}
-                className="p-2 bg-brand-600 hover:bg-brand-700 disabled:opacity-50 text-white rounded-full transition-colors active:scale-95 flex-shrink-0"
+                className="p-2 bg-brand-600 hover:bg-brand-700 disabled:opacity-50 text-white rounded-full transition-colors active:scale-95 flex-shrink-0 cursor-pointer"
               >
                 <Send className="w-4 h-4" />
               </button>

@@ -4,12 +4,14 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import { 
   Product, Category, CartItem, Order, Voucher, Review, 
   CustomOrderRequest, UserRole, OrderStatus, SizeOption, AddOn,
-  BlogPost, VietQRConfig, TelegramConfig, PaymentStatus, GeminiConfig
+  BlogPost, VietQRConfig, TelegramConfig, PaymentStatus, GeminiConfig,
+  LuckyWheelConfig, LuckyWheelPrize, LuckyWheelSpinLog
 } from '@/types';
 import { 
   INITIAL_CATEGORIES, INITIAL_PRODUCTS, INITIAL_VOUCHERS, 
   INITIAL_REVIEWS, INITIAL_ORDERS, INITIAL_CUSTOM_REQUESTS, 
-  INITIAL_BLOG_POSTS, INITIAL_VIETQR_CONFIG, INITIAL_TELEGRAM_CONFIG, INITIAL_GEMINI_CONFIG 
+  INITIAL_BLOG_POSTS, INITIAL_VIETQR_CONFIG, INITIAL_TELEGRAM_CONFIG, 
+  INITIAL_GEMINI_CONFIG, INITIAL_LUCKY_WHEEL_CONFIG 
 } from '@/data/mockData';
 
 interface StoreContextType {
@@ -74,6 +76,12 @@ interface StoreContextType {
   sendTelegramNotification: (text: string) => Promise<{ success: boolean; message: string }>;
   geminiConfig: GeminiConfig;
   updateGeminiConfig: (config: Partial<GeminiConfig>) => void;
+
+  // Lucky Wheel Manager
+  luckyWheelConfig: LuckyWheelConfig;
+  updateLuckyWheelConfig: (config: Partial<LuckyWheelConfig>) => void;
+  luckyWheelSpinLogs: LuckyWheelSpinLog[];
+  addLuckyWheelSpinLog: (log: Omit<LuckyWheelSpinLog, 'id' | 'timestamp'>) => void;
 }
 
 const StoreContext = createContext<StoreContextType | undefined>(undefined);
@@ -97,6 +105,8 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [vietQRConfig, setVietQRConfig] = useState<VietQRConfig>(INITIAL_VIETQR_CONFIG);
   const [telegramConfig, setTelegramConfig] = useState<TelegramConfig>(INITIAL_TELEGRAM_CONFIG);
   const [geminiConfig, setGeminiConfig] = useState<GeminiConfig>(INITIAL_GEMINI_CONFIG);
+  const [luckyWheelConfig, setLuckyWheelConfig] = useState<LuckyWheelConfig>(INITIAL_LUCKY_WHEEL_CONFIG);
+  const [luckyWheelSpinLogs, setLuckyWheelSpinLogs] = useState<LuckyWheelSpinLog[]>([]);
 
   // Load from localStorage on mount
   useEffect(() => {
@@ -127,6 +137,12 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
       const savedGemini = localStorage.getItem(LOCAL_STORAGE_PREFIX + 'gemini');
       if (savedGemini) setGeminiConfig(JSON.parse(savedGemini));
+
+      const savedLuckyWheel = localStorage.getItem(LOCAL_STORAGE_PREFIX + 'lucky_wheel');
+      if (savedLuckyWheel) setLuckyWheelConfig(JSON.parse(savedLuckyWheel));
+
+      const savedLogs = localStorage.getItem(LOCAL_STORAGE_PREFIX + 'wheel_logs');
+      if (savedLogs) setLuckyWheelSpinLogs(JSON.parse(savedLogs));
     } catch (e) {
       console.error('Failed to parse localStorage data', e);
     }
@@ -164,6 +180,14 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_PREFIX + 'gemini', JSON.stringify(geminiConfig));
   }, [geminiConfig]);
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_PREFIX + 'lucky_wheel', JSON.stringify(luckyWheelConfig));
+  }, [luckyWheelConfig]);
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_PREFIX + 'wheel_logs', JSON.stringify(luckyWheelSpinLogs));
+  }, [luckyWheelSpinLogs]);
 
   const setUserRole = (role: UserRole) => {
     setUserRoleState(role);
@@ -487,6 +511,20 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     setGeminiConfig((prev) => ({ ...prev, ...config }));
   };
 
+  // Lucky Wheel Config & Logs
+  const updateLuckyWheelConfig = (config: Partial<LuckyWheelConfig>) => {
+    setLuckyWheelConfig((prev) => ({ ...prev, ...config }));
+  };
+
+  const addLuckyWheelSpinLog = (logData: Omit<LuckyWheelSpinLog, 'id' | 'timestamp'>) => {
+    const newLog: LuckyWheelSpinLog = {
+      ...logData,
+      id: `spin-${Date.now()}`,
+      timestamp: new Date().toLocaleString('vi-VN')
+    };
+    setLuckyWheelSpinLogs((prev) => [newLog, ...prev]);
+  };
+
   return (
     <StoreContext.Provider
       value={{
@@ -532,6 +570,10 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         sendTelegramNotification,
         geminiConfig,
         updateGeminiConfig,
+        luckyWheelConfig,
+        updateLuckyWheelConfig,
+        luckyWheelSpinLogs,
+        addLuckyWheelSpinLog,
       }}
     >
       {children}

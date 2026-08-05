@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { 
   LayoutDashboard, ShoppingCart, Package, Shield, 
-  Tag, ArrowLeft, UserCheck, Lock, Sparkles, QrCode, BookOpen 
+  Tag, ArrowLeft, UserCheck, Lock, Sparkles, QrCode, BookOpen, Gift 
 } from 'lucide-react';
 import { useStore } from '@/context/StoreContext';
 
@@ -77,11 +77,19 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               </Link>
 
               <Link
+                href="/admin/lucky-wheel"
+                className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-all ${pathname === '/admin/lucky-wheel' ? 'bg-brand-600 text-white font-bold shadow-sm' : 'hover:bg-stone-800 text-stone-400 hover:text-white'}`}
+              >
+                <Gift className="w-4 h-4 text-amber-300" />
+                <span className="text-amber-200">Quản Lý Vòng Quay</span>
+              </Link>
+
+              <Link
                 href="/admin/integrations"
                 className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-all ${pathname === '/admin/integrations' ? 'bg-brand-600 text-white font-bold shadow-sm' : 'hover:bg-stone-800 text-stone-400 hover:text-white'}`}
               >
-                <QrCode className="w-4 h-4 text-amber-300" />
-                <span className="text-amber-200">Tích Hợp QR & Telegram</span>
+                <QrCode className="w-4 h-4" />
+                <span>Tích Hợp QR, Telegram & AI</span>
               </Link>
 
               <Link
@@ -117,8 +125,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 <div className="font-bold flex items-center gap-1">
                   <Sparkles className="w-3.5 h-3.5 text-amber-400" /> Admin (Toàn Quyền)
                 </div>
-                <div>• Quản lý QR & Telegram Bot</div>
-                <div>• Đăng/Sửa/Xóa bài cẩm nang</div>
+                <div>• Cấu hình Vòng quay & Quà tặng</div>
+                <div>• Quản lý QR, Telegram & AI</div>
                 <div>• Báo cáo doanh thu & Kho hoa</div>
               </div>
             ) : (
