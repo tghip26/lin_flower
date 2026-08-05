@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { QrCode, Send, Sparkles, CheckCircle2, AlertCircle, Shield, RefreshCw } from 'lucide-react';
 import { useStore } from '@/context/StoreContext';
 
@@ -32,6 +32,23 @@ export default function AdminIntegrationsPage() {
   const [telegramTestStatus, setTelegramTestStatus] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
   const [isSendingTest, setIsSendingTest] = useState(false);
 
+  // Sync form state when store context finishes loading from localStorage
+  useEffect(() => {
+    setAccountNo(vietQRConfig.accountNo);
+    setAccountName(vietQRConfig.accountName);
+    setBankCode(vietQRConfig.bankCode);
+    setBankName(vietQRConfig.bankName);
+    setQrEnabled(vietQRConfig.enabled);
+  }, [vietQRConfig]);
+
+  useEffect(() => {
+    setBotToken(telegramConfig.botToken);
+    setChatId(telegramConfig.chatId);
+    setTelegramEnabled(telegramConfig.enabled);
+    setNotifyOnNewOrder(telegramConfig.notifyOnNewOrder);
+    setNotifyOnStatusChange(telegramConfig.notifyOnStatusChange);
+  }, [telegramConfig]);
+
   const handleSaveVietQR = (e: React.FormEvent) => {
     e.preventDefault();
     updateVietQRConfig({
@@ -54,7 +71,7 @@ export default function AdminIntegrationsPage() {
       notifyOnNewOrder,
       notifyOnStatusChange,
     });
-    setTelegramTestStatus({ type: 'success', text: 'Đã lưu cấu hình Telegram Bot thành công!' });
+    setTelegramTestStatus({ type: 'success', text: '✓ Đã lưu cấu hình Telegram Bot vào hệ thống thành công!' });
     setTimeout(() => setTelegramTestStatus(null), 3000);
   };
 
@@ -92,7 +109,7 @@ export default function AdminIntegrationsPage() {
           Cài Đặt Tích Hợp VietQR & Telegram Bot
         </h1>
         <p className="text-xs text-stone-500 mt-1">
-          Cấu hình mã QR thanh toán ngân hàng tự động và hệ thống đẩy thông báo đơn hàng live qua Telegram
+          Cấu hình mã QR thanh toán ngân hàng tự động và hệ thống đẩy thông báo đơn hàng live qua Telegram (Tự động lưu lại)
         </p>
       </div>
 
@@ -177,15 +194,16 @@ export default function AdminIntegrationsPage() {
             </div>
 
             {vietQRSuccessMsg && (
-              <div className="p-2.5 bg-green-50 text-green-700 font-bold rounded-xl border border-green-200">
-                ✓ Đã lưu cài đặt VietQR thành công!
+              <div className="p-2.5 bg-green-50 text-green-700 font-bold rounded-xl border border-green-200 flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-green-600" />
+                <span>Đã lưu cấu hình VietQR vào hệ thống thành công!</span>
               </div>
             )}
 
             <div className="pt-2">
               <button
                 type="submit"
-                className="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-2.5 rounded-xl shadow-pink-soft transition-colors"
+                className="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3 rounded-xl shadow-pink-soft active:scale-95 transition-all text-xs"
               >
                 Lưu Cấu Hình VietQR
               </button>
@@ -194,9 +212,9 @@ export default function AdminIntegrationsPage() {
 
           {/* Live Preview Card */}
           <div className="bg-stone-50 p-4 rounded-2xl border border-stone-200 space-y-2 text-center">
-            <div className="text-xs font-bold text-stone-700">Xem Trước Mã QR Ngân Hàng</div>
-            <img src={previewQRUrl} alt="Live QR Preview" className="w-36 h-36 mx-auto rounded-xl border bg-white p-1" />
-            <div className="text-[11px] text-stone-500">{bankName} - STK: {accountNo}</div>
+            <div className="text-xs font-bold text-stone-700">Xem Trước Mã QR Ngân Hàng Tự Động</div>
+            <img src={previewQRUrl} alt="Live QR Preview" className="w-36 h-36 mx-auto rounded-xl border bg-white p-1 shadow-sm" />
+            <div className="text-[11px] text-stone-600 font-semibold">{bankName} - STK: <span className="text-brand-700 font-bold">{accountNo}</span></div>
           </div>
         </div>
 
@@ -267,8 +285,9 @@ export default function AdminIntegrationsPage() {
             </div>
 
             {telegramTestStatus && (
-              <div className={`p-2.5 font-bold rounded-xl border ${telegramTestStatus.type === 'success' ? 'bg-green-50 text-green-700 border-green-200' : 'bg-red-50 text-red-600 border-red-200'}`}>
-                {telegramTestStatus.text}
+              <div className={`p-2.5 font-bold rounded-xl border flex items-center gap-1.5 ${telegramTestStatus.type === 'success' ? 'bg-green-50 text-green-700 border-green-200' : 'bg-red-50 text-red-600 border-red-200'}`}>
+                {telegramTestStatus.type === 'success' ? <CheckCircle2 className="w-4 h-4 text-green-600" /> : <AlertCircle className="w-4 h-4 text-red-600" />}
+                <span>{telegramTestStatus.text}</span>
               </div>
             )}
 
@@ -277,7 +296,7 @@ export default function AdminIntegrationsPage() {
                 type="button"
                 onClick={handleTestTelegram}
                 disabled={isSendingTest}
-                className="bg-stone-800 hover:bg-black text-amber-300 font-bold py-2.5 rounded-xl transition-colors flex items-center justify-center gap-1.5"
+                className="bg-stone-800 hover:bg-black text-amber-300 font-bold py-3 rounded-xl transition-all flex items-center justify-center gap-1.5 active:scale-95"
               >
                 {isSendingTest ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Send className="w-3.5 h-3.5" />}
                 <span>Gửi Thử Tin Nhắn</span>
@@ -285,7 +304,7 @@ export default function AdminIntegrationsPage() {
 
               <button
                 type="submit"
-                className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 rounded-xl transition-colors shadow-sm"
+                className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition-all shadow-sm active:scale-95"
               >
                 Lưu Cấu Hình Telegram
               </button>

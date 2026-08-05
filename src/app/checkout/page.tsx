@@ -20,7 +20,8 @@ export default function CheckoutPage() {
     applyVoucher, 
     removeVoucher, 
     discountAmount, 
-    placeOrder 
+    placeOrder,
+    vietQRConfig
   } = useStore();
 
   // Form State
@@ -128,7 +129,7 @@ export default function CheckoutPage() {
 
   // SUCCESS CONFIRMATION VIEW
   if (orderCreated) {
-    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=STK:0363819228-MBBANK-ND:${orderCreated.id}-AM:${orderCreated.totalPrice}`;
+    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=STK:${vietQRConfig.accountNo}-${vietQRConfig.bankCode}-ND:${orderCreated.id}-AM:${orderCreated.totalPrice}`;
 
     return (
       <div className="max-w-4xl mx-auto px-4 py-12 space-y-8 animate-in fade-in duration-300">
@@ -193,7 +194,7 @@ export default function CheckoutPage() {
             <div className="flex gap-4 pt-4">
               <Link
                 href={`/tracking?orderId=${orderCreated.id}&phone=${orderCreated.customerPhone}`}
-                className="w-full text-center bg-stone-900 hover:bg-black text-white font-bold text-xs py-3 rounded-xl transition-colors"
+                className="w-full text-center bg-stone-900 hover:bg-black text-white font-bold text-xs py-3 rounded-xl transition-colors active:scale-95"
               >
                 Tra Cứu Tiến Độ Đơn Hàng Live
               </Link>
@@ -203,7 +204,7 @@ export default function CheckoutPage() {
           {/* Payment Instructions */}
           <div className="md:col-span-5 space-y-6">
             {orderCreated.paymentMethod === 'vietqr' ? (
-              <div className="bg-amber-50/80 p-6 rounded-3xl border border-amber-200 text-center space-y-4">
+              <div className="bg-amber-50/80 p-6 rounded-3xl border border-amber-200 text-center space-y-4 shadow-sm">
                 <div className="inline-flex items-center gap-1.5 bg-amber-200 text-amber-900 text-xs font-bold px-3 py-1 rounded-full">
                   <Sparkles className="w-3.5 h-3.5" />
                   Thanh Toán VietQR Tự Động
@@ -216,10 +217,10 @@ export default function CheckoutPage() {
                 </div>
 
                 <div className="text-xs text-stone-700 space-y-1.5 text-left bg-white p-3.5 rounded-xl border border-amber-200">
-                  <div>Tên TK: <strong className="text-stone-900">LIN FLOWER - BAC NINH</strong></div>
-                  <div>Số TK: <strong className="text-brand-700 text-sm">0363 819 228</strong> (MB Bank)</div>
+                  <div>Tên TK: <strong className="text-stone-900">{vietQRConfig.accountName}</strong></div>
+                  <div>Số TK: <strong className="text-brand-700 font-bold text-sm">{vietQRConfig.accountNo}</strong> ({vietQRConfig.bankName})</div>
                   <div>Số tiền: <strong className="text-brand-700 font-bold">{orderCreated.totalPrice.toLocaleString('vi-VN')}đ</strong></div>
-                  <div>Cú pháp: <strong className="text-amber-800 bg-amber-100 px-1.5 py-0.5 rounded">{orderCreated.id}</strong></div>
+                  <div>Cú pháp: <strong className="text-amber-800 bg-amber-100 px-1.5 py-0.5 rounded font-mono">{orderCreated.id}</strong></div>
                 </div>
 
                 <p className="text-[11px] text-stone-500">
@@ -399,13 +400,13 @@ export default function CheckoutPage() {
             <div className="space-y-3">
               <label
                 onClick={() => setPaymentMethod('vietqr')}
-                className={`flex items-center justify-between p-4 rounded-2xl border cursor-pointer transition-all ${paymentMethod === 'vietqr' ? 'border-brand-600 bg-brand-50/50 shadow-sm' : 'border-stone-200 hover:bg-stone-50'}`}
+                className={`flex items-center justify-between p-4 rounded-2xl border cursor-pointer transition-all active:scale-98 ${paymentMethod === 'vietqr' ? 'border-brand-600 bg-brand-50/50 shadow-sm' : 'border-stone-200 hover:bg-stone-50'}`}
               >
                 <div className="flex items-center gap-3">
                   <span className="text-xl">💳</span>
                   <div>
-                    <div className="font-bold text-stone-800 text-xs">Chuyển Khoản Ngân Hàng Tự Động (VietQR)</div>
-                    <div className="text-[11px] text-stone-500">Quét mã QR bằng mọi app ngân hàng (MB Bank, Vietcombank...)</div>
+                    <div className="font-bold text-stone-800 text-xs">Chuyển Khoản Ngân Hàng Tự Động (VietQR - {vietQRConfig.bankCode})</div>
+                    <div className="text-[11px] text-stone-500">Quét mã QR chuyển khoản tới STK {vietQRConfig.accountNo} ({vietQRConfig.accountName})</div>
                   </div>
                 </div>
                 {paymentMethod === 'vietqr' && <CheckCircle className="w-5 h-5 text-brand-600" />}
@@ -413,7 +414,7 @@ export default function CheckoutPage() {
 
               <label
                 onClick={() => setPaymentMethod('cod')}
-                className={`flex items-center justify-between p-4 rounded-2xl border cursor-pointer transition-all ${paymentMethod === 'cod' ? 'border-brand-600 bg-brand-50/50 shadow-sm' : 'border-stone-200 hover:bg-stone-50'}`}
+                className={`flex items-center justify-between p-4 rounded-2xl border cursor-pointer transition-all active:scale-98 ${paymentMethod === 'cod' ? 'border-brand-600 bg-brand-50/50 shadow-sm' : 'border-stone-200 hover:bg-stone-50'}`}
               >
                 <div className="flex items-center gap-3">
                   <span className="text-xl">💵</span>
@@ -488,7 +489,7 @@ export default function CheckoutPage() {
             {/* Submit button */}
             <button
               type="submit"
-              className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700 text-white font-bold py-4 rounded-2xl shadow-pink-soft text-base transition-all"
+              className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700 text-white font-bold py-4 rounded-2xl shadow-pink-soft text-base transition-all active:scale-95"
             >
               <span>Xác Nhận & Đặt Hàng</span>
               <ArrowRight className="w-5 h-5" />
