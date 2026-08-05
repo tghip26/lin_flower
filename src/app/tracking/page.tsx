@@ -1,12 +1,12 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Search, CheckCircle2, Clock, Truck, Award, AlertCircle, PhoneCall, ShieldCheck, MapPin } from 'lucide-react';
 import { useStore } from '@/context/StoreContext';
 import { Order, OrderStatus } from '@/types';
 
-export default function OrderTrackingPage() {
+function OrderTrackingContent() {
   const searchParams = useSearchParams();
   const initialOrderId = searchParams.get('orderId') || '';
   const initialPhone = searchParams.get('phone') || '';
@@ -181,5 +181,13 @@ export default function OrderTrackingPage() {
       </div>
 
     </div>
+  );
+}
+
+export default function OrderTrackingPage() {
+  return (
+    <Suspense fallback={<div className="p-12 text-center text-xs text-stone-500 font-bold">Đang tải trang tra cứu đơn hàng...</div>}>
+      <OrderTrackingContent />
+    </Suspense>
   );
 }

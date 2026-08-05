@@ -1,12 +1,12 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Filter, SlidersHorizontal, ArrowUpDown, RefreshCw } from 'lucide-react';
 import { useStore } from '@/context/StoreContext';
 import { ProductCard } from '@/components/products/ProductCard';
 
-export default function ProductsPage() {
+function ProductsContent() {
   const searchParams = useSearchParams();
   const categoryParam = searchParams.get('category');
   const wishlistParam = searchParams.get('wishlist');
@@ -214,5 +214,13 @@ export default function ProductsPage() {
 
       </div>
     </div>
+  );
+}
+
+export default function ProductsPage() {
+  return (
+    <Suspense fallback={<div className="p-12 text-center text-xs text-stone-500 font-bold">Đang tải danh mục hoa...</div>}>
+      <ProductsContent />
+    </Suspense>
   );
 }
