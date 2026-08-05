@@ -42,7 +42,7 @@ export default function HomePage() {
                 transition={{ duration: 0.6, ease: 'easeOut' }}
                 className="lg:col-span-7 space-y-5 sm:space-y-7 text-center lg:text-left"
               >
-                <div className="inline-flex items-center gap-2 bg-white/95 backdrop-blur-xl text-brand-900 text-xs sm:text-sm font-semibold px-4.5 py-2 rounded-full border border-amber-200/80 shadow-md">
+                <div className="inline-flex items-center gap-2 bg-white/95 backdrop-blur-xl text-brand-900 text-xs sm:text-sm font-semibold px-5 py-2 rounded-full border border-amber-200/80 shadow-md">
                   <Sparkles className="w-4 h-4 text-amber-500 animate-spin" />
                   <span className="tracking-wide">Tiệm Hoa Tươi Cao Cấp Hàng Đầu Tại Quế Võ - Bắc Ninh</span>
                 </div>
