@@ -24,7 +24,7 @@ export const FloralVineBackground: React.FC = () => {
         <defs>
           {/* Glowing Vine Linear Gradients */}
           <linearGradient id="glowingVineGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#e63963" stopOpacity="0.8" />
+            <stop offset="0%" stopColor="#e63963" stopOpacity="0.85" />
             <stop offset="25%" stopColor="#f59e0b" stopOpacity="0.85" />
             <stop offset="50%" stopColor="#ec4899" stopOpacity="0.9" />
             <stop offset="75%" stopColor="#fb7185" stopOpacity="0.85" />
@@ -57,7 +57,7 @@ export const FloralVineBackground: React.FC = () => {
           filter="url(#vineGlow)"
         />
 
-        {/* Primary Animated Vine Stem */}
+        {/* Primary Animated Vine Stem starting exactly at (140,140) */}
         <motion.path
           d="M 140,140 
              C 320,360 60,650 220,940 
@@ -73,7 +73,7 @@ export const FloralVineBackground: React.FC = () => {
 
         {/* Secondary Gold Twinkling Dotted Line */}
         <path
-          d="M 155,150 
+          d="M 140,140 
              C 335,370 75,660 235,950 
              S 1375,1250 1265,1550 
              S 125,1850 275,2250 
@@ -94,25 +94,42 @@ export const FloralVineBackground: React.FC = () => {
           />
         </circle>
 
-        {/* NODE 1 - HERO BANNER FLOWER (Shifted down to Y=140 to prevent top clipping!) */}
+        {/* NODE 1 - FLOWER BLOSSOM + LEAVES MOUNTED DIRECTLY ON VINE TIP AT (140, 140) */}
         <motion.g
           transform="translate(140, 140)"
           animate={{ rotate: [0, 8, -8, 0], scale: [1, 1.06, 1] }}
           transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
         >
-          <circle r="18" fill="#f43f5e" opacity="0.35" filter="url(#vineGlow)" />
-          <circle r="9" fill="#fbbf24" />
+          {/* Green Leaves attached underneath top flower head */}
+          <path
+            d="M -5,5 C -25,25 -35,5 -15,-15 Z"
+            fill="url(#leafGrad)"
+            fillOpacity="0.85"
+          />
+          <path
+            d="M 5,5 C 25,25 35,5 15,-15 Z"
+            fill="url(#leafGrad)"
+            fillOpacity="0.85"
+          />
+
+          {/* Glowing Aura */}
+          <circle r="22" fill="#f43f5e" opacity="0.35" filter="url(#vineGlow)" />
+          
+          {/* Flower Petals */}
           {[0, 45, 90, 135, 180, 225, 270, 315].map((angle, i) => (
             <ellipse
               key={i}
               cx="0"
-              cy="-18"
-              rx="6"
-              ry="12"
+              cy="-20"
+              rx="7"
+              ry="14"
               fill="#fda4af"
               transform={`rotate(${angle})`}
             />
           ))}
+
+          {/* Yellow Flower Center */}
+          <circle r="10" fill="#fbbf24" stroke="#f59e0b" strokeWidth="1.5" />
         </motion.g>
 
         {/* SWAYING LEAF BRANCH 1 */}
