@@ -25,13 +25,13 @@ export default function HomePage() {
 
   return (
     <PageTransition>
-      <div className="relative space-y-12 sm:space-y-24 pb-16 sm:pb-24 overflow-hidden">
+      <div className="relative space-y-8 sm:space-y-16 pb-16 sm:pb-24 overflow-hidden">
         
         {/* Background Glowing Floral Vine SVG Path Spanning Top to Bottom */}
         <FloralVineBackground />
 
         {/* 1. Hero Banner Section */}
-        <section className="relative z-10 pt-0 sm:pt-4 pb-8 sm:pb-14">
+        <section className="relative z-10 pt-2 sm:pt-3 pb-6 sm:pb-10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
               

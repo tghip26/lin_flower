@@ -81,8 +81,8 @@ export const Navbar: React.FC = () => {
       </div>
 
       {/* Main Header */}
-      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-brand-100 shadow-sm transition-all">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-brand-100 shadow-xs transition-all">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 sm:py-2.5">
           <div className="flex items-center justify-between gap-4">
             
             {/* Mobile menu trigger */}
@@ -185,9 +185,9 @@ export const Navbar: React.FC = () => {
         </div>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden lg:block bg-stone-50/80 border-t border-brand-100/60">
+        <nav className="hidden lg:block bg-stone-50/90 border-t border-brand-100/60">
           <div className="max-w-7xl mx-auto px-6">
-            <ul className="flex items-center justify-center gap-8 text-sm font-semibold text-stone-700 py-2.5">
+            <ul className="flex items-center justify-center gap-8 text-sm font-semibold text-stone-700 py-1.5">
               <li>
                 <Link 
                   href="/" 
