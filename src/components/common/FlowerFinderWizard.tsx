@@ -30,9 +30,9 @@ export const FlowerFinderWizard: React.FC = () => {
   };
 
   return (
-    <div className="bg-gradient-to-r from-brand-900 via-brand-700 to-stone-900 text-white rounded-3xl p-6 sm:p-10 shadow-2xl space-y-6 border border-amber-400/30">
+    <div className="bg-gradient-to-r from-brand-800 via-rose-800 to-brand-900 text-white rounded-[2.5rem] p-7 sm:p-11 shadow-2xl space-y-8 border border-pink-300/30">
       
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-brand-500/40 pb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-pink-300/20 pb-5">
         <div>
           <div className="inline-flex items-center gap-1.5 bg-amber-400/20 text-amber-300 text-xs font-bold px-3 py-1 rounded-full mb-1">
             <Sparkles className="w-3.5 h-3.5" />
