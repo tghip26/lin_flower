@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Sparkles, ArrowRight, Heart, ShoppingBag, Truck, ShieldCheck, 
   Clock, PhoneCall, Gift, CheckCircle2, Star, MapPin, Search 
@@ -106,7 +106,7 @@ export default function HomePage() {
                 </div>
               </motion.div>
 
-              {/* Right Hero Image (Pure Frameless High-Res Rose Photo focused 100% on flowers) */}
+              {/* Right Hero Image */}
               <motion.div 
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -150,7 +150,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* 3. BEST SELLERS & CATEGORY TABS */}
+        {/* 3. BEST SELLERS & CATEGORY TABS WITH STABLE FIXED MIN-HEIGHT & SMOOTH MORPH ANIMATION */}
         <section className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-pink-100 pb-4">
             <div>
@@ -186,11 +186,22 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Products Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {filteredProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
+          {/* Products Grid with Fixed Stable Height and Smooth AnimatePresence Transition */}
+          <div className="min-h-[520px] sm:min-h-[640px] relative">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeTab}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 transform-gpu"
+              >
+                {filteredProducts.map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
+              </motion.div>
+            </AnimatePresence>
           </div>
 
           <div className="text-center pt-4">
