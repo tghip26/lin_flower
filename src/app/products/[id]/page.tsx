@@ -5,11 +5,12 @@ import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { 
   Heart, ShoppingBag, Truck, ShieldCheck, CheckCircle2, 
-  Sparkles, Star, MessageSquare, Plus, Check, PhoneCall 
+  Sparkles, Star, MessageSquare, Plus, Check, PhoneCall, ArrowRight 
 } from 'lucide-react';
 import { useStore } from '@/context/StoreContext';
 import { SizeOption, AddOn } from '@/types';
 import { INITIAL_ADD_ONS } from '@/data/mockData';
+import { ProductCard } from '@/components/products/ProductCard';
 
 export default function ProductDetailPage() {
   const params = useParams();
@@ -55,6 +56,13 @@ export default function ProductDetailPage() {
   const unitBasePrice = Math.round(product.price * selectedSize.priceMultiplier);
   const addOnsTotal = selectedAddOns.reduce((sum, item) => sum + item.price, 0);
   const totalPrice = unitBasePrice + addOnsTotal;
+
+  // Filter Related Products
+  const relatedProducts = products
+    .filter((p) => p.id !== product.id && (p.categoryId === product.categoryId || p.occasions.some((o) => product.occasions.includes(o))))
+    .concat(products.filter((p) => p.id !== product.id))
+    .filter((v, i, a) => a.findIndex((t) => t.id === v.id) === i)
+    .slice(0, 4);
 
   const toggleAddOn = (addon: AddOn) => {
     setSelectedAddOns((prev) =>
@@ -309,6 +317,34 @@ export default function ProductDetailPage() {
               <li>Với bó hoa: Tỉa bớt gốc 1cm và cắm vào bình nước sạch.</li>
             </ul>
           </div>
+        </div>
+      </div>
+
+      {/* RELATED PRODUCTS RECOMMENDATION SECTION */}
+      <div className="space-y-6 pt-4">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-stone-200 pb-4">
+          <div>
+            <span className="text-xs font-bold text-brand-600 uppercase tracking-widest flex items-center gap-1">
+              <Sparkles className="w-3.5 h-3.5 text-brand-500" /> Gợi ý cùng phong cách
+            </span>
+            <h3 className="font-serif font-extrabold text-2xl sm:text-3xl text-stone-900 mt-1">
+              Các Mẫu Hoa Khác Bạn Có Thể Thích 🌸
+            </h3>
+          </div>
+
+          <Link
+            href="/products"
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-600 hover:text-brand-700 active:scale-95"
+          >
+            <span>Xem tất cả danh mục hoa</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {relatedProducts.map((relProduct) => (
+            <ProductCard key={relProduct.id} product={relProduct} />
+          ))}
         </div>
       </div>
 
