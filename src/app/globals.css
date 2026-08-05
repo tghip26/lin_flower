@@ -9,6 +9,10 @@
   --foreground: #1c1917;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   color: var(--foreground);
   background: var(--background);
@@ -20,36 +24,35 @@ h1, h2, h3, .font-serif {
   font-family: 'Playfair Display', Georgia, serif;
 }
 
-/* Glassmorphism effects */
+/* Glassmorphism & Card Enhancements */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(244, 107, 134, 0.15);
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(244, 107, 134, 0.18);
 }
 
 .glass-card {
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(230, 57, 99, 0.1);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(230, 57, 99, 0.12);
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .glass-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 15px 35px -5px rgba(230, 57, 99, 0.18);
-  border-color: rgba(230, 57, 99, 0.3);
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 0 20px 40px -10px rgba(230, 57, 99, 0.2);
+  border-color: rgba(230, 57, 99, 0.35);
 }
 
-/* Shimmer animation */
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+/* Button & Interactive Click Animations */
+button, a {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.animate-shimmer {
-  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
-  background-size: 200% 100%;
-  animation: shimmer 2.5s infinite;
+button:active, a.btn-active:active {
+  transform: scale(0.96);
 }
 
 /* Custom Scrollbar */
@@ -65,4 +68,14 @@ h1, h2, h3, .font-serif {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #e63963;
+}
+
+/* Pulse Glow Keyframes */
+@keyframes softGlow {
+  0%, 100% { box-shadow: 0 0 15px rgba(230, 57, 99, 0.2); }
+  50% { box-shadow: 0 0 25px rgba(230, 57, 99, 0.45); }
+}
+
+.glow-effect {
+  animation: softGlow 3s infinite ease-in-out;
 }

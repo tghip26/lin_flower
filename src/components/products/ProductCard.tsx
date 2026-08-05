@@ -2,7 +2,8 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Heart, ShoppingBag, Eye, Star } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Heart, ShoppingBag, Eye } from 'lucide-react';
 import { Product } from '@/types';
 import { useStore } from '@/context/StoreContext';
 
@@ -17,14 +18,19 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const defaultSize = { name: 'Tiêu chuẩn', priceMultiplier: 1.0, description: 'Kích thước tiêu chuẩn' };
 
   return (
-    <div className="group bg-white rounded-3xl overflow-hidden border border-brand-100/70 shadow-sm hover:shadow-xl hover:border-brand-300 transition-all duration-300 flex flex-col justify-between">
+    <motion.div
+      whileHover={{ y: -6 }}
+      whileTap={{ scale: 0.99 }}
+      transition={{ duration: 0.25, ease: [0.25, 1, 0.5, 1] }}
+      className="group bg-white rounded-3xl overflow-hidden border border-brand-100/70 shadow-sm hover:shadow-xl hover:border-brand-300 transition-all duration-300 flex flex-col justify-between"
+    >
       
       {/* Image Container */}
       <div className="relative aspect-square overflow-hidden bg-stone-100">
         <img
           src={product.images[0]}
           alt={product.name}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500 ease-out"
         />
 
         {/* Badges */}
@@ -47,7 +53,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             e.preventDefault();
             toggleWishlist(product.id);
           }}
-          className={`absolute top-3 right-3 p-2.5 rounded-full backdrop-blur-md transition-all z-10 ${isWished ? 'bg-brand-500 text-white shadow-pink-soft' : 'bg-white/80 text-stone-600 hover:bg-white hover:text-brand-600'}`}
+          className={`absolute top-3 right-3 p-2.5 rounded-full backdrop-blur-md transition-all active:scale-125 z-10 ${isWished ? 'bg-brand-500 text-white shadow-pink-soft' : 'bg-white/80 text-stone-600 hover:bg-white hover:text-brand-600'}`}
           title={isWished ? 'Đã yêu thích' : 'Thêm vào yêu thích'}
         >
           <Heart className={`w-4 h-4 ${isWished ? 'fill-white' : ''}`} />
@@ -57,7 +63,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex justify-center gap-2 z-10">
           <Link
             href={`/products/${product.id}`}
-            className="flex items-center gap-1 bg-white/90 hover:bg-white text-stone-800 font-bold text-xs px-3.5 py-2 rounded-full backdrop-blur-sm transition-all"
+            className="flex items-center gap-1 bg-white/90 hover:bg-white text-stone-800 font-bold text-xs px-4 py-2 rounded-full backdrop-blur-sm transition-all active:scale-95 shadow-md"
           >
             <Eye className="w-3.5 h-3.5" />
             <span>Xem Chi Tiết</span>
@@ -98,7 +104,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
           <button
             onClick={() => addToCart(product, defaultSize)}
-            className="flex items-center gap-1 bg-brand-50 hover:bg-brand-600 text-brand-700 hover:text-white px-3 py-2 rounded-xl text-xs font-bold transition-all border border-brand-200 hover:border-brand-600"
+            className="flex items-center gap-1 bg-brand-50 hover:bg-brand-600 text-brand-700 hover:text-white px-3 py-2 rounded-xl text-xs font-bold transition-all border border-brand-200 hover:border-brand-600 active:scale-95"
             title="Thêm nhanh vào giỏ hàng"
           >
             <ShoppingBag className="w-3.5 h-3.5" />
@@ -108,6 +114,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
       </div>
 
-    </div>
+    </motion.div>
   );
 };
