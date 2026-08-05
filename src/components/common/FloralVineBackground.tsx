@@ -8,7 +8,7 @@ export const FloralVineBackground: React.FC = () => {
     <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden select-none">
       
       {/* Ambient Radial Floral Glows */}
-      <div className="absolute top-[2%] left-[-5%] w-[550px] h-[550px] bg-pink-300/25 rounded-full blur-3xl animate-pulse"></div>
+      <div className="absolute top-[0%] left-[-5%] w-[550px] h-[550px] bg-pink-300/30 rounded-full blur-3xl animate-pulse"></div>
       <div className="absolute top-[30%] right-[-8%] w-[650px] h-[650px] bg-amber-200/30 rounded-full blur-3xl"></div>
       <div className="absolute top-[60%] left-[-5%] w-[550px] h-[550px] bg-rose-200/30 rounded-full blur-3xl"></div>
       <div className="absolute top-[85%] right-[-5%] w-[500px] h-[500px] bg-pink-200/30 rounded-full blur-3xl"></div>
@@ -24,7 +24,7 @@ export const FloralVineBackground: React.FC = () => {
         <defs>
           {/* Glowing Vine Linear Gradients */}
           <linearGradient id="glowingVineGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#e63963" stopOpacity="0.85" />
+            <stop offset="0%" stopColor="#e63963" stopOpacity="0.9" />
             <stop offset="25%" stopColor="#f59e0b" stopOpacity="0.85" />
             <stop offset="50%" stopColor="#ec4899" stopOpacity="0.9" />
             <stop offset="75%" stopColor="#fb7185" stopOpacity="0.85" />
@@ -42,10 +42,10 @@ export const FloralVineBackground: React.FC = () => {
           </filter>
         </defs>
 
-        {/* Outer Soft Glow Layer for Vine */}
+        {/* Outer Soft Glow Layer for Vine starting at top-left (20,20) */}
         <path
-          d="M 140,140 
-             C 320,360 60,650 220,940 
+          d="M 20,20 
+             C 180,180 60,500 220,940 
              S 1360,1240 1250,1540 
              S 110,1840 260,2240 
              S 1320,2640 1210,3040
@@ -57,10 +57,10 @@ export const FloralVineBackground: React.FC = () => {
           filter="url(#vineGlow)"
         />
 
-        {/* Primary Animated Vine Stem starting exactly at (140,140) */}
+        {/* Primary Animated Vine Stem starting EXACTLY at top-left (20,20) */}
         <motion.path
-          d="M 140,140 
-             C 320,360 60,650 220,940 
+          d="M 20,20 
+             C 180,180 60,500 220,940 
              S 1360,1240 1250,1540 
              S 110,1840 260,2240 
              S 1320,2640 1210,3040
@@ -71,10 +71,10 @@ export const FloralVineBackground: React.FC = () => {
           fill="none"
         />
 
-        {/* Secondary Gold Twinkling Dotted Line */}
+        {/* Secondary Gold Twinkling Dotted Line starting at (20,20) */}
         <path
-          d="M 140,140 
-             C 335,370 75,660 235,950 
+          d="M 20,20 
+             C 195,190 75,510 235,950 
              S 1375,1250 1265,1550 
              S 125,1850 275,2250 
              S 1335,2650 1225,3050"
@@ -85,56 +85,56 @@ export const FloralVineBackground: React.FC = () => {
           fill="none"
         />
 
-        {/* Travelling Light Sparkle Particle on Vine Path */}
+        {/* Travelling Light Sparkle Particle starting from top-left (20,20) */}
         <circle r="5" fill="#ffffff" filter="url(#vineGlow)">
           <animateMotion
-            path="M 140,140 C 320,360 60,650 220,940 S 1360,1240 1250,1540 S 110,1840 260,2240 S 1320,2640 1210,3040 S 200,3240 300,3380"
+            path="M 20,20 C 180,180 60,500 220,940 S 1360,1240 1250,1540 S 110,1840 260,2240 S 1320,2640 1210,3040 S 200,3240 300,3380"
             dur="14s"
             repeatCount="indefinite"
           />
         </circle>
 
-        {/* NODE 1 - FLOWER BLOSSOM + LEAVES MOUNTED DIRECTLY ON VINE TIP AT (140, 140) */}
+        {/* NODE 1 - TOP-LEFT FLOWER & LEAVES MOUNTED DIRECTLY AT (20, 20) SO STEM EXTENDS FROM IT */}
         <motion.g
-          transform="translate(140, 140)"
+          transform="translate(20, 20)"
           animate={{ rotate: [0, 8, -8, 0], scale: [1, 1.06, 1] }}
           transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
         >
-          {/* Green Leaves attached underneath top flower head */}
+          {/* Green Leaves attached under flower base */}
           <path
-            d="M -5,5 C -25,25 -35,5 -15,-15 Z"
+            d="M 0,0 C 15,35 40,25 25,5 Z"
             fill="url(#leafGrad)"
-            fillOpacity="0.85"
+            fillOpacity="0.9"
           />
           <path
-            d="M 5,5 C 25,25 35,5 15,-15 Z"
+            d="M 0,0 C 35,15 25,40 5,25 Z"
             fill="url(#leafGrad)"
-            fillOpacity="0.85"
+            fillOpacity="0.9"
           />
 
           {/* Glowing Aura */}
-          <circle r="22" fill="#f43f5e" opacity="0.35" filter="url(#vineGlow)" />
+          <circle r="26" fill="#f43f5e" opacity="0.35" filter="url(#vineGlow)" />
           
-          {/* Flower Petals */}
+          {/* Large Flower Petals */}
           {[0, 45, 90, 135, 180, 225, 270, 315].map((angle, i) => (
             <ellipse
               key={i}
               cx="0"
-              cy="-20"
-              rx="7"
-              ry="14"
+              cy="-24"
+              rx="8"
+              ry="16"
               fill="#fda4af"
               transform={`rotate(${angle})`}
             />
           ))}
 
-          {/* Yellow Flower Center */}
-          <circle r="10" fill="#fbbf24" stroke="#f59e0b" strokeWidth="1.5" />
+          {/* Yellow Flower Center Disc */}
+          <circle r="12" fill="#fbbf24" stroke="#f59e0b" strokeWidth="2" />
         </motion.g>
 
         {/* SWAYING LEAF BRANCH 1 */}
         <motion.g
-          transform="translate(240, 440)"
+          transform="translate(180, 440)"
           animate={{ rotate: [-4, 4, -4] }}
           transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
         >
