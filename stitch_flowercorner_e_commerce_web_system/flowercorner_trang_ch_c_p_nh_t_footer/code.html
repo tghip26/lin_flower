@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FlowerCorner - Hoa Tươi Cho Mọi Dịp</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#ffffff",
+                        "surface-container-low": "#f5f3f2",
+                        "outline-variant": "#e4bdc2",
+                        "secondary-fixed-dim": "#d7c1c8",
+                        "surface-tint": "#bc004b",
+                        "primary-fixed-dim": "#ffb2be",
+                        "error": "#ba1a1a",
+                        "on-secondary": "#ffffff",
+                        "border-light": "#EEEEEE",
+                        "error-container": "#ffdad6",
+                        "secondary": "#6b5a60",
+                        "surface-container": "#f0eded",
+                        "on-primary-container": "#fffbff",
+                        "success-green": "#4CAF50",
+                        "on-surface": "#1b1c1c",
+                        "on-background": "#1b1c1c",
+                        "on-secondary-container": "#716066",
+                        "background-faint": "#F5F5F5",
+                        "surface-variant": "#e4e2e1",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed-variant": "#900038",
+                        "on-tertiary-fixed": "#001d36",
+                        "tertiary-fixed-dim": "#9ecaff",
+                        "tertiary-fixed": "#d1e4ff",
+                        "secondary-container": "#f4dce4",
+                        "secondary-fixed": "#f4dce4",
+                        "surface": "#fbf9f8",
+                        "on-secondary-fixed": "#25181e",
+                        "surface-container-high": "#eae8e7",
+                        "primary-fixed": "#ffd9de",
+                        "on-primary-fixed": "#400014",
+                        "inverse-surface": "#303030",
+                        "tertiary": "#005fa0",
+                        "surface-bright": "#fbf9f8",
+                        "on-error": "#ffffff",
+                        "outline": "#8f6f73",
+                        "on-tertiary-container": "#fdfcff",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#dcd9d9",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-on-surface": "#f3f0f0",
+                        "on-surface-variant": "#5b3f43",
+                        "on-tertiary-fixed-variant": "#00497d",
+                        "on-secondary-fixed-variant": "#524249",
+                        "surface-container-highest": "#e4e2e1",
+                        "primary-container": "#e2165f",
+                        "tertiary-container": "#0078c8",
+                        "primary": "#b80049",
+                        "background": "#fbf9f8",
+                        "sale-red": "#FF3B3D",
+                        "inverse-primary": "#ffb2be"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "section-gap": "64px",
+                        "container-max": "1200px",
+                        "margin-mobile": "16px",
+                        "base": "8px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "price-lg": ["Montserrat"],
+                        "label-md": ["Montserrat"],
+                        "price-strikethrough": ["Montserrat"],
+                        "display-lg": ["Montserrat"],
+                        "body-lg": ["Montserrat"],
+                        "headline-md": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "body-md": ["Montserrat"],
+                        "headline-lg-mobile": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "price-lg": ["18px", { "lineHeight": "24px", "fontWeight": "700" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+                        "price-strikethrough": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Montserrat', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- TopNavBar -->
+<nav class="bg-surface shadow-sm docked full-width top-0 sticky z-50">
+<div class="flex justify-between items-center w-full px-section-gap max-w-container-max mx-auto h-16 transition-all duration-200 ease-in-out">
+<div class="flex items-center gap-8">
+<a class="font-headline-md text-headline-md font-bold text-primary" href="#">FlowerCorner</a>
+<div class="hidden md:flex gap-6 font-body-md text-body-md">
+<a class="text-primary border-b-2 border-primary pb-1" href="#">Birthdays</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Grand Opening</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Orchids</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Anniversaries</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Sympathy</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex bg-surface-container-low rounded-full px-4 py-2 shadow-sm">
+<input class="bg-transparent border-none focus:ring-0 text-body-md w-48" placeholder="Search flowers..." type="text"/>
+<span class="material-symbols-outlined text-on-surface-variant">search</span>
+</div>
+<div class="relative group">
+<button class="text-primary hover:bg-surface-container-low p-2 rounded-full transition-colors flex items-center">
+<span class="material-symbols-outlined">person</span>
+</button>
+<div class="absolute right-0 mt-2 w-48 bg-surface border border-border-light rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
+<a class="block px-4 py-3 font-body-md text-on-surface hover:bg-surface-container-low hover:text-primary transition-colors" href="#">Thông tin cá nhân</a>
+</div>
+</div>
+<button class="text-primary hover:bg-surface-container-low p-2 rounded-full transition-colors relative">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="absolute top-0 right-0 bg-sale-red text-white rounded-full w-4 h-4 flex items-center justify-center font-label-md text-label-md">2</span>
+</button>
+</div>
+</div>
+</nav>
+<main>
+<!-- Hero Section -->
+<section class="relative w-full h-[600px] flex items-center bg-surface-container-low">
+<div class="absolute inset-0 z-0">
+<div class="w-full h-full bg-cover bg-center" data-alt="A panoramic hero image of a vibrant, upscale flower shop display. The scene is bright and airy, with soft, natural lighting highlighting an array of colorful fresh flowers in modern vases. The aesthetic is clean, joyful, and professional, reflecting a premium floral service." style="background-image: url('https://lh3.googleusercontent.com/aida/AP1WRLvhy9FeIWlTOlTcpkXJfuMWYBUmD-FMirivNsOqdbArp5aEasVsEGrP2rUnUC0bw8t_yBZRlhr__mI19SpwjyD1JREJL9giyDW3QJY-z3cu3cawyOu4dSUgzfESk8B1iRllWbrGKVxmXRcVuVErsPRPCO729eiDGoJSG3C0drVUXRBs449XgYebN5UpcfamIS2Yf_O5Qtz1KGxPvTxk-jz-fYyJj2Vwvi6ZLNVDuowU19rS-uUTXA6ArQw');"></div>
+<div class="absolute inset-0 bg-black bg-opacity-30"></div>
+</div>
+<div class="relative z-10 max-w-container-max mx-auto px-section-gap w-full text-white">
+<h1 class="font-display-lg text-display-lg mb-4 drop-shadow-md">Gửi Trao Yêu Thương,<br/>Trọn Vẹn Từng Khoảnh Khắc</h1>
+<p class="font-headline-md text-headline-md mb-8 drop-shadow-sm max-w-2xl">Fast delivery in 90 minutes. 10% off for first order.</p>
+<button class="bg-primary text-white font-headline-md text-headline-md py-3 px-8 rounded-full shadow-lg hover:bg-primary-container hover:-translate-y-1 transition-all duration-200">
+                    Đặt Hoa Ngay
+                </button>
+</div>
+</section>
+<!-- Categories Section (Bento Grid) -->
+<section class="max-w-container-max mx-auto px-section-gap py-section-gap">
+<h2 class="font-headline-lg text-headline-lg text-center mb-12 text-primary">Danh Mục Yêu Thích</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Birthday -->
+<div class="relative rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 group h-80">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A beautiful, vibrant birthday flower basket featuring a mix of bright, joyful colors like orange, pink, and yellow. The arrangement is lush and full, presented in a stylish wicker basket against a clean, light background. The lighting is soft and flattering, highlighting the freshness of the blooms." src="https://lh3.googleusercontent.com/aida/AP1WRLsNN5qxcMA6T_BEE_FCktc3aEkg98UfSI0xBBsLFMp0dVdR5F303rWhwDPtHWSnaQwlUlr5lHqBxKYZLRrlT0CBdj0Jur2AHSFXlMLdHMYWRoeARf2dDdR-tYvN3f2v-Eci_Qd_pdcpEDhqbm6j3El2EyAyFucHpEunawhXdlqP-7f9_Q8UY1i39C4yH2bkM_LYZBXKouFTRDsRJtHNkAQeUAeKZQ4LfB_V1w8RwrKh4rdjX8QMeMaILA0"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6">
+<h3 class="text-white font-headline-lg text-headline-lg mb-2">Hoa Sinh Nhật</h3>
+<p class="text-white font-body-md text-body-md mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">Tặng người thương nhân ngày đặc biệt</p>
+<a class="text-primary-fixed font-label-md text-label-md uppercase tracking-wider flex items-center gap-1 group-hover:gap-2 transition-all" href="#">Xem Ngay <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+</div>
+</div>
+<!-- Grand Opening -->
+<div class="relative rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 group h-80 md:col-span-2">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A grand, impressive flower arrangement designed for a business opening or congratulatory event. The stand features tall, elegant blooms in bold, celebratory colors like red and gold, arranged structurally. The setting is professional and bright, conveying success and prosperity." src="https://lh3.googleusercontent.com/aida/AP1WRLvMjEYFFaXizwvkTFrOaW7dUgzofIqNxAGpdhOFdd4GuOWO3qvagNLRnZSKJ92JoBL2LdovO77gCwv9ddIsYw8bjKqDSeKlernjSfAMBGAddmTG0Sy52n_SMv40sTqxLay6jm31MgMDS_FITxdyFOKp4LMCap9nB9TTGVuGS9eD9N_VLnObdSccXeGuW3Bt6hwfxb69Du9Reljf6DAS2UC4TrNCoazgPknOhO1hLUpd3ydBVipyuaWIlw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6">
+<h3 class="text-white font-headline-lg text-headline-lg mb-2">Hoa Khai Trương</h3>
+<p class="text-white font-body-md text-body-md mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">Chúc hồng phát, vạn sự hanh thông</p>
+<a class="text-primary-fixed font-label-md text-label-md uppercase tracking-wider flex items-center gap-1 group-hover:gap-2 transition-all" href="#">Xem Ngay <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+</div>
+</div>
+<!-- Orchids -->
+<div class="relative rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 group h-80 md:col-span-3 lg:col-span-1">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A sophisticated, minimalist arrangement of white Phalaenopsis orchids in a premium ceramic pot. The orchids are pristine and elegant, arching gracefully. The background is a soft, muted grey, highlighting the delicate texture and pure color of the flowers. High-key lighting." src="https://lh3.googleusercontent.com/aida/AP1WRLsYePTQVlVBu5j23plUOAvso_XbQnGGKc6rjj7YhDWbZzHqZlFafegTu72092xMonIGwBOhQntfR99HOlnMY0QuzRgx9STNd7WoBqFSSG7ORrXa4UPPYuIN7sRbLTOJr0mUqaXguXZH6n12rQMOvcaU4rRTuykbshfigfUXGbBqao1rLdVmgcZF4SNpyALk5ngNbOfS6ae5q0TnzXjwj9ousp8jkE3ksViCb8WI0sta_FOmJsFQlp6gSAM"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6">
+<h3 class="text-white font-headline-lg text-headline-lg mb-2">Lan Hồ Điệp</h3>
+<p class="text-white font-body-md text-body-md mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">Sang trọng, đẳng cấp</p>
+<a class="text-primary-fixed font-label-md text-label-md uppercase tracking-wider flex items-center gap-1 group-hover:gap-2 transition-all" href="#">Xem Ngay <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+</div>
+</div>
+</div>
+</section>
+<!-- Best Sellers Section -->
+<section class="bg-surface-container-lowest py-section-gap">
+<div class="max-w-container-max mx-auto px-section-gap">
+<div class="flex justify-between items-end mb-12">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary">Sản Phẩm Bán Chạy</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">Những mẫu hoa được yêu thích nhất trong tuần</p>
+</div>
+<a class="hidden md:flex items-center gap-2 text-primary font-label-md text-label-md uppercase tracking-wide hover:text-primary-container transition-colors" href="#">
+                        Xem Tất Cả <span class="material-symbols-outlined">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Product 1 -->
+<div class="bg-surface rounded-lg shadow-[0px_4px_20px_rgba(0,0,0,0.05)] hover:shadow-[0px_8px_24px_rgba(0,0,0,0.1)] transition-all duration-300 overflow-hidden flex flex-col group">
+<div class="relative h-64 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A classic, romantic bouquet of deep red roses, tightly arranged and wrapped in premium, dark-toned paper. The velvet texture of the roses is prominent, conveying luxury and passion. The lighting is slightly dramatic, focusing on the rich color of the blooms." src="https://lh3.googleusercontent.com/aida/AP1WRLuMzqhvMb-F_8ZJlcJ95ayQG3IGsG4jx2RnKDX7eV4yhdYSuycSXNmUYDpBY_zUQTmtyusUfLP4dFtz8Fk_mNodf6UhBFzI3vBQ8mJiS6a_wH80EdOMa4mN-UEvwHgGP1P43p7aiZxz6Kl3k2PtROdFbxKvRYV9LaVaxMJhQzcI40juc07__aSqzSWcXYrp_K1KxTSHZythQRU9wV1DL4rHW-_MM80IMLb63zdL8cOvGBJ1aHQD3S8DdA"/>
+<div class="absolute top-2 right-2 bg-sale-red text-white px-2 py-1 rounded-full font-label-md text-label-md">Giảm 20%</div>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<h3 class="font-headline-md text-headline-md mb-2 text-on-surface truncate">Red rose</h3>
+<div class="flex items-center gap-2 mt-auto">
+<span class="font-price-lg text-price-lg text-primary">1,000,000đ</span>
+<span class="font-price-strikethrough text-price-strikethrough text-on-surface-variant line-through">1,250,000đ</span>
+</div>
+<button class="mt-4 w-full border border-primary text-primary hover:bg-secondary-container font-label-md text-label-md py-2 rounded transition-colors uppercase">Thêm Giỏ Hàng</button>
+</div>
+</div>
+<!-- Product 2 -->
+<div class="bg-surface rounded-lg shadow-[0px_4px_20px_rgba(0,0,0,0.05)] hover:shadow-[0px_8px_24px_rgba(0,0,0,0.1)] transition-all duration-300 overflow-hidden flex flex-col group">
+<div class="relative h-64 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A delicate, charming bouquet of small, daisy-like white Tana chrysanthemums. The arrangement is light, airy, and youthful, wrapped in soft, pastel-colored paper. The visual style is gentle and aesthetic, with soft, diffused lighting perfect for a sweet gift." src="https://lh3.googleusercontent.com/aida/AP1WRLutzXnt399yW0UE8iIv-KtmiXqKnUUq_HL9X_-oPcTr9ULUKxArmcqSmW2r9hBA38Jj3uHeW21Edgb1rrLSIMbhjEGZAkod-964VE1Enhqmpna_2BhQC6wZPcFMOpHeo4FAgIHBo1Wg9sgdCQ9QNydbUvWHOeh5ioz5eB60bG2iHaLSC2dbSv16djoo6kdWn3ZpQTsUJpSsYnRZp64KLLn9ZXA7BcWF4qclUMbpVrI4PO_qGFgXNOVRUWs"/>
+<div class="absolute top-2 right-2 bg-sale-red text-white px-2 py-1 rounded-full font-label-md text-label-md">Giảm 15%</div>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<h3 class="font-headline-md text-headline-md mb-2 text-on-surface truncate">Little Tana</h3>
+<div class="flex items-center gap-2 mt-auto">
+<span class="font-price-lg text-price-lg text-primary">350,000đ</span>
+<span class="font-price-strikethrough text-price-strikethrough text-on-surface-variant line-through">410,000đ</span>
+</div>
+<button class="mt-4 w-full border border-primary text-primary hover:bg-secondary-container font-label-md text-label-md py-2 rounded transition-colors uppercase">Thêm Giỏ Hàng</button>
+</div>
+</div>
+<!-- Product 3 -->
+<div class="bg-surface rounded-lg shadow-[0px_4px_20px_rgba(0,0,0,0.05)] hover:shadow-[0px_8px_24px_rgba(0,0,0,0.1)] transition-all duration-300 overflow-hidden flex flex-col group">
+<div class="relative h-64 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="An elegant, modern floral arrangement featuring a sophisticated mix of muted, dusty pinks, creamy whites, and soft greens. The composition is artistic and asymmetric, presented in a stylish container. The overall feel is premium, contemporary, and poetic." src="https://lh3.googleusercontent.com/aida/AP1WRLtI06Z1dZFvdT8SMyzFCChe05Mq6M648LBZxAAaGsKvcWg8OVOd7-GzJGfHQcnxSDH-Z6rQ8HCXrDFZa5nSEQ88r3iKqIuXBIsxTj4PShODzJoLYc6e459aQ-cD3Kw7o8WGNv7ITWuRvoPP1GR113VlBRUmALtYscYjls7_QnvJ3YSesCMFY-UeNfcadXE-4SQdAWgYuakE80b2C_4CtqDfh67yjcZ5D5EBZX_Z96ZB57DpomUlCCimVrU"/>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<h3 class="font-headline-md text-headline-md mb-2 text-on-surface truncate">Khúc Tình Ca</h3>
+<div class="flex items-center gap-2 mt-auto">
+<span class="font-price-lg text-price-lg text-primary">760,000đ</span>
+</div>
+<button class="mt-4 w-full border border-primary text-primary hover:bg-secondary-container font-label-md text-label-md py-2 rounded transition-colors uppercase">Thêm Giỏ Hàng</button>
+</div>
+</div>
+<!-- Product 4 -->
+<div class="bg-surface rounded-lg shadow-[0px_4px_20px_rgba(0,0,0,0.05)] hover:shadow-[0px_8px_24px_rgba(0,0,0,0.1)] transition-all duration-300 overflow-hidden flex flex-col group">
+<div class="relative h-64 overflow-hidden">
+<div class="w-full h-full bg-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant text-4xl">local_florist</span>
+</div>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<h3 class="font-headline-md text-headline-md mb-2 text-on-surface truncate">Bách Hợp</h3>
+<div class="flex items-center gap-2 mt-auto">
+<span class="font-price-lg text-price-lg text-primary">550,000đ</span>
+<span class="font-price-strikethrough text-price-strikethrough text-on-surface-variant line-through">630,000đ</span>
+</div>
+<button class="mt-4 w-full border border-primary text-primary hover:bg-secondary-container font-label-md text-label-md py-2 rounded transition-colors uppercase">Thêm Giỏ Hàng</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- About Us Section (Glassmorphism) -->
+<section class="relative py-section-gap overflow-hidden">
+<div class="absolute inset-0 bg-primary opacity-5"></div>
+<!-- Decorative blobs -->
+<div class="absolute top-0 left-0 w-96 h-96 bg-primary-fixed rounded-full mix-blend-multiply filter blur-3xl opacity-30 -translate-x-1/2 -translate-y-1/2"></div>
+<div class="absolute bottom-0 right-0 w-96 h-96 bg-secondary-fixed rounded-full mix-blend-multiply filter blur-3xl opacity-30 translate-x-1/2 translate-y-1/2"></div>
+<div class="relative max-w-container-max mx-auto px-section-gap">
+<div class="bg-white/60 backdrop-blur-md border border-white/20 rounded-2xl p-8 md:p-12 shadow-xl max-w-3xl mx-auto text-center">
+<span class="material-symbols-outlined text-primary text-5xl mb-4">diamond</span>
+<h2 class="font-headline-lg text-headline-lg text-primary mb-6">Hơn 5 Năm Trao Gửi Yêu Thương</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-6 leading-relaxed">
+                        Được thành lập từ năm 2017, FlowerCorner.vn tự hào là một trong những shop hoa tươi uy tín hàng đầu. Chúng tôi cam kết sử dụng 100% hoa tươi nhập mới mỗi ngày, mang đến những thiết kế tinh tế, hiện đại, giúp bạn truyền tải trọn vẹn cảm xúc đến những người thân yêu.
+                    </p>
+<div class="grid grid-cols-3 gap-4 border-t border-border-light pt-8 mt-8">
+<div>
+<div class="font-display-lg text-display-lg text-primary">500+</div>
+<div class="font-label-md text-label-md text-on-surface-variant uppercase mt-1">Mẫu Hoa</div>
+</div>
+<div>
+<div class="font-display-lg text-display-lg text-primary">90p</div>
+<div class="font-label-md text-label-md text-on-surface-variant uppercase mt-1">Giao Tốc Độ</div>
+</div>
+<div>
+<div class="font-display-lg text-display-lg text-primary">50k+</div>
+<div class="font-label-md text-label-md text-on-surface-variant uppercase mt-1">Khách Hàng</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container w-full py-section-gap px-section-gap flex flex-col items-center gap-8 border-t border-border-light">
+<div class="max-w-container-max w-full grid grid-cols-1 md:grid-cols-4 gap-8">
+<div class="col-span-1 md:col-span-1 flex flex-col items-start gap-4">
+<a class="font-headline-md text-headline-md font-bold text-primary" href="#">FlowerCorner</a>
+<p class="font-body-md text-body-md text-on-surface-variant">Say it with Flowers.</p>
+<div class="flex gap-4 mt-2">
+<a class="text-secondary hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">qr_code_2</span></a>
+<a class="text-secondary hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">photo_camera</span></a>
+</div>
+</div>
+<div class="col-span-1 md:col-span-2 grid grid-cols-2 gap-8">
+<div>
+<h4 class="font-label-md text-label-md text-on-surface font-bold mb-4 uppercase">Chăm Sóc Khách Hàng</h4>
+<ul class="flex flex-col gap-2 font-body-md text-body-md text-on-surface-variant">
+<li><a class="hover:text-primary transition-colors" href="#">Giới Thiệu</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Liên Hệ</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Chính Sách Vận Chuyển</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Câu Hỏi Thường Gặp</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface font-bold mb-4 uppercase">Chính Sách</h4>
+<ul class="flex flex-col gap-2 font-body-md text-body-md text-on-surface-variant">
+<li><a class="hover:text-primary transition-colors" href="#">Thanh Toán</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Bảo Mật Thông Tin</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Hoàn Tiền &amp; Đổi Trả</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Xử Lý Khiếu Nại</a></li>
+</ul>
+</div>
+</div>
+<div class="col-span-1 md:col-span-1">
+<h4 class="font-label-md text-label-md text-on-surface font-bold mb-4 uppercase">Cửa Hàng</h4>
+<ul class="flex flex-col gap-3 font-body-md text-body-md text-on-surface-variant">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary text-sm mt-1">location_on</span>
+<span>142 Nguyễn Văn Cừ, Quận 1, TP.HCM</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary text-sm mt-1">location_on</span>
+<span>34B Lý Nam Đế, Hoàn Kiếm, Hà Nội</span>
+</li>
+<li class="flex items-start gap-2 mt-2">
+<span class="material-symbols-outlined text-primary text-sm mt-1">call</span>
+<a class="hover:text-primary transition-colors" href="tel:1900633045">1900 633 045</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="w-full max-w-container-max border-t border-border-light pt-8 flex flex-col md:flex-row justify-between items-center text-center">
+<span class="font-body-md text-body-md text-on-surface-variant">© 2023 FlowerCorner. Handcrafted Joy.</span>
+<div class="flex gap-4 mt-4 md:mt-0 font-body-md text-body-md">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Service</a>
+</div>
+</div>
+</footer>
+</body></html>

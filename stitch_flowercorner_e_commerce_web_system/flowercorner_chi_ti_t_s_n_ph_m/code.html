@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Chi tiết sản phẩm - FlowerCorner</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-on-surface": "#f3f0f0",
+                        "on-surface-variant": "#5b3f43",
+                        "tertiary-fixed": "#d1e4ff",
+                        "surface-container-low": "#f5f3f2",
+                        "surface": "#fbf9f8",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#0078c8",
+                        "surface-bright": "#fbf9f8",
+                        "secondary-fixed-dim": "#d7c1c8",
+                        "surface-container": "#f0eded",
+                        "on-primary-fixed": "#400014",
+                        "inverse-primary": "#ffb2be",
+                        "surface-container-high": "#eae8e7",
+                        "tertiary-fixed-dim": "#9ecaff",
+                        "surface-variant": "#e4e2e1",
+                        "primary": "#b80049",
+                        "on-tertiary-fixed-variant": "#00497d",
+                        "on-surface": "#1b1c1c",
+                        "success-green": "#4CAF50",
+                        "on-error-container": "#93000a",
+                        "on-background": "#1b1c1c",
+                        "secondary-fixed": "#f4dce4",
+                        "surface-container-highest": "#e4e2e1",
+                        "primary-fixed-dim": "#ffb2be",
+                        "on-secondary-fixed": "#25181e",
+                        "error": "#ba1a1a",
+                        "outline": "#8f6f73",
+                        "inverse-surface": "#303030",
+                        "secondary-container": "#f4dce4",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#716066",
+                        "error-container": "#ffdad6",
+                        "tertiary": "#005fa0",
+                        "on-error": "#ffffff",
+                        "surface-tint": "#bc004b",
+                        "primary-fixed": "#ffd9de",
+                        "primary-container": "#e2165f",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#dcd9d9",
+                        "on-tertiary-container": "#fdfcff",
+                        "background": "#fbf9f8",
+                        "on-tertiary-fixed": "#001d36",
+                        "on-primary-fixed-variant": "#900038",
+                        "sale-red": "#FF3B3D",
+                        "on-secondary-fixed-variant": "#524249",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#fffbff",
+                        "outline-variant": "#e4bdc2",
+                        "border-light": "#EEEEEE",
+                        "background-faint": "#F5F5F5",
+                        "secondary": "#6b5a60"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "section-gap": "64px",
+                        "base": "8px",
+                        "container-max": "1200px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Montserrat"],
+                        "price-strikethrough": ["Montserrat"],
+                        "price-lg": ["Montserrat"],
+                        "label-md": ["Montserrat"],
+                        "body-lg": ["Montserrat"],
+                        "headline-md": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "display-lg": ["Montserrat"],
+                        "body-md": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "price-strikethrough": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "price-lg": ["18px", { "lineHeight": "24px", "fontWeight": "700" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Montserrat', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-surface flex flex-col min-h-screen">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-surface-dim shadow-sm docked full-width top-0 sticky z-50">
+<div class="flex justify-between items-center w-full px-section-gap max-w-container-max mx-auto h-16 transition-all duration-200 ease-in-out">
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed tracking-tight">
+                FlowerCorner
+            </div>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed font-body-md text-body-md hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors py-2 px-3 rounded" href="#">Birthdays</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed font-body-md text-body-md hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors py-2 px-3 rounded" href="#">Grand Opening</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed font-body-md text-body-md hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors py-2 px-3 rounded" href="#">Orchids</a>
+<a class="text-primary dark:text-primary-fixed border-b-2 border-primary dark:border-primary-fixed pb-1 font-body-md text-body-md hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors py-2 px-3 rounded" href="#">Anniversaries</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed font-body-md text-body-md hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors py-2 px-3 rounded" href="#">Sympathy</a>
+</nav>
+<div class="flex gap-4 items-center">
+<button class="text-primary dark:text-primary-fixed hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors p-2 rounded-full">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</button>
+<button class="text-primary dark:text-primary-fixed hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors p-2 rounded-full">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-gutter py-section-gap">
+<!-- Product Detail Section -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter mb-section-gap">
+<!-- Product Image Gallery -->
+<div class="flex flex-col gap-4">
+<div class="rounded-xl overflow-hidden bg-surface-container-lowest shadow-sm hover:shadow-md transition-shadow duration-300">
+<img alt="Red Rose Bouquet" class="w-full h-auto object-cover aspect-square" src="https://lh3.googleusercontent.com/aida/AP1WRLsSyZ_rVGrcTaLHZZGxrssewsNTYKbzkLz75xyvCPIycbfL5QOUzSifLftqhldrrwR0r4eNFQX0yJrpK8RaG29qmWIGKfJW9XBKL5_TIms4tvL1wEPeSxt6GoD1f0zivl1vZ95-4CPZ3PDrtRMfFtB7AevsPfL5YDPsVaW3fYVsqpMEzzMKQ7dhJk94hFsSnPhmfDSflpzKXWOzD9xJ1ATAspysL3oPtg1jpF9rD9ylrIEX_apSjZvVGjs"/>
+</div>
+<div class="flex gap-4 overflow-x-auto pb-2">
+<img class="w-24 h-24 rounded-lg object-cover cursor-pointer border-2 border-primary" data-alt="A close up shot of a vibrant red rose blossom covered in delicate dew drops. Soft, natural lighting enhances the rich crimson hues and velvety texture of the petals. The background is softly blurred in a bright, modern aesthetic, emphasizing the freshness and premium quality of the flower." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyhb-X6fOZ5F79IY2nGsjMntTDJ7IKUoFt1UeEjFDwPfolJ_8WN4oTI0JvCP9IPOXkXIX20omPKUPNkMbEM3gkrNw21ik-OfTBCMfRdH2i7sYN3oq5rHXx4soxrFtFRRJMGuY-9m5nEl5CQsVF_LGafUNIVV4hS6AEoIyFv_Lpz8SxLh0OVLh0u4-uscdAUmdkdcrAOa7k6Htva6gAh9nus2QsmHVPeC0YsmFuvPdKjMtWwauT-vGT"/>
+<img class="w-24 h-24 rounded-lg object-cover cursor-pointer opacity-70 hover:opacity-100 transition-opacity" data-alt="A top-down view of a luxurious bouquet of deep red roses meticulously arranged in white premium wrapping paper. The wrapping features subtle, elegant creases and is tied with a rich burgundy ribbon. The scene is brightly lit with high-key lighting, set against a pristine, soft-touch minimalist background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHtZ67Aq3x3PMnEvo2AOhdNNZ5LCDdWa6tOjA_B1li2ECVNKMrloFC5ucPOTUKtZXvpCaUwotn6JC5ocn7UViRV7u-AAdM0U9YZ09CKAxrFzdQjeDVIVBlez7Cd8ixzzHDc5MFGC5NSYUZAQ1icd9LHLFdGjfbAyOd85Y5O4c3HJRcsWcLzMnoGFGeLSJNl85MjvoqueJk_3R_AXR9RE3PTvavy5lpselkzYDRoeqH-ri9XxrEZo7J"/>
+<img class="w-24 h-24 rounded-lg object-cover cursor-pointer opacity-70 hover:opacity-100 transition-opacity" data-alt="A lifestyle image showing hands gently holding a bouquet of red roses against a light, neutral-toned modern studio backdrop. The lighting is soft and diffused, highlighting the delicate professionalism and joy associated with premium floral gifting. The overall aesthetic is clean, bright, and romantic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0KdjpmLuPbHuRWue2u5ykZ-yCBSuKNHnbaD_IBtlWxPsyr79GHh0m9dpBv0GPUMbce9zhisG-gvdkFY7YYiocw4bd4q-49HwyHlw7RYw0sUgG08_iO3nsTOrWRNT5ybn8-cU1pGbzFRLf8mzDyXK8oO93fo25EuAbafPRyd1uS8uCx7vvGOGW7-mMP2mS9Yblrjtmw0Hal-nHq5pdZ35u4bKcth3xcFwxV4x6uQJZztGLUgkO-xct"/>
+</div>
+</div>
+<!-- Product Info & Actions -->
+<div class="flex flex-col gap-6">
+<div>
+<h1 class="font-display-lg text-display-lg md:text-headline-lg text-on-surface mb-2">Red Rose</h1>
+<div class="flex items-center gap-4 mb-4">
+<span class="font-price-lg text-price-lg text-primary">1,000,000đ</span>
+<span class="font-price-strikethrough text-price-strikethrough text-on-surface-variant line-through">1,250,000đ</span>
+<span class="bg-sale-red text-white text-xs font-bold px-2 py-1 rounded-full uppercase tracking-wide">Giảm 20%</span>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+                        Hoa hồng đỏ luôn là biểu tượng vĩnh cửu của tình yêu mãnh liệt và sự đam mê. Bó hoa "Red Rose" được tuyển chọn từ những bông hồng tươi thắm nhất, kết hợp cùng lớp giấy gói cao cấp, mang đến vẻ đẹp sang trọng và tinh tế. Đây là món quà hoàn hảo để thể hiện tình cảm chân thành trong những dịp đặc biệt.
+                    </p>
+</div>
+<hr class="border-border-light"/>
+<!-- Options -->
+<div class="flex flex-col gap-4">
+<!-- Size -->
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-3">Kích thước</h3>
+<div class="flex gap-3">
+<button class="flex-1 py-3 border border-outline-variant rounded-lg text-on-surface-variant hover:border-primary hover:text-primary transition-colors font-label-md text-label-md">Nhỏ</button>
+<button class="flex-1 py-3 border-2 border-primary rounded-lg text-primary font-label-md text-label-md bg-secondary-fixed">Vừa</button>
+<button class="flex-1 py-3 border border-outline-variant rounded-lg text-on-surface-variant hover:border-primary hover:text-primary transition-colors font-label-md text-label-md">Lớn</button>
+</div>
+</div>
+<!-- Add-ons -->
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-3">Quà tặng kèm</h3>
+<div class="flex flex-col gap-2">
+<label class="flex items-center gap-3 p-3 border border-outline-variant rounded-lg cursor-pointer hover:bg-surface-container-low transition-colors">
+<input class="form-checkbox text-primary rounded focus:ring-primary h-5 w-5 border-outline" type="checkbox"/>
+<span class="font-body-md text-body-md text-on-surface flex-grow">Gấu bông nhỏ</span>
+<span class="font-body-md text-body-md text-on-surface-variant">+150,000đ</span>
+</label>
+<label class="flex items-center gap-3 p-3 border border-outline-variant rounded-lg cursor-pointer hover:bg-surface-container-low transition-colors">
+<input class="form-checkbox text-primary rounded focus:ring-primary h-5 w-5 border-outline" type="checkbox"/>
+<span class="font-body-md text-body-md text-on-surface flex-grow">Hộp Socola cao cấp</span>
+<span class="font-body-md text-body-md text-on-surface-variant">+250,000đ</span>
+</label>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="mt-4 flex gap-4">
+<button class="flex-grow bg-primary text-on-primary font-headline-md text-headline-md py-4 rounded-lg shadow-[0_4px_14px_0_rgba(184,0,73,0.39)] hover:bg-primary-container hover:shadow-[0_6px_20px_rgba(184,0,73,0.23)] transition-all duration-200">
+                        Đặt hàng ngay
+                    </button>
+<button class="p-4 border border-outline-variant rounded-lg text-primary hover:bg-secondary-fixed transition-colors">
+<span class="material-symbols-outlined" data-icon="favorite_border">favorite_border</span>
+</button>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-label-md text-label-md mt-2 justify-center">
+<span class="material-symbols-outlined text-sm" data-icon="local_shipping">local_shipping</span>
+                    Giao hàng miễn phí nội thành
+                </div>
+</div>
+</div>
+<!-- Related Products Section -->
+<section class="mt-section-gap">
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-8 text-center">Sản phẩm liên quan</h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-gutter">
+<!-- Related Product 1 -->
+<div class="bg-surface-container-lowest rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden flex flex-col group">
+<div class="relative w-full aspect-square overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A stunning bouquet of mixed pink and white peonies arranged elegantly in a soft-touch, minimalist setting. The bright, high-key lighting emphasizes the delicate textures and vibrant colors of the petals. The image exudes a modern, premium floral design aesthetic perfect for e-commerce." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwJUGXI2-VBP67AflCvl-1VD16mxm08F_ex8xVF6wiu6Vpz76PLjRrDK5HZfAQZyQJtZtAqalmu8BwG183auHkRNHw7k7taOfNhaRLHcLzejXlk4_CHBjFxqy2lubbwXCeorYijwlPhToD2NeDzHKuMesiPBNKWT9KBWj8mKH7O0UFAWLia-L-qfXr6mpfaD4WlmPOsX3I4y2yHCS7Tus7Ts0ztHw1zCj6eZfuaHQCQf5TSQY1XOyy"/>
+<div class="absolute top-2 right-2 bg-white/80 backdrop-blur-sm rounded-full p-1.5 cursor-pointer text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="favorite_border">favorite_border</span>
+</div>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<h4 class="font-headline-md text-headline-md text-on-surface mb-1 truncate">Sweet Pink Peony</h4>
+<div class="flex items-center gap-2 mt-auto">
+<span class="font-price-lg text-price-lg text-primary">850,000đ</span>
+</div>
+</div>
+</div>
+<!-- Related Product 2 -->
+<div class="bg-surface-container-lowest rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden flex flex-col group">
+<div class="relative w-full aspect-square overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="An elegant arrangement of pure white lilies and green foliage in a modern, cylindrical glass vase. The setting is a clean, bright space with soft ambient shadows, highlighting the sophisticated and minimalist nature of the floral design. High quality, professional product photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDULS887aop_jNZUnRnTTCTeag9u8OB3HsCiUARm1v915hsiqtfee1HAwNp_3PPf503sTZJ1AlZakypSnxgVXhR_TKkX7v7WkAEsFm54CCsG8aGFYyQGBpPTEYNqegCfuNj-m-kkSpXi1f_soSM4c93SUSSki6EfIsV4kJ9AAo-fZ_m2SmYMp46XztHLZy6s6PUyHdIyqN9-2_Iv63dkDQIeNKHCovv4ufRiw1bnCWuS53jhMkqTHT7"/>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<h4 class="font-headline-md text-headline-md text-on-surface mb-1 truncate">Pure White Lily</h4>
+<div class="flex items-center gap-2 mt-auto">
+<span class="font-price-lg text-price-lg text-primary">1,200,000đ</span>
+</div>
+</div>
+</div>
+<!-- Related Product 3 -->
+<div class="bg-surface-container-lowest rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden flex flex-col group">
+<div class="relative w-full aspect-square overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A vibrant, cheerful bouquet of yellow sunflowers wrapped in rustic brown paper with a delicate twine ribbon. The lighting is warm and bright, capturing the joyful and organic essence of the arrangement against a clean white background. Perfect for a premium online flower shop." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwNj-zvl5mZxnfxtAkRSVXkqnKM3yuLOsjWh51Mzl_VNglpS6fUVfJDz_8ss1D-8x_ouis3OCKiYZ6VNA3JltOZdjnHCpmVItBOAhJ3eVswSSdogQuN_aifCaM8xD5nfOSGK8qaHvVJmMYi8NzKZi6-uhcPZ04Hq6dkdsze6R3IaeyALyxu7q0SPlhklOkRfgBtPGsB9ReNh7SSwJn1Xd33itk5BFOXUN-o5UZpYB5H5SoGwerZ6-L"/>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<h4 class="font-headline-md text-headline-md text-on-surface mb-1 truncate">Sunny Sunflower</h4>
+<div class="flex items-center gap-2 mt-auto">
+<span class="font-price-lg text-price-lg text-primary">600,000đ</span>
+</div>
+</div>
+</div>
+<!-- Related Product 4 -->
+<div class="bg-surface-container-lowest rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden flex flex-col group">
+<div class="relative w-full aspect-square overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A luxurious, modern bouquet featuring deep purple tulips tightly arranged in dark, premium matte wrapping paper. The aesthetic is sophisticated and somewhat moody but illuminated with soft, bright light to emphasize the premium quality of the flowers. High-end e-commerce style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLKGzXLHOdBvTKmBadH-ilsij9Ln-L8JbjZ2AkcFcABpCrWnlAXOLUNh765huTiDwB1WBdrFb2zb2i9YF-ofT77t-30_gFg4ltCTg1R6e9vbSiBhwFsI1MnP47XfHbFYrmGJvap-KXb8tpWBN3IVE1CY9C6bt7Nog6z07xdiF83MGcU08rBvG-az5ockHhECvww3R0R7x16uOVoNPerf5DrN3JU_m-dyRaEiJop_zX5Dxsawz4nDkb"/>
+<div class="absolute top-2 right-2 bg-sale-red text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wide">Mới</div>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<h4 class="font-headline-md text-headline-md text-on-surface mb-1 truncate">Royal Purple Tulip</h4>
+<div class="flex items-center gap-2 mt-auto">
+<span class="font-price-lg text-price-lg text-primary">950,000đ</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container dark:bg-surface-container-highest border-t border-border-light dark:border-outline-variant flat no shadows full-width bottom-0">
+<div class="w-full py-section-gap px-section-gap flex flex-col items-center gap-8 transition-opacity duration-200">
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">
+                FlowerCorner
+            </div>
+<div class="flex flex-wrap justify-center gap-6">
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors font-body-md text-body-md" href="#">Contact Us</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors font-body-md text-body-md" href="#">Shop Locations</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors font-body-md text-body-md" href="#">Delivery Info</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors font-body-md text-body-md" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors font-body-md text-body-md" href="#">Terms of Service</a>
+</div>
+<div class="text-secondary dark:text-secondary-fixed font-body-md text-body-md text-center">
+                © 2023 FlowerCorner. Handcrafted Joy.
+            </div>
+</div>
+</footer>
+</body></html>

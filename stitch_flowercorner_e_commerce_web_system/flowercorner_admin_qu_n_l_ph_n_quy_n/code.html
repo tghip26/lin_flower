@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+
+<html lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Quản lý Quyền - FlowerCorner Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#5b3f43",
+                        "on-primary-container": "#fffbff",
+                        "surface-dim": "#dcd9d9",
+                        "background-faint": "#F5F5F5",
+                        "surface-bright": "#fbf9f8",
+                        "primary-fixed-dim": "#ffb2be",
+                        "surface-container-highest": "#e4e2e1",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#eae8e7",
+                        "tertiary": "#005fa0",
+                        "secondary-container": "#f4dce4",
+                        "on-error": "#ffffff",
+                        "secondary-fixed": "#f4dce4",
+                        "tertiary-container": "#0078c8",
+                        "on-surface": "#1b1c1c",
+                        "on-tertiary-fixed": "#001d36",
+                        "inverse-primary": "#ffb2be",
+                        "secondary-fixed-dim": "#d7c1c8",
+                        "outline-variant": "#e4bdc2",
+                        "on-primary-fixed-variant": "#900038",
+                        "error-container": "#ffdad6",
+                        "primary-container": "#e2165f",
+                        "on-background": "#1b1c1c",
+                        "border-light": "#EEEEEE",
+                        "inverse-on-surface": "#f3f0f0",
+                        "inverse-surface": "#303030",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#6b5a60",
+                        "primary": "#b80049",
+                        "on-tertiary-fixed-variant": "#00497d",
+                        "tertiary-fixed-dim": "#9ecaff",
+                        "on-tertiary-container": "#fdfcff",
+                        "success-green": "#4CAF50",
+                        "on-primary-fixed": "#400014",
+                        "sale-red": "#FF3B3D",
+                        "surface-container": "#f0eded",
+                        "outline": "#8f6f73",
+                        "on-secondary-fixed": "#25181e",
+                        "on-secondary-fixed-variant": "#524249",
+                        "surface": "#fbf9f8",
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#f5f3f2",
+                        "primary-fixed": "#ffd9de",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-container": "#716066",
+                        "error": "#ba1a1a",
+                        "background": "#fbf9f8",
+                        "tertiary-fixed": "#d1e4ff",
+                        "surface-variant": "#e4e2e1",
+                        "surface-tint": "#bc004b",
+                        "on-tertiary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1200px",
+                        "section-gap": "64px",
+                        "gutter": "24px",
+                        "base": "8px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Montserrat"],
+                        "price-strikethrough": ["Montserrat"],
+                        "label-md": ["Montserrat"],
+                        "price-lg": ["Montserrat"],
+                        "body-md": ["Montserrat"],
+                        "headline-md": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "display-lg": ["Montserrat"],
+                        "body-lg": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "price-strikethrough": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+                        "price-lg": ["18px", { "lineHeight": "24px", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #b80049;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #b80049;
+        }
+        .toggle-checkbox:checked + .toggle-label:after {
+            transform: translateX(100%);
+            border-color: white;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-screen flex flex-col p-4 z-40 bg-surface-container-lowest border-r border-border-light docked left-0 h-full w-64 flat no shadows">
+<div class="mb-8">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">FlowerCorner Admin</h1>
+<p class="font-label-md text-label-md text-on-surface-variant mt-1">Management Suite</p>
+</div>
+<button class="w-full bg-primary text-on-primary py-2 px-4 rounded-lg font-label-md text-label-md mb-6 hover:opacity-90 transition-opacity">
+            Create New Listing
+        </button>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:bg-surface-container-high rounded-lg transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:bg-surface-container-high rounded-lg transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">shopping_bag</span>
+                Orders
+            </a>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:bg-surface-container-high rounded-lg transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">local_florist</span>
+                Products
+            </a>
+<a class="flex items-center gap-3 bg-secondary-container text-on-secondary-container rounded-lg px-4 py-3 font-label-md text-label-md Active: scale 0.98x duration-150" href="#">
+<span class="material-symbols-outlined">lock_person</span>
+                Permissions
+            </a>
+</nav>
+<div class="mt-auto space-y-2 pt-6 border-t border-border-light">
+<div class="flex items-center gap-3 px-4 py-2 mb-4">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="A small, circular avatar image of a professional staff member in a bright, modern office setting. Soft lighting, high key aesthetic, subtle depth of field. Clean white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAv1xhTmyDPQZUu27s5FOv8jRweTHz3Sj6ffod3spCi9xg3iyQDr1vKz527gYLBNbZ81F4QtT_MDFU5iIkEE9foZISGuYsjVrQ8OMdHRfi4-swg-QtNHCIxLMXiSCXvKwcrna-6etUmBqQdD7Ds-kRiDlF3FJSBRFsJ1CtGNeNO1FAF8UOxrjccouJqh8NGUYFL9rnLEAr6chFU4-MEMDhZsgYn4CrTwyd2H-WkvP-r9gb8gvQ6j0ui"/>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Staff Profile</p>
+</div>
+</div>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:bg-surface-container-high rounded-lg transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:bg-surface-container-high rounded-lg transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">logout</span>
+                Logout
+            </a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="ml-64 flex-1 p-8 h-screen overflow-y-auto">
+<header class="mb-8 flex justify-between items-end">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Quản lý Quyền</h2>
+<p class="text-on-surface-variant mt-2">Phân quyền chi tiết cho nhân viên hệ thống</p>
+</div>
+<button class="bg-secondary-container text-on-secondary-container px-4 py-2 rounded-lg font-label-md text-label-md hover:bg-surface-container-high transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined">person_add</span>
+                Thêm Nhân Viên
+            </button>
+</header>
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+<!-- Employee List -->
+<div class="xl:col-span-1 bg-surface-container-lowest rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.05)] border border-border-light overflow-hidden flex flex-col h-[calc(100vh-160px)]">
+<div class="p-4 border-b border-border-light bg-surface-container-low flex justify-between items-center">
+<h3 class="font-headline-md text-headline-md text-on-surface">Danh sách Nhân viên</h3>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+<input class="pl-9 pr-3 py-1.5 rounded-full border border-border-light text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary w-48" placeholder="Tìm kiếm..." type="text"/>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto p-2 space-y-2">
+<!-- Active User -->
+<div class="p-3 rounded-lg bg-surface-container-low border border-primary-container cursor-pointer flex items-center gap-3">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="A professional headshot of an Asian woman in her 30s, smiling softly. She wears a modern blouse. The background is a blurred, bright floral shop setting. Natural, soft lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAH6xx5PgA5Bki5Y3SZfJ6P6LKl_11sPGeCfWL5PDI-dgprLNuIn-aZFTJzAYYP0MupYeYfOYP2DkBXRTdCPRvfTLmyenBmtHfzbMtB8ZwQconXsVc0rEBLVQzkQmN0G8VJxZYY6zVET9bXozCkeqEhgvz5ZOe2Wwc0n6sTP1PHkYrb2MCIzfz2T2vwEex_3Z7-NDWeHpVpqINswDfGuyYDOzWzBXi7P8-yHEm5V0PS8thd8rHZCIQb"/>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Nguyễn Thị Lan</p>
+<p class="text-xs text-on-surface-variant mt-0.5">Quản lý kho</p>
+</div>
+</div>
+<div class="p-3 rounded-lg hover:bg-surface-container-lowest cursor-pointer transition-colors flex items-center gap-3">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface-variant font-bold">TM</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Trần Minh</p>
+<p class="text-xs text-on-surface-variant mt-0.5">Admin</p>
+</div>
+</div>
+<div class="p-3 rounded-lg hover:bg-surface-container-lowest cursor-pointer transition-colors flex items-center gap-3">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="A professional headshot of a young Asian man in his 20s, looking friendly. He wears a casual but neat uniform shirt. The background is a clean, well-lit modern workspace. High key aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDw9tC1p8p1RRQiFyT-KUacoCQ2Klhkf1pipeRy3_eEcRwaG0_JDt4-F08m_ygccNOVWiNFrdjIknfiZcjXGk3hUFhlM-Wc0D27Hl21TVmYb6UIsSa_OuivdH13OU2rWIyEZrI7X_T5islTWY5QAQQaO-mFVZerZ6qraeI-46zTLQ9C8NsO0ru90sXYOWPNj02uq5SFscCpBClIq7pnnuwT70iWtQlQYPQqRcKcHj8VE3Zw-dSmn4cx"/>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Lê Hoàng</p>
+<p class="text-xs text-on-surface-variant mt-0.5">Nhân viên bán hàng</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Permission Details -->
+<div class="xl:col-span-2 bg-surface-container-lowest rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.05)] border border-border-light flex flex-col h-[calc(100vh-160px)]">
+<div class="p-6 border-b border-border-light flex justify-between items-center">
+<div class="flex items-center gap-4">
+<img class="w-16 h-16 rounded-full object-cover shadow-sm" data-alt="A professional headshot of an Asian woman in her 30s, smiling softly. She wears a modern blouse. The background is a blurred, bright floral shop setting. Natural, soft lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4eGXJRVQSDPGPhSv7-qwwGUlXvgaUKOgCQHwj5Mddm1esOlZS2YoohELBXOVKsIV2ejaOl4FHiEPVb2XijSvgIseRob2r-aRGv5nqHnv6OX98SyypDvreMtwBEAmXBMxjsB7vk4zGLUk6Mx0i6mEtDOzGpHjdBlUc1coE0X_a5TnJqjkN1282B65sg64kqFEKLLX8B79QvTfEYFdZRpG0yRyWNaTLUQQkv011QIHFGw7McmkQaztK"/>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Nguyễn Thị Lan</h3>
+<div class="flex items-center gap-2 mt-1">
+<span class="bg-secondary-container text-on-secondary-container text-[10px] px-2 py-0.5 rounded-full font-semibold uppercase tracking-wider">Quản lý kho</span>
+<span class="text-sm text-on-surface-variant">lan.nguyen@flowercorner.vn</span>
+</div>
+</div>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-lg font-label-md text-label-md hover:bg-primary-container transition-colors shadow-sm">
+                        Lưu Thay Đổi
+                    </button>
+</div>
+<div class="flex-1 overflow-y-auto p-6">
+<div class="space-y-8">
+<!-- Module: Đơn hàng -->
+<div>
+<div class="flex items-center gap-2 border-b border-border-light pb-2 mb-4">
+<span class="material-symbols-outlined text-primary">shopping_bag</span>
+<h4 class="font-headline-md text-headline-md text-on-surface text-lg">Quản lý Đơn hàng</h4>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="flex items-center justify-between p-3 rounded-lg bg-surface-container-lowest border border-border-light hover:shadow-sm transition-shadow">
+<div>
+<p class="font-label-md text-label-md text-on-surface">Xem danh sách</p>
+<p class="text-xs text-on-surface-variant">Cho phép xem tất cả đơn hàng</p>
+</div>
+<div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer z-10 transition-all duration-300" id="toggle-1" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-5 rounded-full bg-surface-variant cursor-pointer transition-colors duration-300" for="toggle-1"></label>
+</div>
+</div>
+<div class="flex items-center justify-between p-3 rounded-lg bg-surface-container-lowest border border-border-light hover:shadow-sm transition-shadow">
+<div>
+<p class="font-label-md text-label-md text-on-surface">Cập nhật trạng thái</p>
+<p class="text-xs text-on-surface-variant">Cho phép đổi trạng thái đơn</p>
+</div>
+<div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer z-10 transition-all duration-300" id="toggle-2" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-5 rounded-full bg-surface-variant cursor-pointer transition-colors duration-300" for="toggle-2"></label>
+</div>
+</div>
+<div class="flex items-center justify-between p-3 rounded-lg bg-surface-container-lowest border border-border-light hover:shadow-sm transition-shadow opacity-60">
+<div>
+<p class="font-label-md text-label-md text-on-surface">Hủy đơn hàng</p>
+<p class="text-xs text-on-surface-variant">Quyền hủy đơn đã xác nhận</p>
+</div>
+<div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+<input class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer z-10 transition-all duration-300" id="toggle-3" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-5 rounded-full bg-surface-variant cursor-pointer transition-colors duration-300" for="toggle-3"></label>
+</div>
+</div>
+</div>
+</div>
+<!-- Module: Sản phẩm -->
+<div>
+<div class="flex items-center gap-2 border-b border-border-light pb-2 mb-4">
+<span class="material-symbols-outlined text-primary">local_florist</span>
+<h4 class="font-headline-md text-headline-md text-on-surface text-lg">Quản lý Sản phẩm &amp; Kho</h4>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="flex items-center justify-between p-3 rounded-lg bg-surface-container-lowest border border-border-light hover:shadow-sm transition-shadow">
+<div>
+<p class="font-label-md text-label-md text-on-surface">Thêm mới sản phẩm</p>
+<p class="text-xs text-on-surface-variant">Tạo listing hoa mới</p>
+</div>
+<div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer z-10 transition-all duration-300" id="toggle-4" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-5 rounded-full bg-surface-variant cursor-pointer transition-colors duration-300" for="toggle-4"></label>
+</div>
+</div>
+<div class="flex items-center justify-between p-3 rounded-lg bg-surface-container-lowest border border-border-light hover:shadow-sm transition-shadow">
+<div>
+<p class="font-label-md text-label-md text-on-surface">Cập nhật tồn kho</p>
+<p class="text-xs text-on-surface-variant">Nhập/xuất số lượng</p>
+</div>
+<div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer z-10 transition-all duration-300" id="toggle-5" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-5 rounded-full bg-surface-variant cursor-pointer transition-colors duration-300" for="toggle-5"></label>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

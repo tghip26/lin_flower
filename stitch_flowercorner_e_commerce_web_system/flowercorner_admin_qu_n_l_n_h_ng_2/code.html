@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+
+<html lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Quản lý Đơn hàng - FlowerCorner Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#5b3f43",
+                        "on-primary-container": "#fffbff",
+                        "surface-dim": "#dcd9d9",
+                        "background-faint": "#F5F5F5",
+                        "surface-bright": "#fbf9f8",
+                        "primary-fixed-dim": "#ffb2be",
+                        "surface-container-highest": "#e4e2e1",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#eae8e7",
+                        "tertiary": "#005fa0",
+                        "secondary-container": "#f4dce4",
+                        "on-error": "#ffffff",
+                        "secondary-fixed": "#f4dce4",
+                        "tertiary-container": "#0078c8",
+                        "on-surface": "#1b1c1c",
+                        "on-tertiary-fixed": "#001d36",
+                        "inverse-primary": "#ffb2be",
+                        "secondary-fixed-dim": "#d7c1c8",
+                        "outline-variant": "#e4bdc2",
+                        "on-primary-fixed-variant": "#900038",
+                        "error-container": "#ffdad6",
+                        "primary-container": "#e2165f",
+                        "on-background": "#1b1c1c",
+                        "border-light": "#EEEEEE",
+                        "inverse-on-surface": "#f3f0f0",
+                        "inverse-surface": "#303030",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#6b5a60",
+                        "primary": "#b80049",
+                        "on-tertiary-fixed-variant": "#00497d",
+                        "tertiary-fixed-dim": "#9ecaff",
+                        "on-tertiary-container": "#fdfcff",
+                        "success-green": "#4CAF50",
+                        "on-primary-fixed": "#400014",
+                        "sale-red": "#FF3B3D",
+                        "surface-container": "#f0eded",
+                        "outline": "#8f6f73",
+                        "on-secondary-fixed": "#25181e",
+                        "on-secondary-fixed-variant": "#524249",
+                        "surface": "#fbf9f8",
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#f5f3f2",
+                        "primary-fixed": "#ffd9de",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-container": "#716066",
+                        "error": "#ba1a1a",
+                        "background": "#fbf9f8",
+                        "tertiary-fixed": "#d1e4ff",
+                        "surface-variant": "#e4e2e1",
+                        "surface-tint": "#bc004b",
+                        "on-tertiary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1200px",
+                        "section-gap": "64px",
+                        "gutter": "24px",
+                        "base": "8px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Montserrat"],
+                        "price-strikethrough": ["Montserrat"],
+                        "label-md": ["Montserrat"],
+                        "price-lg": ["Montserrat"],
+                        "body-md": ["Montserrat"],
+                        "headline-md": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "display-lg": ["Montserrat"],
+                        "body-lg": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "price-strikethrough": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+                        "price-lg": ["18px", { "lineHeight": "24px", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Montserrat', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased flex h-screen overflow-hidden">
+<!-- SideNavBar (Shared Component) -->
+<nav class="bg-surface-container-lowest border-r border-border-light docked left-0 h-full w-64 fixed left-0 top-0 h-screen flex flex-col p-4 z-40 hidden md:flex">
+<!-- Header -->
+<div class="mb-8 flex flex-col items-start px-2">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">FlowerCorner Admin</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Management Suite</p>
+</div>
+<!-- Navigation Links -->
+<ul class="space-y-2 flex-grow">
+<li>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:bg-surface-container-high rounded-lg transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                    Dashboard
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 bg-secondary-container text-on-secondary-container rounded-lg px-4 py-3 transition-colors font-label-md text-label-md" href="#" style="transform: scale(0.98); transition-duration: 150ms;">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">shopping_bag</span>
+                    Orders
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:bg-surface-container-high rounded-lg transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">local_florist</span>
+                    Products
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:bg-surface-container-high rounded-lg transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">lock_person</span>
+                    Permissions
+                </a>
+</li>
+</ul>
+<!-- CTA -->
+<div class="mb-4">
+<button class="w-full bg-primary text-on-primary font-label-md text-label-md py-3 rounded-lg hover:opacity-90 transition-opacity shadow-sm">
+                Create New Listing
+            </button>
+</div>
+<!-- Footer Links -->
+<ul class="space-y-2 pt-4 border-t border-border-light">
+<li>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:bg-surface-container-high rounded-lg transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">settings</span>
+                    Settings
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:bg-surface-container-high rounded-lg transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">logout</span>
+                    Logout
+                </a>
+</li>
+</ul>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col h-screen overflow-hidden md:ml-64 bg-background">
+<!-- Mobile Header (Visible only on small screens) -->
+<header class="md:hidden bg-surface shadow-sm h-16 flex items-center justify-between px-4 z-30 relative">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">FlowerCorner</h1>
+<button class="text-on-surface-variant p-2">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</header>
+<!-- Top Bar for Main Area -->
+<div class="h-16 px-gutter flex items-center justify-between bg-surface-container-lowest border-b border-border-light shadow-sm sticky top-0 z-20">
+<h2 class="font-headline-md text-headline-md text-on-surface">Quản lý Đơn hàng</h2>
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+<input class="pl-9 pr-4 py-2 rounded-full border border-border-light bg-surface focus:outline-none focus:border-primary font-body-md text-body-md text-on-surface w-64 shadow-sm transition-colors" placeholder="Tìm kiếm mã đơn, khách hàng..." type="text"/>
+</div>
+<button class="w-10 h-10 rounded-full overflow-hidden border border-border-light">
+<img alt="Staff Profile" class="w-full h-full object-cover" data-alt="A professional headshot of an administrative staff member smiling warmly. Soft, diffused lighting, clean light background, premium high-quality photography suitable for a corporate profile." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBroG70015cO9LKfWDEipgjHvcmYJTte-hwASkjM83Gk15QFWjkTGcb_mPGIcXOOIhr-f0uCLoEUo21K2hUdkzwcYE2MC8h4QqHusXo8c_CJAMJBkmeuPtsqeBSzvVfEC1gLKyFpT382epbJSYrL9sLza2e5EkAUimrfsQ_LkD2Tq6qhMEwPEDzr-9Ps1ASRJtXq8R5JxBItNnCo89u72Xv2jBfDgcrEG1hj4HR2yIokkELxJK-UfeH"/>
+</button>
+</div>
+</div>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto p-gutter bg-background-faint">
+<!-- Metrics Row -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+<div class="bg-surface-container-lowest p-6 rounded-lg border border-border-light shadow-sm flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">pending_actions</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Chờ xử lý</p>
+<p class="font-headline-lg text-headline-lg text-on-surface mt-1">12</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-lg border border-border-light shadow-sm flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-tertiary-fixed text-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined">local_shipping</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Đang giao</p>
+<p class="font-headline-lg text-headline-lg text-on-surface mt-1">8</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-lg border border-border-light shadow-sm flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-success-green/20 text-success-green flex items-center justify-center">
+<span class="material-symbols-outlined">check_circle</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Đã hoàn thành</p>
+<p class="font-headline-lg text-headline-lg text-on-surface mt-1">45</p>
+</div>
+</div>
+</div>
+<!-- Orders Table Container -->
+<div class="bg-surface-container-lowest rounded-xl border border-border-light shadow-sm overflow-hidden flex flex-col">
+<!-- Table Controls -->
+<div class="px-6 py-4 border-b border-border-light flex flex-wrap gap-4 items-center justify-between bg-surface-bright">
+<div class="flex gap-2">
+<button class="px-4 py-1.5 rounded-full bg-surface-variant text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high transition-colors">Tất cả</button>
+<button class="px-4 py-1.5 rounded-full border border-border-light text-on-surface font-label-md text-label-md hover:bg-surface-container-low transition-colors">Chờ xử lý</button>
+<button class="px-4 py-1.5 rounded-full border border-border-light text-on-surface font-label-md text-label-md hover:bg-surface-container-low transition-colors">Đang giao</button>
+<button class="px-4 py-1.5 rounded-full border border-border-light text-on-surface font-label-md text-label-md hover:bg-surface-container-low transition-colors">Hoàn thành</button>
+</div>
+<button class="flex items-center gap-2 text-primary font-label-md text-label-md hover:text-primary-container transition-colors">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+                        Bộ lọc
+                    </button>
+</div>
+<!-- Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-border-light">
+<th class="px-6 py-3 font-label-md text-label-md text-on-surface-variant font-semibold">Mã Đơn</th>
+<th class="px-6 py-3 font-label-md text-label-md text-on-surface-variant font-semibold">Khách Hàng</th>
+<th class="px-6 py-3 font-label-md text-label-md text-on-surface-variant font-semibold">Ngày Đặt</th>
+<th class="px-6 py-3 font-label-md text-label-md text-on-surface-variant font-semibold text-right">Tổng Tiền</th>
+<th class="px-6 py-3 font-label-md text-label-md text-on-surface-variant font-semibold text-center">Trạng Thái</th>
+<th class="px-6 py-3 font-label-md text-label-md text-on-surface-variant font-semibold text-center">Thao Tác</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md text-on-surface divide-y divide-border-light">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-lowest transition-colors group">
+<td class="px-6 py-4 font-semibold">#ORD-2023-001</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-fixed-dim text-on-primary-fixed flex items-center justify-center font-bold text-xs">
+                                            NT
+                                        </div>
+<div>
+<p class="font-semibold text-on-surface">Nguyễn Thị A</p>
+<p class="text-xs text-on-surface-variant">0901234567</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-on-surface-variant">24/10/2023 <br/><span class="text-xs">08:30</span></td>
+<td class="px-6 py-4 text-right font-price-lg text-price-lg">1,250,000 đ</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-secondary-container text-on-secondary-container border border-outline-variant">
+                                        Chờ xử lý
+                                    </span>
+</td>
+<td class="px-6 py-4 text-center">
+<button class="text-tertiary hover:text-tertiary-container transition-colors p-1 rounded hover:bg-surface-container-low" title="Xem chi tiết">
+<span class="material-symbols-outlined text-base">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-lowest transition-colors group">
+<td class="px-6 py-4 font-semibold">#ORD-2023-002</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center font-bold text-xs">
+                                            TH
+                                        </div>
+<div>
+<p class="font-semibold text-on-surface">Trần Hữu B</p>
+<p class="text-xs text-on-surface-variant">0987654321</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-on-surface-variant">23/10/2023 <br/><span class="text-xs">14:15</span></td>
+<td class="px-6 py-4 text-right font-price-lg text-price-lg">850,000 đ</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-tertiary-fixed text-on-tertiary-fixed-variant border border-tertiary-fixed-dim">
+                                        Đang giao
+                                    </span>
+</td>
+<td class="px-6 py-4 text-center">
+<button class="text-tertiary hover:text-tertiary-container transition-colors p-1 rounded hover:bg-surface-container-low" title="Xem chi tiết">
+<span class="material-symbols-outlined text-base">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-lowest transition-colors group bg-surface-bright">
+<td class="px-6 py-4 font-semibold text-on-surface-variant">#ORD-2023-003</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center font-bold text-xs">
+                                            LM
+                                        </div>
+<div>
+<p class="font-semibold text-on-surface">Lê Minh C</p>
+<p class="text-xs text-on-surface-variant">0912345678</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-on-surface-variant">22/10/2023 <br/><span class="text-xs">10:00</span></td>
+<td class="px-6 py-4 text-right font-price-lg text-price-lg text-on-surface-variant">2,100,000 đ</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-green/10 text-success-green border border-success-green/20">
+                                        Đã hoàn thành
+                                    </span>
+</td>
+<td class="px-6 py-4 text-center">
+<button class="text-tertiary hover:text-tertiary-container transition-colors p-1 rounded hover:bg-surface-container-low" title="Xem chi tiết">
+<span class="material-symbols-outlined text-base">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-lowest transition-colors group">
+<td class="px-6 py-4 font-semibold">#ORD-2023-004</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-fixed-dim text-on-primary-fixed flex items-center justify-center font-bold text-xs">
+                                            PV
+                                        </div>
+<div>
+<p class="font-semibold text-on-surface">Phạm Văn D</p>
+<p class="text-xs text-on-surface-variant">0945678123</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-on-surface-variant">24/10/2023 <br/><span class="text-xs">16:45</span></td>
+<td class="px-6 py-4 text-right font-price-lg text-price-lg">550,000 đ</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-secondary-container text-on-secondary-container border border-outline-variant">
+                                        Chờ xử lý
+                                    </span>
+</td>
+<td class="px-6 py-4 text-center">
+<button class="text-tertiary hover:text-tertiary-container transition-colors p-1 rounded hover:bg-surface-container-low" title="Xem chi tiết">
+<span class="material-symbols-outlined text-base">visibility</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="px-6 py-4 border-t border-border-light flex items-center justify-between bg-surface">
+<p class="font-body-md text-body-md text-on-surface-variant">Hiển thị 1 - 4 trong số 65 đơn hàng</p>
+<div class="flex items-center gap-2">
+<button class="p-1 rounded hover:bg-surface-container-low text-on-surface-variant disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-md bg-primary text-on-primary font-label-md text-label-md flex items-center justify-center">1</button>
+<button class="w-8 h-8 rounded-md border border-border-light hover:bg-surface-container-low text-on-surface font-label-md text-label-md flex items-center justify-center transition-colors">2</button>
+<button class="w-8 h-8 rounded-md border border-border-light hover:bg-surface-container-low text-on-surface font-label-md text-label-md flex items-center justify-center transition-colors">3</button>
+<span class="text-on-surface-variant">...</span>
+<button class="p-1 rounded hover:bg-surface-container-low text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<div class="h-12"></div> <!-- Bottom padding -->
+</div>
+</main>
+</body></html>

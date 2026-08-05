@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FlowerCorner Admin Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#ffffff",
+                        "surface-container-low": "#f5f3f2",
+                        "outline-variant": "#e4bdc2",
+                        "secondary-fixed-dim": "#d7c1c8",
+                        "surface-tint": "#bc004b",
+                        "primary-fixed-dim": "#ffb2be",
+                        "error": "#ba1a1a",
+                        "on-secondary": "#ffffff",
+                        "border-light": "#EEEEEE",
+                        "error-container": "#ffdad6",
+                        "secondary": "#6b5a60",
+                        "surface-container": "#f0eded",
+                        "on-primary-container": "#fffbff",
+                        "success-green": "#4CAF50",
+                        "on-surface": "#1b1c1c",
+                        "on-background": "#1b1c1c",
+                        "on-secondary-container": "#716066",
+                        "background-faint": "#F5F5F5",
+                        "surface-variant": "#e4e2e1",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed-variant": "#900038",
+                        "on-tertiary-fixed": "#001d36",
+                        "tertiary-fixed-dim": "#9ecaff",
+                        "tertiary-fixed": "#d1e4ff",
+                        "secondary-container": "#f4dce4",
+                        "secondary-fixed": "#f4dce4",
+                        "surface": "#fbf9f8",
+                        "on-secondary-fixed": "#25181e",
+                        "surface-container-high": "#eae8e7",
+                        "primary-fixed": "#ffd9de",
+                        "on-primary-fixed": "#400014",
+                        "inverse-surface": "#303030",
+                        "tertiary": "#005fa0",
+                        "surface-bright": "#fbf9f8",
+                        "on-error": "#ffffff",
+                        "outline": "#8f6f73",
+                        "on-tertiary-container": "#fdfcff",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#dcd9d9",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-on-surface": "#f3f0f0",
+                        "on-surface-variant": "#5b3f43",
+                        "on-tertiary-fixed-variant": "#00497d",
+                        "on-secondary-fixed-variant": "#524249",
+                        "surface-container-highest": "#e4e2e1",
+                        "primary-container": "#e2165f",
+                        "tertiary-container": "#0078c8",
+                        "primary": "#b80049",
+                        "background": "#fbf9f8",
+                        "sale-red": "#FF3B3D",
+                        "inverse-primary": "#ffb2be"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "section-gap": "64px",
+                        "container-max": "1200px",
+                        "margin-mobile": "16px",
+                        "base": "8px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "price-lg": ["Montserrat"],
+                        "label-md": ["Montserrat"],
+                        "price-strikethrough": ["Montserrat"],
+                        "display-lg": ["Montserrat"],
+                        "body-lg": ["Montserrat"],
+                        "headline-md": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "body-md": ["Montserrat"],
+                        "headline-lg-mobile": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "price-lg": ["18px", { "lineHeight": "24px", "fontWeight": "700" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+                        "price-strikethrough": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md h-full flex antialiased">
+<!-- SideNavBar -->
+<nav class="bg-surface-container-lowest border-r border-border-light docked left-0 h-full w-64 fixed left-0 top-0 flex flex-col p-4 z-40 hidden md:flex">
+<div class="flex items-center gap-4 mb-8 px-4">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="A small, elegant minimalist logo featuring a stylized delicate orchid or lotus flower in subtle pink and deep magenta tones, set against a pure white background. Professional, high-end botanical e-commerce aesthetic, clean corporate identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBV-AVZz9tphlhxjbaN0zz7IjbY5JNsdG64Qob3e8RRTMkPWN8AJTcQINrqmHqNLHlloL14SNgCIYBEE6l_1xjTBszN4e23Ebl79PO8rIi4drq58fSbI4Occ8rFBPQ4Dg-1ExjOpZKJ3hLZ0sfryhyKlNO8b0oubSAQMCKTQx4AATKwIVOsM1fUwi9hIeqC1FPoz1VlYM_099rGrx2xABKtfhMdIi458kI9l6cAfBECn7qVnXkptqZ2"/>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">FlowerCorner Admin</h1>
+<p class="font-label-md text-label-md text-on-surface-variant">Management Suite</p>
+</div>
+</div>
+<button class="mb-8 w-full bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md py-3 rounded-lg shadow-sm hover:shadow-md transition-all duration-200 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add</span>
+            Create New Listing
+        </button>
+<div class="flex-1 space-y-2">
+<!-- Active Tab -->
+<a class="flex items-center gap-3 bg-secondary-container text-on-secondary-container rounded-lg px-4 py-3 scale-95 transition-all duration-150" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:bg-surface-container-high rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">shopping_bag</span>
+<span class="font-label-md text-label-md">Orders</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:bg-surface-container-high rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">local_florist</span>
+<span class="font-label-md text-label-md">Products</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:bg-surface-container-high rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">lock_person</span>
+<span class="font-label-md text-label-md">Permissions</span>
+</a>
+</div>
+<div class="mt-auto space-y-2 pt-4 border-t border-border-light">
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:bg-surface-container-high rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:bg-surface-container-high rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Logout</span>
+</a>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-1 md:ml-64 p-gutter max-w-container-max mx-auto w-full flex flex-col gap-8 h-full overflow-y-auto bg-background">
+<!-- Header -->
+<header class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-background">Welcome back, Admin</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">October 24, 2023</p>
+</div>
+<div class="relative w-full md:w-96">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-lowest border border-border-light rounded-full pl-10 pr-4 py-2 font-body-md text-body-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary shadow-sm transition-all" placeholder="Search orders, customers, products..." type="text"/>
+</div>
+</header>
+<!-- Stats Row -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-surface-container-lowest border border-border-light rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Today's Orders</p>
+<h3 class="font-display-lg text-display-lg text-on-background mt-2">42</h3>
+</div>
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-weight="fill">shopping_bag</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-success-green flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+                    +12% from yesterday
+                </p>
+</div>
+<div class="bg-surface-container-lowest border border-border-light rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Revenue</p>
+<h3 class="font-display-lg text-display-lg text-on-background mt-2">15.5M <span class="font-headline-md text-headline-md text-on-surface-variant">VND</span></h3>
+</div>
+<div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-weight="fill">payments</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-success-green flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+                    +8.4% from last week
+                </p>
+</div>
+<div class="bg-surface-container-lowest border border-border-light rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">New Customers</p>
+<h3 class="font-display-lg text-display-lg text-on-background mt-2">8</h3>
+</div>
+<div class="w-12 h-12 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined" data-weight="fill">group_add</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">trending_flat</span>
+                    Steady
+                </p>
+</div>
+</section>
+<!-- Main Content Area Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 pb-12">
+<!-- Chart Area (Placeholder for actual chart) -->
+<section class="lg:col-span-2 bg-surface-container-lowest border border-border-light rounded-lg p-6 shadow-sm flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-md text-headline-md text-on-background">Sales Overview (7 Days)</h3>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<div class="flex-1 w-full min-h-[300px] bg-background-faint rounded-lg border border-border-light flex items-center justify-center overflow-hidden relative">
+<!-- Decorative Chart Background Placeholder -->
+<div class="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary via-surface-container-lowest to-surface-container-lowest"></div>
+<!-- Faux SVG Line Chart -->
+<svg class="w-full h-full p-4" preserveaspectratio="none" viewbox="0 0 800 300">
+<path d="M 0,250 C 100,220 200,280 300,150 C 400,100 500,180 600,80 C 700,40 800,90 800,90" fill="none" stroke="#e2165f" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></path>
+<path d="M 0,250 C 100,220 200,280 300,150 C 400,100 500,180 600,80 C 700,40 800,90 800,90 L 800,300 L 0,300 Z" fill="url(#gradient)" opacity="0.2"></path>
+<defs>
+<lineargradient id="gradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#e2165f"></stop>
+<stop offset="100%" stop-color="transparent"></stop>
+</lineargradient>
+</defs>
+<!-- Grid Lines -->
+<line stroke="#EEEEEE" stroke-dasharray="4 4" stroke-width="1" x1="0" x2="800" y1="50" y2="50"></line>
+<line stroke="#EEEEEE" stroke-dasharray="4 4" stroke-width="1" x1="0" x2="800" y1="150" y2="150"></line>
+<line stroke="#EEEEEE" stroke-dasharray="4 4" stroke-width="1" x1="0" x2="800" y1="250" y2="250"></line>
+</svg>
+</div>
+</section>
+<!-- Popular Products Bento Card -->
+<section class="bg-surface-container-lowest border border-border-light rounded-lg p-6 shadow-sm flex flex-col">
+<h3 class="font-headline-md text-headline-md text-on-background mb-6">Trending Products</h3>
+<div class="space-y-4 flex-1">
+<div class="flex items-center gap-4 p-3 rounded-lg hover:bg-background-faint transition-colors cursor-pointer border border-transparent hover:border-border-light">
+<img class="w-16 h-16 rounded-md object-cover shadow-sm" data-alt="A highly detailed close-up shot of a stunning floral arrangement featuring vibrant, soft pink orchids and delicate white roses in a modern, elegant vase. The lighting is bright and ethereal, perfect for a high-end botanical e-commerce site, set against a clean, minimalist light background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrsayfkxr1unZdETdF4q94QnGgeiRydyHIiDFRDH89zxIAsAdQbfcScssp8kX-8zsgqTu1YhDwfws15_cZceMq4867envIdm5iGkvljQXRx7JuAUU4w_oqBgJDJtPPgSjISqMwjQN5tO231M6KkRRUiU6s4BryOl6sYNZqXINfcYCTwUEhETVY2OneovesGXbCu44OEAbvWs23rZESddhQWm22mm2FT8WHQFQnQZaa1rVLNFlpOw6t"/>
+<div class="flex-1">
+<h4 class="font-label-md text-label-md text-on-background">Morning Glow Orchids</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">45 sold this week</p>
+</div>
+<span class="font-price-lg text-price-lg text-primary">#1</span>
+</div>
+<div class="flex items-center gap-4 p-3 rounded-lg hover:bg-background-faint transition-colors cursor-pointer border border-transparent hover:border-border-light">
+<img class="w-16 h-16 rounded-md object-cover shadow-sm" data-alt="A macro photography shot of a classic deep red rose bouquet, tightly packed and visually luxurious. The roses have a velvety texture and are slightly dewy, photographed with a clean, high-key lighting setup suitable for a premium floral management dashboard." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCz_ok8Aod-gsSschHdK7OJJ-ipHvapRWGQm_be3_XFyBXVtfQ4-WpAlEpCr3ZDmCHSQYvtGvpsa4ELU6ezUVutD3Fgz_LM3uJgwgyp2I211cCO8v1IiXWXDSc32_agsEcki6wWUikvlRGqyJDd3aV-2DYv3TQOD3oCjQH10TWZpq2hlLY2g_e4d6SrEqJ56xGPntIQrTAg3GzbL3ogX2qLoTZhoYriNSp0cQTvsqODBWElGNFU1O9r"/>
+<div class="flex-1">
+<h4 class="font-label-md text-label-md text-on-background">Crimson Romance</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">32 sold this week</p>
+</div>
+<span class="font-price-lg text-price-lg text-secondary">#2</span>
+</div>
+<div class="flex items-center gap-4 p-3 rounded-lg hover:bg-background-faint transition-colors cursor-pointer border border-transparent hover:border-border-light">
+<img class="w-16 h-16 rounded-md object-cover shadow-sm" data-alt="An elegant, modern minimalist floral arrangement consisting of pure white lilies and subtle green foliage in a sleek glass cylinder. The lighting is soft and diffused, creating a serene, professional aesthetic against a pure white background for an e-commerce platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVs-31q2Izq9sGex2HvAaDSIsW4iQL6Tg5qYGVPjiIMO3cuy4Y1_8icy1yeZ5_VBPl13Up0Ju5Fz3QhNAMJs-F_ekiHKGBM5UJKj2c71EagFnrUsvzJoqR1FPo3WYTLE5SiTOMDjSaU-pWZ4cBHzu-BvrpTBKMlO30Mc6IBfHYZJKHiDFo4XDr5JpaEX87nC75jfdJwjAkTUunluSX7_LuyVL99SIIT6f_7xZZdpNUBF9vEn9VMR7M"/>
+<div class="flex-1">
+<h4 class="font-label-md text-label-md text-on-background">Pure Serenity Lilies</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">28 sold this week</p>
+</div>
+<span class="font-price-lg text-price-lg text-secondary">#3</span>
+</div>
+</div>
+</section>
+<!-- Recent Orders Table -->
+<section class="lg:col-span-3 bg-surface-container-lowest border border-border-light rounded-lg shadow-sm overflow-hidden">
+<div class="p-6 border-b border-border-light flex justify-between items-center bg-surface-bright">
+<h3 class="font-headline-md text-headline-md text-on-background">Recent Orders</h3>
+<a class="font-label-md text-label-md text-primary hover:text-primary-container transition-colors" href="#">View All</a>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-border-light">
+<th class="py-3 px-6 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Order ID</th>
+<th class="py-3 px-6 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Customer Name</th>
+<th class="py-3 px-6 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Product</th>
+<th class="py-3 px-6 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Status</th>
+<th class="py-3 px-6 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Amount</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-light">
+<tr class="hover:bg-background-faint transition-colors group">
+<td class="py-4 px-6 font-body-md text-body-md text-on-background font-medium">#ORD-0842</td>
+<td class="py-4 px-6 font-body-md text-body-md text-on-background">Nguyen Van A</td>
+<td class="py-4 px-6 font-body-md text-body-md text-on-surface-variant">Morning Glow Orchids</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full font-label-md text-label-md bg-secondary-container text-on-secondary-container">
+                                        Processing
+                                    </span>
+</td>
+<td class="py-4 px-6 font-price-lg text-price-lg text-on-background text-sm">850,000 VND</td>
+</tr>
+<tr class="hover:bg-background-faint transition-colors group">
+<td class="py-4 px-6 font-body-md text-body-md text-on-background font-medium">#ORD-0841</td>
+<td class="py-4 px-6 font-body-md text-body-md text-on-background">Tran Thi B</td>
+<td class="py-4 px-6 font-body-md text-body-md text-on-surface-variant">Crimson Romance</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full font-label-md text-label-md bg-success-green/20 text-success-green">
+                                        Delivered
+                                    </span>
+</td>
+<td class="py-4 px-6 font-price-lg text-price-lg text-on-background text-sm">1,200,000 VND</td>
+</tr>
+<tr class="hover:bg-background-faint transition-colors group">
+<td class="py-4 px-6 font-body-md text-body-md text-on-background font-medium">#ORD-0840</td>
+<td class="py-4 px-6 font-body-md text-body-md text-on-background">Le Van C</td>
+<td class="py-4 px-6 font-body-md text-body-md text-on-surface-variant">Pure Serenity Lilies</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full font-label-md text-label-md bg-error-container text-on-error-container">
+                                        Cancelled
+                                    </span>
+</td>
+<td class="py-4 px-6 font-price-lg text-price-lg text-on-background text-sm">650,000 VND</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+</main>
+<!-- FAB for Mobile (Hidden on Desktop since it's in the side nav) -->
+<button class="md:hidden fixed bottom-6 right-6 w-14 h-14 bg-primary hover:bg-primary-container text-on-primary rounded-full shadow-lg flex items-center justify-center z-50 transition-transform active:scale-95">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+</body></html>

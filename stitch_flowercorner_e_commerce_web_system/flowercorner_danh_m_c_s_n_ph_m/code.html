@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Danh Mục Sản Phẩm - FlowerCorner</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-on-surface": "#f3f0f0",
+                        "on-surface-variant": "#5b3f43",
+                        "tertiary-fixed": "#d1e4ff",
+                        "surface-container-low": "#f5f3f2",
+                        "surface": "#fbf9f8",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#0078c8",
+                        "surface-bright": "#fbf9f8",
+                        "secondary-fixed-dim": "#d7c1c8",
+                        "surface-container": "#f0eded",
+                        "on-primary-fixed": "#400014",
+                        "inverse-primary": "#ffb2be",
+                        "surface-container-high": "#eae8e7",
+                        "tertiary-fixed-dim": "#9ecaff",
+                        "surface-variant": "#e4e2e1",
+                        "primary": "#b80049",
+                        "on-tertiary-fixed-variant": "#00497d",
+                        "on-surface": "#1b1c1c",
+                        "success-green": "#4CAF50",
+                        "on-error-container": "#93000a",
+                        "on-background": "#1b1c1c",
+                        "secondary-fixed": "#f4dce4",
+                        "surface-container-highest": "#e4e2e1",
+                        "primary-fixed-dim": "#ffb2be",
+                        "on-secondary-fixed": "#25181e",
+                        "error": "#ba1a1a",
+                        "outline": "#8f6f73",
+                        "inverse-surface": "#303030",
+                        "secondary-container": "#f4dce4",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#716066",
+                        "error-container": "#ffdad6",
+                        "tertiary": "#005fa0",
+                        "on-error": "#ffffff",
+                        "surface-tint": "#bc004b",
+                        "primary-fixed": "#ffd9de",
+                        "primary-container": "#e2165f",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#dcd9d9",
+                        "on-tertiary-container": "#fdfcff",
+                        "background": "#fbf9f8",
+                        "on-tertiary-fixed": "#001d36",
+                        "on-primary-fixed-variant": "#900038",
+                        "sale-red": "#FF3B3D",
+                        "on-secondary-fixed-variant": "#524249",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#fffbff",
+                        "outline-variant": "#e4bdc2",
+                        "border-light": "#EEEEEE",
+                        "background-faint": "#F5F5F5",
+                        "secondary": "#6b5a60"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "section-gap": "64px",
+                        "base": "8px",
+                        "container-max": "1200px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Montserrat"],
+                        "price-strikethrough": ["Montserrat"],
+                        "price-lg": ["Montserrat"],
+                        "label-md": ["Montserrat"],
+                        "body-lg": ["Montserrat"],
+                        "headline-md": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "display-lg": ["Montserrat"],
+                        "body-md": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "price-strikethrough": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "price-lg": ["18px", { "lineHeight": "24px", "fontWeight": "700" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md">
+<!-- TopNavBar -->
+<nav class="bg-surface dark:bg-surface-dim docked full-width top-0 sticky shadow-sm z-50">
+<div class="flex justify-between items-center w-full px-section-gap max-w-container-max mx-auto h-16 transition-all duration-200 ease-in-out">
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">FlowerCorner</div>
+<div class="hidden md:flex gap-8">
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">Birthdays</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">Grand Opening</a>
+<a class="text-primary dark:text-primary-fixed border-b-2 border-primary dark:border-primary-fixed pb-1" href="#">Orchids</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">Anniversaries</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">Sympathy</a>
+</div>
+<div class="flex gap-4">
+<button class="text-primary dark:text-primary-fixed hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors rounded-full p-2">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</button>
+<button class="text-primary dark:text-primary-fixed hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors rounded-full p-2">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</button>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="max-w-container-max mx-auto px-gutter py-section-gap grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<!-- Sidebar Filter -->
+<aside class="md:col-span-1 flex flex-col gap-8">
+<div>
+<h3 class="font-headline-md text-headline-md mb-4 text-primary">Danh Mục</h3>
+<ul class="flex flex-col gap-2 font-body-md text-on-surface-variant">
+<li><label class="flex items-center gap-2 cursor-pointer hover:text-primary transition-colors"><input class="rounded text-primary focus:ring-primary border-outline-variant" type="checkbox"/> Tất cả</label></li>
+<li><label class="flex items-center gap-2 cursor-pointer hover:text-primary transition-colors"><input class="rounded text-primary focus:ring-primary border-outline-variant" type="checkbox"/> Bó hoa</label></li>
+<li><label class="flex items-center gap-2 cursor-pointer hover:text-primary transition-colors"><input class="rounded text-primary focus:ring-primary border-outline-variant" type="checkbox"/> Lẵng hoa</label></li>
+<li><label class="flex items-center gap-2 cursor-pointer hover:text-primary transition-colors"><input class="rounded text-primary focus:ring-primary border-outline-variant" type="checkbox"/> Giỏ hoa</label></li>
+</ul>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md mb-4 text-primary">Mức Giá</h3>
+<ul class="flex flex-col gap-2 font-body-md text-on-surface-variant">
+<li><label class="flex items-center gap-2 cursor-pointer hover:text-primary transition-colors"><input class="text-primary focus:ring-primary border-outline-variant" name="price" type="radio"/> Dưới 500k</label></li>
+<li><label class="flex items-center gap-2 cursor-pointer hover:text-primary transition-colors"><input class="text-primary focus:ring-primary border-outline-variant" name="price" type="radio"/> 500k - 1 Triệu</label></li>
+<li><label class="flex items-center gap-2 cursor-pointer hover:text-primary transition-colors"><input class="text-primary focus:ring-primary border-outline-variant" name="price" type="radio"/> Trên 1 Triệu</label></li>
+</ul>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md mb-4 text-primary">Dịp Lễ</h3>
+<ul class="flex flex-col gap-2 font-body-md text-on-surface-variant">
+<li><label class="flex items-center gap-2 cursor-pointer hover:text-primary transition-colors"><input class="rounded text-primary focus:ring-primary border-outline-variant" type="checkbox"/> Sinh nhật</label></li>
+<li><label class="flex items-center gap-2 cursor-pointer hover:text-primary transition-colors"><input class="rounded text-primary focus:ring-primary border-outline-variant" type="checkbox"/> Khai trương</label></li>
+<li><label class="flex items-center gap-2 cursor-pointer hover:text-primary transition-colors"><input class="rounded text-primary focus:ring-primary border-outline-variant" type="checkbox"/> Kỷ niệm</label></li>
+</ul>
+</div>
+</aside>
+<!-- Product Grid -->
+<div class="md:col-span-3">
+<div class="flex justify-between items-center mb-6">
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Hoa Tươi</h1>
+<div class="flex items-center gap-2">
+<span class="font-body-md text-on-surface-variant">Sắp xếp:</span>
+<select class="rounded-md border-outline-variant py-1 px-3 text-sm font-body-md focus:ring-primary focus:border-primary bg-surface-container-lowest">
+<option>Bán chạy nhất</option>
+<option>Giá thấp đến cao</option>
+<option>Giá cao đến thấp</option>
+<option>Mới nhất</option>
+</select>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Product Card 1 -->
+<div class="bg-surface-container-lowest rounded-lg overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] transition-shadow duration-300 flex flex-col relative group">
+<div class="absolute top-2 right-2 bg-sale-red text-on-error font-label-md px-2 py-1 rounded-full z-10">-15%</div>
+<div class="aspect-[4/5] overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A beautiful bouquet of pink and white chrysanthemums wrapped in pink paper, held up against a gray background with sunlight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-_F-p_hgO2Na31wonHJfzFr5G433R2pcnnw1oVMTpXHTc3E0_kxHziSegNoLt6wArQnvb5Kv4oS2-jmpkODBHaB5iNni8-5jlMIQxlx0P8IH1WfgQIDfCQzioUSTetgOeZcbu-ykNSOG7XdpF73QDGVU5_dka2MgludVNk3P7Q-ld2MLw_PuRQ6BW6ahYCoXQq8-LPNHwsJqDvRJBln5UefcjBdWc4MHdkkt0elBLlfeaaAspIwuD"/>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2 line-clamp-1">Nắng Mai</h3>
+<div class="flex items-center gap-2 mt-auto mb-4">
+<span class="font-price-lg text-price-lg text-primary">550.000 đ</span>
+<span class="font-price-strikethrough text-price-strikethrough text-on-surface-variant line-through">650.000 đ</span>
+</div>
+<button class="w-full bg-primary-container text-on-primary-container font-label-md py-2 rounded hover:bg-primary hover:text-on-primary transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="add_shopping_cart">add_shopping_cart</span> Thêm vào giỏ
+                        </button>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="bg-surface-container-lowest rounded-lg overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] transition-shadow duration-300 flex flex-col relative group">
+<div class="aspect-[4/5] overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A vibrant bouquet of small white daisies with yellow centers wrapped in brown paper, held in front of a green wooden door." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuJXT_ZA6EW26azdPQrcDcimg3Wjr8qA9l3NNBCPWyFWNrR7ckUtJxS6KruJ-TZSOMzAtc4kALlAif-0RbdlXdKj8Cjg1Uyl1TL4fvODjPnEahNUnVnv4hrzHhS_D40-nGgGnHZABnPLfJwlY0SE-hdzQVSCffKTwsNqkChnNqcJMGM936TmVGUanUAR3__OsPOQy-NDWWZ_B63NzYjujbyZ1VMzf-PX-N4LZ3bGp0_ty5A52d4uiU"/>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2 line-clamp-1">Hương Đồng Nội</h3>
+<div class="flex items-center gap-2 mt-auto mb-4">
+<span class="font-price-lg text-price-lg text-primary">450.000 đ</span>
+</div>
+<button class="w-full border border-primary text-primary font-label-md py-2 rounded hover:bg-primary hover:text-on-primary transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="add_shopping_cart">add_shopping_cart</span> Thêm vào giỏ
+                        </button>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="bg-surface-container-lowest rounded-lg overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] transition-shadow duration-300 flex flex-col relative group">
+<div class="aspect-[4/5] overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A classic bouquet of vibrant red roses wrapped in elegant white paper with a burgundy ribbon, held outdoors." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtcVdfXEDvjdPOXA8LOoT759YNaabRDL34OTiTLxtKO4AAyHr4LtJSShve90r4J4wXKL8BgeIUMDCegGCrrJewpFRkt6qeFbHjmSAcZho3tNnJnop_I8gg8JyXRZak6nMJdH6yqikeu3umHyoFr9qBSyJeIn_P-Y6R7EC28GM0jzi-vhojLFrbjBwa-swCxckoW7lqyfnFjbpQRpCQFMWYc53MnoPraBswu0xuqWs4Lnd9z5angtio"/>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2 line-clamp-1">Tình Yêu Vĩnh Cửu</h3>
+<div class="flex items-center gap-2 mt-auto mb-4">
+<span class="font-price-lg text-price-lg text-primary">850.000 đ</span>
+</div>
+<button class="w-full border border-primary text-primary font-label-md py-2 rounded hover:bg-primary hover:text-on-primary transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="add_shopping_cart">add_shopping_cart</span> Thêm vào giỏ
+                        </button>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="bg-surface-container-lowest rounded-lg overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] transition-shadow duration-300 flex flex-col relative group">
+<div class="absolute top-2 right-2 bg-sale-red text-on-error font-label-md px-2 py-1 rounded-full z-10">-10%</div>
+<div class="aspect-[4/5] overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A stunning bouquet of large pink lilies wrapped in white paper, held up against a textured beige wall." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtXcHe_rtAxCsDVlLyipOT_pg3f2HlltoFdb7PHrlgzzmMRLm5_D2apipsFl5R89lxpY2j-i9tB0OIMwZkJGiiN5jVyYno9K316wQ2gq6SA-Ea3G81di4cDGFt8z3lSNlTt3lkApxTgwUaziY5-uTxN-zINf6vvVssG-Zn5M7HWsuj0CIGbmzY_aWS8aFI7EYEtyYTuRnxXg-vNL70kUKgder0I81YYAyY1PVYrE2Y90gvxOpixkwl"/>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2 line-clamp-1">Kiêu Sa</h3>
+<div class="flex items-center gap-2 mt-auto mb-4">
+<span class="font-price-lg text-price-lg text-primary">720.000 đ</span>
+<span class="font-price-strikethrough text-price-strikethrough text-on-surface-variant line-through">800.000 đ</span>
+</div>
+<button class="w-full bg-primary-container text-on-primary-container font-label-md py-2 rounded hover:bg-primary hover:text-on-primary transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="add_shopping_cart">add_shopping_cart</span> Thêm vào giỏ
+                        </button>
+</div>
+</div>
+<!-- Product Card 5 -->
+<div class="bg-surface-container-lowest rounded-lg overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] transition-shadow duration-300 flex flex-col relative group">
+<div class="aspect-[4/5] overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A serene arrangement of white orchids and subtle greenery in a modern ceramic vase, sitting on a wooden table in a bright room." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCU_3-VO0xP9PE1mBGuH1uifuvEQxBzOXmqD3yqFflwAeEwzDpZnkzq7bjuNrB2-9c8HfItIFTQfscP3cqERpHO_L8sjLSwQ6GkWKFxJsZty--VcWy9RWG9fo2lXJ1hokQUKOFaz1i51RKbBRGmcQ8zovPq7Fm9cUkx4A0k9plbHtPhIZYN4COsXv7f9BFt9OYPQwy9CEihXOEEx2IyBg8Sxs5RchTwak5uQAdgyGcS7XaiYOG6HGQw"/>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2 line-clamp-1">Thanh Khiết</h3>
+<div class="flex items-center gap-2 mt-auto mb-4">
+<span class="font-price-lg text-price-lg text-primary">1.200.000 đ</span>
+</div>
+<button class="w-full border border-primary text-primary font-label-md py-2 rounded hover:bg-primary hover:text-on-primary transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="add_shopping_cart">add_shopping_cart</span> Thêm vào giỏ
+                        </button>
+</div>
+</div>
+<!-- Product Card 6 -->
+<div class="bg-surface-container-lowest rounded-lg overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] transition-shadow duration-300 flex flex-col relative group">
+<div class="absolute top-2 right-2 bg-sale-red text-on-error font-label-md px-2 py-1 rounded-full z-10">-20%</div>
+<div class="aspect-[4/5] overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A colorful mixed bouquet featuring sunflowers, purple asters, and orange roses, tied with a rustic twine ribbon." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhRpaddta9SWxQmYwtTFi8NB7fiqPNmit3eZwQJ6RZbOkZE1Is6l4WrpgTVUNdc4a7xDV5aAGoKHUjsMN7aIyJuouJSmCAiYMVu1iDGfZ0neaacxzcaXdVv5YtjA0nMhfjE26IdnT-QhWqYCz4uISqUH8-Juphjk9WMfJ2A9cPLNX6v5kus39sNji9R26T73-i41KySUSRD8-egWe_wqtMgrzUSnD6ajS6zb2ou9yVS9ohw90Sdvna"/>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2 line-clamp-1">Rực Rỡ</h3>
+<div class="flex items-center gap-2 mt-auto mb-4">
+<span class="font-price-lg text-price-lg text-primary">400.000 đ</span>
+<span class="font-price-strikethrough text-price-strikethrough text-on-surface-variant line-through">500.000 đ</span>
+</div>
+<button class="w-full bg-primary-container text-on-primary-container font-label-md py-2 rounded hover:bg-primary hover:text-on-primary transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="add_shopping_cart">add_shopping_cart</span> Thêm vào giỏ
+                        </button>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="flex justify-center items-center gap-2 mt-12">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center bg-primary text-on-primary font-label-md">1</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high font-label-md transition-colors">2</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high font-label-md transition-colors">3</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container dark:bg-surface-container-highest border-t border-border-light dark:border-outline-variant flat no shadows w-full py-section-gap px-section-gap flex flex-col items-center gap-8 mt-12">
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">FlowerCorner</div>
+<div class="flex flex-wrap justify-center gap-6 font-body-md text-on-surface-variant dark:text-on-surface-variant">
+<a class="hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">Contact Us</a>
+<a class="hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">Shop Locations</a>
+<a class="hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">Delivery Info</a>
+<a class="hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">Terms of Service</a>
+</div>
+<div class="font-body-md text-body-md text-secondary dark:text-secondary-fixed">© 2023 FlowerCorner. Handcrafted Joy.</div>
+</footer>
+</body></html>

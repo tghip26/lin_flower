@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+
+<html lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Thanh toán - FlowerCorner</title>
+<!-- Google Fonts: Montserrat -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-on-surface": "#f3f0f0",
+                        "on-surface-variant": "#5b3f43",
+                        "tertiary-fixed": "#d1e4ff",
+                        "surface-container-low": "#f5f3f2",
+                        "surface": "#fbf9f8",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#0078c8",
+                        "surface-bright": "#fbf9f8",
+                        "secondary-fixed-dim": "#d7c1c8",
+                        "surface-container": "#f0eded",
+                        "on-primary-fixed": "#400014",
+                        "inverse-primary": "#ffb2be",
+                        "surface-container-high": "#eae8e7",
+                        "tertiary-fixed-dim": "#9ecaff",
+                        "surface-variant": "#e4e2e1",
+                        "primary": "#b80049",
+                        "on-tertiary-fixed-variant": "#00497d",
+                        "on-surface": "#1b1c1c",
+                        "success-green": "#4CAF50",
+                        "on-error-container": "#93000a",
+                        "on-background": "#1b1c1c",
+                        "secondary-fixed": "#f4dce4",
+                        "surface-container-highest": "#e4e2e1",
+                        "primary-fixed-dim": "#ffb2be",
+                        "on-secondary-fixed": "#25181e",
+                        "error": "#ba1a1a",
+                        "outline": "#8f6f73",
+                        "inverse-surface": "#303030",
+                        "secondary-container": "#f4dce4",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#716066",
+                        "error-container": "#ffdad6",
+                        "tertiary": "#005fa0",
+                        "on-error": "#ffffff",
+                        "surface-tint": "#bc004b",
+                        "primary-fixed": "#ffd9de",
+                        "primary-container": "#e2165f",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#dcd9d9",
+                        "on-tertiary-container": "#fdfcff",
+                        "background": "#fbf9f8",
+                        "on-tertiary-fixed": "#001d36",
+                        "on-primary-fixed-variant": "#900038",
+                        "sale-red": "#FF3B3D",
+                        "on-secondary-fixed-variant": "#524249",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#fffbff",
+                        "outline-variant": "#e4bdc2",
+                        "border-light": "#EEEEEE",
+                        "background-faint": "#F5F5F5",
+                        "secondary": "#6b5a60"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "section-gap": "64px",
+                        "base": "8px",
+                        "container-max": "1200px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Montserrat"],
+                        "price-strikethrough": ["Montserrat"],
+                        "price-lg": ["Montserrat"],
+                        "label-md": ["Montserrat"],
+                        "body-lg": ["Montserrat"],
+                        "headline-md": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "display-lg": ["Montserrat"],
+                        "body-md": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "price-strikethrough": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "price-lg": ["18px", { "lineHeight": "24px", "fontWeight": "700" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Custom Input Styles to match brand soft-touch minimal aesthetic */
+        .form-input {
+            width: 100%;
+            border-radius: 0.5rem; /* rounded-lg */
+            border: 1px solid theme('colors.outline-variant');
+            padding: 0.75rem 1rem;
+            background-color: theme('colors.surface-container-lowest');
+            color: theme('colors.on-surface');
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            transition: all 0.2s ease-in-out;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: theme('colors.primary');
+            box-shadow: 0 0 0 2px theme('colors.primary-fixed');
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: theme('colors.on-surface-variant');
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-sans antialiased min-h-screen flex flex-col">
+<!-- Minimal Header for Transactional Flow (Navigation Suppressed) -->
+<header class="bg-surface-container-lowest border-b border-border-light py-4 px-gutter sticky top-0 z-50 shadow-sm">
+<div class="max-w-container-max mx-auto flex items-center justify-between">
+<a class="flex items-center gap-2 text-primary hover:opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">local_florist</span>
+<span class="font-headline-md text-headline-md font-bold">FlowerCorner</span>
+</a>
+<a class="flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined text-sm">arrow_back</span>
+                Trở lại giỏ hàng
+            </a>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-gutter py-8 md:py-12">
+<div class="mb-8">
+<h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-background mb-2">Thanh toán an toàn</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Vui lòng điền đầy đủ thông tin để chúng tôi chuẩn bị đơn hàng tốt nhất.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-gutter">
+<!-- Left Column: Forms -->
+<div class="lg:col-span-7 xl:col-span-8 flex flex-col gap-6">
+<!-- Sender Info -->
+<section class="bg-surface-container-lowest rounded-xl shadow-sm border border-border-light p-6">
+<h2 class="font-headline-md text-headline-md text-on-background mb-6 border-b border-border-light pb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">person</span>
+                        Thông tin người gửi
+                    </h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="form-label" for="sender-name">Họ và tên *</label>
+<input class="form-input" id="sender-name" placeholder="Nhập tên người đặt hoa" type="text"/>
+</div>
+<div>
+<label class="form-label" for="sender-phone">Số điện thoại *</label>
+<input class="form-input" id="sender-phone" placeholder="Nhập số điện thoại" type="tel"/>
+</div>
+<div class="md:col-span-2">
+<label class="form-label" for="sender-email">Email</label>
+<input class="form-input" id="sender-email" placeholder="Để nhận email xác nhận đơn hàng (không bắt buộc)" type="email"/>
+</div>
+</div>
+</section>
+<!-- Recipient Info -->
+<section class="bg-surface-container-lowest rounded-xl shadow-sm border border-border-light p-6">
+<h2 class="font-headline-md text-headline-md text-on-background mb-6 border-b border-border-light pb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">location_on</span>
+                        Thông tin người nhận
+                    </h2>
+<!-- Checkbox to copy sender info -->
+<div class="mb-5 flex items-center gap-2">
+<input class="w-4 h-4 text-primary bg-surface-container border-outline-variant rounded focus:ring-primary focus:ring-2" id="same-as-sender" type="checkbox"/>
+<label class="font-body-md text-body-md text-on-surface-variant cursor-pointer" for="same-as-sender">Người nhận là người gửi</label>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+<div>
+<label class="form-label" for="recipient-name">Họ và tên người nhận *</label>
+<input class="form-input" id="recipient-name" placeholder="Nhập tên người nhận" type="text"/>
+</div>
+<div>
+<label class="form-label" for="recipient-phone">Số điện thoại *</label>
+<input class="form-input" id="recipient-phone" placeholder="Số điện thoại liên hệ giao hàng" type="tel"/>
+</div>
+</div>
+<div>
+<label class="form-label" for="recipient-address">Địa chỉ giao hàng chi tiết *</label>
+<textarea class="form-input" id="recipient-address" placeholder="Số nhà, tên đường, phường/xã, quận/huyện, thành phố..." rows="3"></textarea>
+</div>
+</section>
+<!-- Greeting Message -->
+<section class="bg-surface-container-lowest rounded-xl shadow-sm border border-border-light p-6">
+<h2 class="font-headline-md text-headline-md text-on-background mb-6 border-b border-border-light pb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">favorite</span>
+                        Nội dung thiệp chúc mừng
+                    </h2>
+<div>
+<label class="form-label" for="greeting-message">Lời nhắn gửi kèm (Miễn phí thiệp)</label>
+<textarea class="form-input" id="greeting-message" placeholder="Nhập những lời chúc tốt đẹp nhất dành cho người nhận..." rows="4"></textarea>
+</div>
+</section>
+<!-- Delivery Time -->
+<section class="bg-surface-container-lowest rounded-xl shadow-sm border border-border-light p-6">
+<h2 class="font-headline-md text-headline-md text-on-background mb-6 border-b border-border-light pb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">schedule</span>
+                        Thời gian giao hàng
+                    </h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="form-label" for="delivery-date">Ngày giao *</label>
+<input class="form-input" id="delivery-date" type="date"/>
+</div>
+<div>
+<label class="form-label" for="delivery-time">Khung giờ giao *</label>
+<select class="form-input" id="delivery-time">
+<option disabled="" selected="" value="">Chọn khung giờ</option>
+<option value="morning">Sáng (08:00 - 12:00)</option>
+<option value="afternoon">Chiều (13:00 - 17:00)</option>
+<option value="evening">Tối (18:00 - 21:00)</option>
+<option value="anytime">Trong ngày</option>
+</select>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Order Summary (Sticky) -->
+<div class="lg:col-span-5 xl:col-span-4 relative">
+<div class="bg-surface-container-lowest rounded-xl shadow-md border border-border-light p-6 sticky top-24">
+<h2 class="font-headline-md text-headline-md text-on-background mb-6">Tóm tắt đơn hàng</h2>
+<!-- Product Items List -->
+<div class="flex flex-col gap-4 border-b border-border-light pb-6 mb-6">
+<!-- Item 1 -->
+<div class="flex gap-4 items-start">
+<div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A beautiful, romantic bouquet of deep red roses and delicate white baby's breath arranged elegantly in premium floral wrapping paper. Photographed from slightly above against a clean, light surface, showcasing soft, natural lighting that highlights the velvety texture of the rose petals. E-commerce aesthetic, high-end floristry." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpoLXwRO25aYMUgBk1BZS2tTI36Otvk9L08c58iZWLttyP2u7ApKm80sCmiKxSVI-jGX0oeVSL2exaotOBAYz3vwRLh30wBVDOm4gs7s-vgGCbXYpBhz4ur2nOOVt5o9a1SBPwdyNwsts7v330FSWzSYz4kPjHJAHIeSJAlSUYInfnpiruSY1V3Cwors0PAPb-5C3f1ZAg52B-cq50xIAibZae_f3lw2Pmze__vQ3SPNg6loKjytl0"/>
+</div>
+<div class="flex-grow">
+<h3 class="font-body-md text-body-md font-semibold text-on-background mb-1 line-clamp-2">Bó hoa Hồng Đam Mê - Size Lớn</h3>
+<div class="flex justify-between items-center mt-2">
+<span class="font-body-md text-body-md text-on-surface-variant">Số lượng: 1</span>
+<span class="font-body-md text-body-md font-semibold text-on-background">1,250,000 ₫</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Cost Breakdown -->
+<div class="flex flex-col gap-3 font-body-md text-body-md text-on-surface-variant border-b border-border-light pb-6 mb-6">
+<div class="flex justify-between items-center">
+<span>Tạm tính</span>
+<span class="text-on-background">1,250,000 ₫</span>
+</div>
+<div class="flex justify-between items-center">
+<span>Phí vận chuyển (Nội thành)</span>
+<span class="text-on-background">50,000 ₫</span>
+</div>
+<div class="flex justify-between items-center">
+<span>Khuyến mãi</span>
+<span class="text-success-green">- 0 ₫</span>
+</div>
+</div>
+<!-- Total -->
+<div class="flex justify-between items-center mb-8">
+<span class="font-headline-md text-headline-md text-on-background">Tổng cộng</span>
+<span class="font-price-lg text-price-lg text-primary">1,300,000 ₫</span>
+</div>
+<!-- Checkout Button -->
+<button class="w-full bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md py-4 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 flex items-center justify-center gap-2 uppercase tracking-wide" type="button">
+<span class="material-symbols-outlined text-xl">lock</span>
+                        Hoàn tất đặt hàng
+                    </button>
+<p class="font-body-md text-body-md text-on-surface-variant text-center text-xs mt-4">
+                        Bằng việc đặt hàng, bạn đồng ý với <a class="text-tertiary underline" href="#">Điều khoản dịch vụ</a> và <a class="text-tertiary underline" href="#">Chính sách bảo mật</a> của chúng tôi.
+                    </p>
+</div>
+</div>
+</div>
+</main>
+<!-- Simplified Footer for Checkout Flow -->
+<footer class="bg-surface-container py-6 border-t border-border-light mt-auto">
+<div class="max-w-container-max mx-auto px-gutter text-center">
+<p class="font-label-md text-label-md text-secondary">© 2023 FlowerCorner. Handcrafted Joy. Giao dịch được bảo mật an toàn.</p>
+</div>
+</footer>
+</body></html>

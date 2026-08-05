@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+
+<html lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Quản lý sản phẩm - FlowerCorner</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#900038",
+                        "tertiary-fixed-dim": "#9ecaff",
+                        "on-secondary-fixed": "#25181e",
+                        "secondary-container": "#f4dce4",
+                        "inverse-primary": "#ffb2be",
+                        "inverse-surface": "#303030",
+                        "background-faint": "#F5F5F5",
+                        "tertiary": "#005fa0",
+                        "on-tertiary-container": "#fdfcff",
+                        "on-tertiary": "#ffffff",
+                        "on-surface-variant": "#5b3f43",
+                        "surface": "#fbf9f8",
+                        "on-primary-fixed": "#400014",
+                        "tertiary-container": "#0078c8",
+                        "primary": "#b80049",
+                        "outline-variant": "#e4bdc2",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "success-green": "#4CAF50",
+                        "primary-container": "#e2165f",
+                        "inverse-on-surface": "#f3f0f0",
+                        "surface-container": "#f0eded",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed-dim": "#ffb2be",
+                        "secondary": "#6b5a60",
+                        "on-secondary-container": "#716066",
+                        "secondary-fixed": "#f4dce4",
+                        "primary-fixed": "#ffd9de",
+                        "surface-variant": "#e4e2e1",
+                        "on-primary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "on-primary-container": "#fffbff",
+                        "on-tertiary-fixed-variant": "#00497d",
+                        "surface-container-highest": "#e4e2e1",
+                        "border-light": "#EEEEEE",
+                        "background": "#fbf9f8",
+                        "surface-container-high": "#eae8e7",
+                        "surface-bright": "#fbf9f8",
+                        "surface-tint": "#bc004b",
+                        "on-tertiary-fixed": "#001d36",
+                        "surface-container-low": "#f5f3f2",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#1b1c1c",
+                        "on-error": "#ffffff",
+                        "sale-red": "#FF3B3D",
+                        "outline": "#8f6f73",
+                        "on-secondary-fixed-variant": "#524249",
+                        "surface-dim": "#dcd9d9",
+                        "on-background": "#1b1c1c",
+                        "secondary-fixed-dim": "#d7c1c8",
+                        "tertiary-fixed": "#d1e4ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "base": "8px",
+                        "container-max": "1200px",
+                        "section-gap": "64px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "price-strikethrough": ["Montserrat"],
+                        "headline-lg-mobile": ["Montserrat"],
+                        "headline-md": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "body-lg": ["Montserrat"],
+                        "body-md": ["Montserrat"],
+                        "price-lg": ["Montserrat"],
+                        "display-lg": ["Montserrat"],
+                        "label-md": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "price-strikethrough": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "price-lg": ["18px", { "lineHeight": "24px", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body-md text-on-surface antialiased flex h-screen overflow-hidden">
+<!-- SideNavBar -->
+<nav class="bg-surface-container-lowest dark:bg-surface-dim text-primary dark:text-primary-fixed font-label-md text-label-md docked left-0 h-full w-64 border-r border-border-light dark:border-outline-variant flat no shadows fixed left-0 top-0 h-screen flex flex-col p-4 z-40">
+<!-- Header -->
+<div class="mb-8 flex flex-col items-center">
+<div class="h-16 w-16 rounded-full overflow-hidden mb-4 border-2 border-primary-container">
+<img alt="Staff Profile" class="object-cover h-full w-full" data-alt="A professional headshot of a florist shop manager, female, bright and welcoming smile, set against a blurred background of a modern, well-lit floral studio. The aesthetic is clean and modern, complementing a light mode UI with soft pink and white tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCg6TEAyTF9JigIs65iOpSig3Z9DEf9ygMnvxx5yojsr6SIgCB_0ftOu7E03CROoAaFyjFIB8wIKk4eR8cWFrVNaSh2dgyGLtSrJs1xBf22Zpo1q73mN4emXlYsLw1GhTfU2-7y_Xst55cU7_0PMESiB_JTQVF-11foOIGZzPCfGgb-qSfH2BDwcupXwTS5K4zlamt6pQLDtFvLILLrhnOPDNzvyT6yfqpY6nQlhnkBoP3gsOmQCbEX"/>
+</div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">FlowerCorner Admin</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Management Suite</p>
+</div>
+<!-- Navigation Tabs -->
+<div class="flex-grow flex flex-col gap-2">
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-on-surface-variant px-4 py-3 hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-on-surface-variant px-4 py-3 hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+                Orders
+            </a>
+<!-- Active Tab -->
+<a class="flex items-center gap-3 bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary rounded-lg px-4 py-3 Active: scale 0.98x duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="local_florist" data-weight="fill" style="font-variation-settings: 'FILL' 1;">local_florist</span>
+                Products
+            </a>
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-on-surface-variant px-4 py-3 hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="lock_person">lock_person</span>
+                Permissions
+            </a>
+</div>
+<!-- Footer Tabs -->
+<div class="flex flex-col gap-2 mt-auto border-t border-border-light pt-4">
+<button class="w-full mb-4 bg-primary text-on-primary font-label-md text-label-md py-3 rounded-lg hover:bg-primary-container transition-colors shadow-sm flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add</span>
+                Create New Listing
+            </button>
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-on-surface-variant px-4 py-3 hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                Settings
+            </a>
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-on-surface-variant px-4 py-3 hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+                Logout
+            </a>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 ml-64 p-8 overflow-y-auto bg-background-faint">
+<div class="max-w-container-max mx-auto flex flex-col gap-8">
+<!-- Page Header -->
+<header class="flex justify-between items-center bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-border-light">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface font-bold">Products Management</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Manage your floral inventory, update prices, and track stock.</p>
+</div>
+<button class="bg-primary text-on-primary px-6 py-3 rounded-lg font-label-md text-label-md flex items-center gap-2 hover:bg-primary-container transition shadow-sm">
+<span class="material-symbols-outlined">add_circle</span>
+                    Thêm sản phẩm mới
+                </button>
+</header>
+<!-- Search and Filter Bar -->
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm border border-border-light flex gap-4 items-center">
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface rounded-full border border-border-light focus:border-primary focus:ring-1 focus:ring-primary outline-none font-body-md text-body-md transition" placeholder="Tìm kiếm tên sản phẩm..." type="text"/>
+</div>
+<div class="relative min-w-[200px]">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">filter_list</span>
+<select class="w-full pl-10 pr-4 py-2 bg-surface rounded-lg border border-border-light focus:border-primary focus:ring-1 focus:ring-primary outline-none font-body-md text-body-md appearance-none">
+<option value="">Tất cả danh mục</option>
+<option value="bo-hoa">Bó hoa</option>
+<option value="lang-hoa">Lẵng hoa</option>
+<option value="lan-ho-diep">Lan hồ điệp</option>
+</select>
+</div>
+</div>
+<!-- Products Table -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm border border-border-light overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low font-label-md text-label-md text-on-surface-variant border-b border-border-light uppercase tracking-wider">
+<tr>
+<th class="p-4 w-24">Hình ảnh</th>
+<th class="p-4">Tên sản phẩm</th>
+<th class="p-4">Danh mục</th>
+<th class="p-4">Giá bán</th>
+<th class="p-4">Trạng thái</th>
+<th class="p-4 text-right">Hành động</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-light font-body-md text-body-md text-on-surface">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container transition-colors">
+<td class="p-4">
+<div class="w-16 h-16 rounded-lg overflow-hidden bg-surface-variant border border-border-light">
+<img alt="Bó hoa Sweet Love" class="object-cover w-full h-full" data-alt="A beautiful, soft-focus close-up photograph of a classic bouquet of pink roses, wrapped in delicate white paper. The lighting is bright and airy, typical of a high-end online florist catalog in a light-themed UI. The background is a plain, very light gray to isolate the vibrant pinks." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeKPN4gBdlLRnbZV1sR3H-Doje_zIjP_nCaGxEVW4oOaFTnzesDeShe_ydOQy9eU_fQC1CiqQ1wSBB15aYfiAKj3RwJp6slvSaKexkcjLkvNSuSeA6AdPDCpDo4BTugzDtwLqaLsuSOVWUtgICcEGj4ruSLsj6pbOgiRfnfKMsv8mjL3JBrfLDIwjPGJ5JKYiaC_uxJbK4qIbidHigrT4-piW8nDS1x70MV4R48fZSPwRweF6PFdo3"/>
+</div>
+</td>
+<td class="p-4 font-semibold text-primary">Sweet Love - Bó hoa hồng</td>
+<td class="p-4">
+<span class="bg-secondary-container text-on-secondary-container px-2 py-1 rounded-full text-xs">Bó hoa</span>
+</td>
+<td class="p-4 font-price-lg text-price-lg text-on-surface">550.000 đ</td>
+<td class="p-4">
+<span class="bg-success-green/20 text-success-green px-3 py-1 rounded-full text-xs font-semibold">Còn hàng</span>
+</td>
+<td class="p-4 text-right">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container transition-colors">
+<td class="p-4">
+<div class="w-16 h-16 rounded-lg overflow-hidden bg-surface-variant border border-border-light">
+<img alt="Lẵng hoa Khai Trương" class="object-cover w-full h-full" data-alt="A vibrant and elegant floral arrangement in a woven basket, featuring a mix of seasonal blooms in pastel shades of yellow, pink, and white. Shot against a stark white backdrop in a studio setting, optimizing for e-commerce catalog clarity in a minimalist design system." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9HlxB0zBSGVYXmex9cHkqP3GcvW0VoHFOMkyTVRc_MfV3lsmRwr9sXIEpZ-QR4HW7lYLbUk7KYAfoSgpxcAGq4yPFYe3Wew3EA9GbzCcAejfoHRch3rZd087EvOCG7S-iLyfxMNRkjLtYV-tVnGXtZX9Y7bcQ0kGhhXoOxwGS4xa4p_ZQY1kmpJxpd-pCs5UPqfxpoGpq-Vx8Hc8TyrlWWbLUIUwTnB-iVcV-2UVOMWtW_DxB3V4C"/>
+</div>
+</td>
+<td class="p-4 font-semibold text-primary">Lẵng hoa Cát Tường</td>
+<td class="p-4">
+<span class="bg-tertiary-fixed text-on-tertiary-fixed px-2 py-1 rounded-full text-xs">Lẵng hoa</span>
+</td>
+<td class="p-4 font-price-lg text-price-lg text-on-surface">1.200.000 đ</td>
+<td class="p-4">
+<span class="bg-success-green/20 text-success-green px-3 py-1 rounded-full text-xs font-semibold">Còn hàng</span>
+</td>
+<td class="p-4 text-right">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container transition-colors">
+<td class="p-4">
+<div class="w-16 h-16 rounded-lg overflow-hidden bg-surface-variant border border-border-light">
+<img alt="Chậu Lan Hồ Điệp Trắng" class="object-cover w-full h-full" data-alt="A premium, tall white Phalaenopsis orchid plant in a sleek, modern ceramic pot. The image is sharply in focus, highlighting the delicate texture of the petals, set against a pristine, soft-white background suited for a luxury floral UI aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAu7KlQFFptL-z8R4eNoTEUp8JGMf6bofj4paMnWp8TB4Qv77NBhaYqvcuq0BG_w715l3AcBksAU-Zir9LRnlCKZ3S2M_wijpEBCozb7HuPxetq2M_9So5a28sIfdslXjyXkE0CtJLf3TXSc_6mncJ5xwMwzhdP29OtML9RAKkKxef4K7flXqsqao_wdmak--8lEevBMGy2mHRabBHjaQdF_YGQMMthX7cNsK6Zd1HDFJU7OBBen_1Z"/>
+</div>
+</td>
+<td class="p-4 font-semibold text-primary">Lan Hồ Điệp Trắng 5 Cành</td>
+<td class="p-4">
+<span class="bg-primary-fixed text-on-primary-fixed px-2 py-1 rounded-full text-xs">Lan hồ điệp</span>
+</td>
+<td class="p-4 font-price-lg text-price-lg text-on-surface">2.500.000 đ</td>
+<td class="p-4">
+<span class="bg-error-container text-on-error-container px-3 py-1 rounded-full text-xs font-semibold">Hết hàng</span>
+</td>
+<td class="p-4 text-right">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+<!-- Pagination -->
+<div class="bg-surface p-4 border-t border-border-light flex items-center justify-between">
+<span class="font-body-md text-body-md text-on-surface-variant">Hiển thị 1-3 của 45 sản phẩm</span>
+<div class="flex gap-2">
+<button class="p-2 rounded border border-border-light hover:bg-surface-container text-on-surface disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded bg-primary text-on-primary flex items-center justify-center font-label-md text-label-md">1</button>
+<button class="w-8 h-8 rounded hover:bg-surface-container text-on-surface flex items-center justify-center font-label-md text-label-md">2</button>
+<button class="w-8 h-8 rounded hover:bg-surface-container text-on-surface flex items-center justify-center font-label-md text-label-md">3</button>
+<button class="p-2 rounded border border-border-light hover:bg-surface-container text-on-surface">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>
