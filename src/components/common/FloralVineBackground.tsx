@@ -41,11 +41,11 @@ export const FloralVineBackground: React.FC = () => {
           </filter>
         </defs>
 
-        {/* Outer Glow Layer - Vine stem starts at top (40, 50), passes directly through Flower Node 1 at (120, 240) */}
+        {/* Outer Soft Glow Vine Stem - Starts at (120,60), passes directly through Node 1 Flower at (220, 240) */}
         <path
-          d="M 40,50 
-             C 60,130 120,240 120,240 
-             C 120,240 60,560 180,940 
+          d="M 120,60 
+             C 160,140 220,240 220,240 
+             C 220,240 140,580 260,940 
              S 1360,1240 1250,1540 
              S 110,1840 260,2240 
              S 1320,2640 1210,3040
@@ -57,11 +57,11 @@ export const FloralVineBackground: React.FC = () => {
           filter="url(#vineGlow)"
         />
 
-        {/* Primary Animated Vine Stem - Continuous line running right through Node 1 (120, 240) */}
+        {/* Primary Animated Vine Stem - Continuous line running straight into and through Node 1 (220, 240) */}
         <motion.path
-          d="M 40,50 
-             C 60,130 120,240 120,240 
-             C 120,240 60,560 180,940 
+          d="M 120,60 
+             C 160,140 220,240 220,240 
+             C 220,240 140,580 260,940 
              S 1360,1240 1250,1540 
              S 110,1840 260,2240 
              S 1320,2640 1210,3040
@@ -72,11 +72,11 @@ export const FloralVineBackground: React.FC = () => {
           fill="none"
         />
 
-        {/* Secondary Gold Dotted Line passing through Node 1 */}
+        {/* Secondary Gold Dotted Line passing through Node 1 (220, 240) */}
         <path
-          d="M 40,50 
-             C 60,130 120,240 120,240 
-             C 120,240 75,570 195,950 
+          d="M 120,60 
+             C 160,140 220,240 220,240 
+             C 220,240 155,590 275,950 
              S 1375,1250 1265,1550 
              S 125,1850 275,2250 
              S 1335,2650 1225,3050"
@@ -90,60 +90,65 @@ export const FloralVineBackground: React.FC = () => {
         {/* Travelling Light Sparkle Particle along the vine path */}
         <circle r="5" fill="#ffffff" filter="url(#vineGlow)">
           <animateMotion
-            path="M 40,50 C 60,130 120,240 120,240 C 120,240 60,560 180,940 S 1360,1240 1250,1540 S 110,1840 260,2240 S 1320,2640 1210,3040 S 200,3240 300,3380"
+            path="M 120,60 C 160,140 220,240 220,240 C 220,240 140,580 260,940 S 1360,1240 1250,1540 S 110,1840 260,2240 S 1320,2640 1210,3040 S 200,3240 300,3380"
             dur="14s"
             repeatCount="indefinite"
           />
         </circle>
 
-        {/* NODE 1 - FLOWER BLOSSOM MOUNTED DIRECTLY ON TOP OF THE VINE STEM AT (120, 240) */}
+        {/* NODE 1 - FULLY VISIBLE BLOOMING ROSE FLOWER HEAD MOUNTED DIRECTLY ON VINE AT (220, 240) NEAR LIN FLOWER */}
         <motion.g
-          transform="translate(120, 240)"
+          transform="translate(220, 240)"
           animate={{ rotate: [0, 8, -8, 0], scale: [1, 1.06, 1] }}
           transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
         >
-          {/* Green Leaves blooming around stem junction */}
+          {/* Green Leaves branching around the stem junction */}
           <path
-            d="M 0,0 C -30,20 -40,-10 -15,-30 Z"
+            d="M 0,0 C -35,25 -45,-15 -20,-35 Z"
             fill="url(#leafGrad)"
             fillOpacity="0.9"
           />
           <path
-            d="M 0,0 C 20,30 -10,40 -30,15 Z"
+            d="M 0,0 C 25,35 -15,45 -35,20 Z"
             fill="url(#leafGrad)"
             fillOpacity="0.9"
+          />
+          <path
+            d="M 0,0 C 35,-20 45,15 20,35 Z"
+            fill="url(#leafGrad)"
+            fillOpacity="0.8"
           />
 
           {/* Soft Pink Glow Filter */}
-          <circle r="28" fill="#f43f5e" opacity="0.35" filter="url(#vineGlow)" />
+          <circle r="32" fill="#f43f5e" opacity="0.35" filter="url(#vineGlow)" />
           
-          {/* Overlapping Rounded Petals */}
+          {/* Outer Layer Rounded Rose Petals */}
           {[0, 45, 90, 135, 180, 225, 270, 315].map((angle, i) => {
             const rad = (angle * Math.PI) / 180;
-            const px = 14 * Math.cos(rad);
-            const py = 14 * Math.sin(rad);
+            const px = 16 * Math.cos(rad);
+            const py = 16 * Math.sin(rad);
             return (
-              <circle key={i} cx={px} cy={py} r="9" fill="#fda4af" />
+              <circle key={i} cx={px} cy={py} r="10" fill="#fda4af" />
             );
           })}
 
-          {/* Inner Rose Core Accent */}
+          {/* Inner Layer Accent Petals */}
           {[22.5, 67.5, 112.5, 157.5, 202.5, 247.5, 292.5, 337.5].map((angle, i) => {
             const rad = (angle * Math.PI) / 180;
-            const px = 8 * Math.cos(rad);
-            const py = 8 * Math.sin(rad);
+            const px = 9 * Math.cos(rad);
+            const py = 9 * Math.sin(rad);
             return (
-              <circle key={i} cx={px} cy={py} r="6" fill="#f472b6" />
+              <circle key={i} cx={px} cy={py} r="7" fill="#f472b6" />
             );
           })}
 
           {/* Yellow Center Core */}
-          <circle r="9" fill="#fbbf24" stroke="#f59e0b" strokeWidth="2" />
+          <circle r="10" fill="#fbbf24" stroke="#f59e0b" strokeWidth="2" />
         </motion.g>
 
         {/* SWAYING LEAF BRANCH 1 */}
         <motion.g
-          transform="translate(140, 480)"
+          transform="translate(180, 520)"
           animate={{ rotate: [-4, 4, -4] }}
           transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
         >
@@ -157,7 +162,7 @@ export const FloralVineBackground: React.FC = () => {
 
         {/* NODE 2 - FLOWER AT FLOWER FINDER WIZARD SECTION */}
         <motion.g
-          transform="translate(180, 940)"
+          transform="translate(260, 940)"
           animate={{ rotate: [0, -10, 10, 0], scale: [1, 1.08, 1] }}
           transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
         >
