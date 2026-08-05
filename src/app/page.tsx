@@ -85,7 +85,7 @@ export default function HomePage() {
 
                   <Link
                     href="/custom-order"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-white/95 backdrop-blur-md hover:bg-stone-50 text-stone-800 font-semibold text-base px-7.5 py-4 rounded-full border-2 border-brand-200 hover:border-brand-400 active:scale-95 transition-all shadow-xs"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-white/95 backdrop-blur-md hover:bg-stone-50 text-stone-800 font-semibold text-base px-8 py-4 rounded-full border-2 border-brand-200 hover:border-brand-400 active:scale-95 transition-all shadow-xs"
                   >
                     <Sparkles className="w-5 h-5 text-amber-500" />
                     <span>Thiết Kế Theo Yêu Cầu</span>
