@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Gift, X, Sparkles, Trophy, CheckCircle, AlertCircle, ShieldCheck, Laptop } from 'lucide-react';
+import { Gift, X, Sparkles, Trophy, CheckCircle, AlertCircle, ShieldCheck, Laptop, Disc } from 'lucide-react';
 import { useStore } from '@/context/StoreContext';
 import confetti from 'canvas-confetti';
 
@@ -112,22 +112,48 @@ export const LuckyWheelModal: React.FC = () => {
 
   return (
     <>
-      {/* Floating Gift Box Button */}
-      <motion.button
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        onClick={() => setIsOpen(true)}
-        className="fixed bottom-24 right-6 z-40 bg-gradient-to-r from-amber-400 via-amber-500 to-rose-500 text-stone-950 p-3.5 rounded-full shadow-2xl border-2 border-white flex items-center gap-2 glow-effect cursor-pointer"
-        title="Quay số trúng mã giảm giá mỗi ngày"
-      >
-        <div className="relative">
-          <Gift className="w-6 h-6 text-stone-950 animate-bounce" />
-          <span className="absolute -top-1 -right-1 w-4 h-4 bg-brand-600 text-white rounded-full text-[9px] font-bold flex items-center justify-center border border-white">
-            {spinsLeftToday}
-          </span>
-        </div>
-        <span className="text-xs font-serif font-extrabold pr-1 hidden md:inline text-stone-950">Vòng Quay Hái Lộc</span>
-      </motion.button>
+      {/* Sleek Premium Floating Gift Wheel Trigger Button */}
+      <AnimatePresence>
+        {!isOpen && (
+          <motion.div
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0, opacity: 0 }}
+            className="fixed bottom-24 right-6 z-40 flex items-center"
+          >
+            {/* Outer Glowing Pulse Ring */}
+            <span className="absolute inset-0 rounded-full bg-gradient-to-r from-amber-400 to-pink-500 opacity-60 animate-ping pointer-events-none"></span>
+
+            <motion.button
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.92 }}
+              onClick={() => setIsOpen(true)}
+              className="relative flex items-center gap-2.5 bg-gradient-to-r from-amber-400 via-amber-500 to-rose-500 text-stone-950 px-4 py-3 rounded-full shadow-2xl shadow-pink-500/40 border-2 border-amber-200/90 active:scale-95 transition-all cursor-pointer group"
+            >
+              <div className="relative flex items-center justify-center">
+                <Disc className="w-6 h-6 text-stone-950 animate-[spin_8s_linear_infinite]" />
+                <Gift className="w-3.5 h-3.5 text-rose-700 absolute inset-0 m-auto" />
+              </div>
+
+              <div className="text-left hidden sm:block">
+                <div className="text-xs font-serif font-black text-stone-950 uppercase tracking-wide flex items-center gap-1">
+                  <span>Vòng Quay Lộc Xuân</span>
+                  <Sparkles className="w-3 h-3 text-rose-800" />
+                </div>
+                <div className="text-[10px] text-stone-900 font-bold">
+                  {spinsLeftToday > 0 ? '🎁 1 Lượt quay miễn phí' : '🔒 Đã quay hôm nay'}
+                </div>
+              </div>
+
+              {spinsLeftToday > 0 && (
+                <span className="w-5 h-5 bg-stone-950 text-amber-300 rounded-full text-[10px] font-extrabold flex items-center justify-center border border-amber-400 shadow-sm ml-1">
+                  1
+                </span>
+              )}
+            </motion.button>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Modal */}
       <AnimatePresence>

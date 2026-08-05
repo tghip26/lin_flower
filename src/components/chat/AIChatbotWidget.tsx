@@ -14,7 +14,6 @@ const renderFormattedText = (content: string) => {
       {lines.map((line, lIdx) => {
         if (!line.trim()) return <div key={lIdx} className="h-1.5" />;
 
-        // Replace markdown bold **text** with <strong>text</strong>
         const parts = line.split(/(\*\*.*?\*\*)/g);
 
         const renderedLine = parts.map((part, pIdx) => {
@@ -166,28 +165,42 @@ export const AIChatbotWidget: React.FC = () => {
 
   return (
     <>
-      {/* Floating Trigger Button */}
+      {/* Sleek Premium Floating AI Chatbot Trigger Button */}
       <AnimatePresence>
         {!isOpen && (
-          <motion.button
+          <motion.div
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
-            onClick={() => setIsOpen(true)}
-            className="fixed bottom-6 right-6 z-40 flex items-center gap-2.5 bg-gradient-to-r from-brand-600 via-rose-600 to-amber-500 hover:from-brand-700 hover:to-rose-700 text-white px-4.5 py-3.5 rounded-full shadow-2xl glow-effect active:scale-95 transition-all border-2 border-white cursor-pointer"
+            className="fixed bottom-6 right-6 z-40 flex items-center"
           >
-            <div className="relative">
-              <Bot className="w-6 h-6 text-amber-200 animate-bounce" />
-              <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-green-400 rounded-full border-2 border-white"></span>
-            </div>
-            <div className="text-left hidden sm:block">
-              <div className="text-xs font-serif font-bold text-white flex items-center gap-1">
-                <span>Tư Vấn AI Lin Flower</span>
-                <Sparkles className="w-3 h-3 text-amber-300 animate-spin" />
+            {/* Outer Pulse Glow */}
+            <span className="absolute inset-0 rounded-full bg-pink-500/40 opacity-75 animate-ping pointer-events-none"></span>
+
+            <motion.button
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.92 }}
+              onClick={() => setIsOpen(true)}
+              className="relative flex items-center gap-3 bg-gradient-to-r from-stone-900 via-brand-900 to-stone-900 text-white px-4.5 py-3.5 rounded-full shadow-2xl shadow-rose-900/40 border-2 border-brand-300/80 active:scale-95 transition-all cursor-pointer group"
+            >
+              <div className="relative">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-brand-600 to-amber-400 p-0.5 shadow-inner">
+                  <div className="w-full h-full rounded-full bg-stone-900 flex items-center justify-center text-amber-300">
+                    <Bot className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+                  </div>
+                </div>
+                <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-400 rounded-full border-2 border-stone-900"></span>
               </div>
-              <div className="text-[10px] text-pink-100">Trả lời tức thì • Đặt hoa 2H</div>
-            </div>
-          </motion.button>
+
+              <div className="text-left hidden sm:block">
+                <div className="text-xs font-serif font-extrabold text-white flex items-center gap-1">
+                  <span>Trợ Lý AI Lin Flower</span>
+                  <Sparkles className="w-3.5 h-3.5 text-amber-400 animate-spin" />
+                </div>
+                <div className="text-[10px] text-pink-200 font-medium">Tư vấn chọn hoa • Phản hồi 24/7</div>
+              </div>
+            </motion.button>
+          </motion.div>
         )}
       </AnimatePresence>
 
@@ -219,7 +232,7 @@ export const AIChatbotWidget: React.FC = () => {
 
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-1.5 text-stone-400 hover:text-white rounded-full hover:bg-white/10 transition-colors"
+                className="p-1.5 text-stone-400 hover:text-white rounded-full hover:bg-white/10 transition-colors cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -289,7 +302,7 @@ export const AIChatbotWidget: React.FC = () => {
             </div>
 
             {/* Quick Chips Prompts */}
-            <div className="p-2 bg-white border-t border-stone-100 overflow-x-auto flex gap-1.5 whitespace-nowrap text-[11px] scrollbar-none">
+            <div className="p-2 bg-white border-t border-stone-100 overflow-x-auto flex gap-1.5 whitespace-nowrap text-[11px]">
               {[
                 '🎂 Hoa tặng sinh nhật',
                 '🎉 Lẵng hoa khai trương',
