@@ -92,24 +92,87 @@ export const FloralVineBackground: React.FC = () => {
           />
         </circle>
 
-        {/* Mobile Side Branch 1 (Hero section near LIN FLOWER) */}
-        <g transform="translate(35, 260)">
-          <path d="M 0,0 C 20,-5 35,5 45,10" stroke="url(#treeBranchGradMob)" strokeWidth="2" fill="none" />
-          <path d="M 15,-3 C 10,-12 20,-15 22,-5 Z" fill="url(#leafGradMob)" fillOpacity="0.85" />
-          <g transform="translate(45, 10)">
-            <circle r="12" fill="#f43f5e" opacity="0.35" />
-            {[0, 60, 120, 180, 240, 300].map((angle, i) => {
+        {/* ========================================== */}
+        {/* LUSH MOBILE HERO FLORAL BRANCHES & BLOSSOMS */}
+        {/* ========================================== */}
+
+        {/* Mobile Hero Branch 1 (Near Top Badge "Tiệm Hoa Tươi Hàng Đầu") */}
+        <g transform="translate(25, 130)">
+          <path d="M 0,0 C 25,-10 45,10 65,15" stroke="url(#treeBranchGradMob)" strokeWidth="2.5" fill="none" />
+          <path d="M 25,-8 C 20,-18 35,-20 38,-8 Z" fill="url(#leafGradMob)" fillOpacity="0.85" />
+          <path d="M 45,5 C 55,-8 68,0 60,12 Z" fill="url(#leafGradMob)" fillOpacity="0.85" />
+          <g transform="translate(65, 15)">
+            <circle r="14" fill="#f43f5e" opacity="0.35" filter="url(#vineGlowMob)" />
+            {[0, 45, 90, 135, 180, 225, 270, 315].map((angle, i) => {
               const rad = (angle * Math.PI) / 180;
-              return <circle key={i} cx={7 * Math.cos(rad)} cy={7 * Math.sin(rad)} r="4.5" fill="#fda4af" />;
+              return <circle key={i} cx={8 * Math.cos(rad)} cy={8 * Math.sin(rad)} r="5" fill="#fda4af" />;
             })}
-            <circle r="4" fill="#fbbf24" />
+            <circle r="4.5" fill="#fbbf24" stroke="#f59e0b" strokeWidth="1" />
           </g>
         </g>
 
-        {/* Mobile Side Branch 2 (Flower Finder Wizard) */}
-        <g transform="translate(50, 820)">
-          <path d="M 0,0 C 20,-5 35,5 45,10" stroke="url(#treeBranchGradMob)" strokeWidth="2" fill="none" />
-          <g transform="translate(45, 10)">
+        {/* Mobile Hero Branch 2 (Beside LIN FLOWER Title) */}
+        <g transform="translate(35, 270)">
+          <path d="M 0,0 C 30,-10 60,15 85,25" stroke="url(#treeBranchGradMob)" strokeWidth="2.5" fill="none" />
+          <path d="M 35,-6 C 30,-16 45,-18 48,-6 Z" fill="url(#leafGradMob)" fillOpacity="0.85" />
+          <path d="M 60,8 C 70,-5 82,2 75,15 Z" fill="url(#leafGradMob)" fillOpacity="0.85" />
+          <g transform="translate(85, 25)">
+            <circle r="16" fill="#f43f5e" opacity="0.35" filter="url(#vineGlowMob)" />
+            {[0, 45, 90, 135, 180, 225, 270, 315].map((angle, i) => {
+              const rad = (angle * Math.PI) / 180;
+              return <circle key={i} cx={9 * Math.cos(rad)} cy={9 * Math.sin(rad)} r="5.5" fill="#fda4af" />;
+            })}
+            <circle r="5" fill="#f472b6" />
+            <circle r="4.5" fill="#fbbf24" />
+          </g>
+        </g>
+
+        {/* Mobile Hero Branch 3 (Beside Text Box "Chuyên cung cấp...") */}
+        <g transform="translate(28, 440)">
+          <path d="M 0,0 C 25,-10 50,12 70,20" stroke="url(#treeBranchGradMob)" strokeWidth="2" fill="none" />
+          <path d="M 30,-5 C 25,-15 40,-16 42,-5 Z" fill="url(#leafGradMob)" fillOpacity="0.85" />
+          <g transform="translate(70, 20)">
+            <circle r="12" fill="#ec4899" opacity="0.4" />
+            {[0, 72, 144, 216, 288].map((angle, i) => {
+              const rad = (angle * Math.PI) / 180;
+              return <circle key={i} cx={6 * Math.cos(rad)} cy={6 * Math.sin(rad)} r="4" fill="#f472b6" />;
+            })}
+            <circle r="3.5" fill="#fef08a" />
+          </g>
+        </g>
+
+        {/* Mobile Hero Branch 4 (Beside CTA Buttons "Xem Tất Cả Mẫu Hoa") */}
+        <g transform="translate(38, 620)">
+          <path d="M 0,0 C 30,-8 55,10 75,20" stroke="url(#treeBranchGradMob)" strokeWidth="2.5" fill="none" />
+          <path d="M 35,-6 C 30,-16 45,-18 48,-6 Z" fill="url(#leafGradMob)" fillOpacity="0.85" />
+          <g transform="translate(75, 20)">
+            <circle r="14" fill="#fbbf24" opacity="0.35" filter="url(#vineGlowMob)" />
+            {[0, 60, 120, 180, 240, 300].map((angle, i) => {
+              const rad = (angle * Math.PI) / 180;
+              return <circle key={i} cx={7 * Math.cos(rad)} cy={7 * Math.sin(rad)} r="4.5" fill="#fef08a" />;
+            })}
+            <circle r="4" fill="#f59e0b" />
+          </g>
+        </g>
+
+        {/* Mobile Hero Right Side Branch (Opposite side near LIN FLOWER title) */}
+        <g transform="translate(340, 340)">
+          <path d="M 0,0 C -25,-10 -50,10 -70,20" stroke="url(#treeBranchGradMob)" strokeWidth="2.5" fill="none" />
+          <path d="M -30,-5 C -25,-15 -40,-16 -42,-5 Z" fill="url(#leafGradMob)" fillOpacity="0.85" />
+          <g transform="translate(-70, 20)">
+            <circle r="14" fill="#be185d" opacity="0.35" filter="url(#vineGlowMob)" />
+            {[0, 60, 120, 180, 240, 300].map((angle, i) => {
+              const rad = (angle * Math.PI) / 180;
+              return <circle key={i} cx={7 * Math.cos(rad)} cy={7 * Math.sin(rad)} r="4.5" fill="#fb7185" />;
+            })}
+            <circle r="4" fill="#9d174d" />
+          </g>
+        </g>
+
+        {/* Mobile Side Branch (Flower Finder Wizard Section) */}
+        <g transform="translate(50, 850)">
+          <path d="M 0,0 C 25,-5 45,10 60,18" stroke="url(#treeBranchGradMob)" strokeWidth="2" fill="none" />
+          <g transform="translate(60, 18)">
             <circle r="12" fill="#e63963" opacity="0.35" />
             {[0, 72, 144, 216, 288].map((angle, i) => {
               const rad = (angle * Math.PI) / 180;
@@ -119,7 +182,7 @@ export const FloralVineBackground: React.FC = () => {
           </g>
         </g>
 
-        {/* Mobile Side Branch 3 (Categories section) */}
+        {/* Mobile Side Branch (Categories section) */}
         <g transform="translate(330, 1520)">
           <path d="M 0,0 C -20,-5 -35,5 -45,10" stroke="url(#treeBranchGradMob)" strokeWidth="2" fill="none" />
           <g transform="translate(-45, 10)">
@@ -207,7 +270,7 @@ export const FloralVineBackground: React.FC = () => {
         {/* Travelling Light Sparkle Particle */}
         <circle r="5" fill="#ffffff" filter="url(#vineGlowDesk)">
           <animateMotion
-            path="M 20,-20 C 140,180 80,420 180,820 S 1320,1220 1200,1520 S 110,1840 240,2240 S 1320,2640 1200,3040"
+            path="M 20,-20 C 140,180 80,420 180,820 S 1320,1220 1200,1520 S 110,1840 260,2240 S 1320,2640 1200,3040"
             dur="14s"
             repeatCount="indefinite"
           />
