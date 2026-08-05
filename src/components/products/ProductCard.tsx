@@ -26,11 +26,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     >
       
       {/* Image Container */}
-      <div className="relative aspect-square overflow-hidden bg-stone-100">
+      <div className="relative aspect-square overflow-hidden bg-stone-100 transform-gpu">
         <img
           src={product.images[0]}
           alt={product.name}
-          className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500 ease-out"
+          loading="lazy"
+          decoding="async"
+          className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500 ease-out will-change-transform"
         />
 
         {/* Badges */}
