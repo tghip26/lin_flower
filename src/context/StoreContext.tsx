@@ -4,7 +4,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import { 
   Product, Category, CartItem, Order, Voucher, Review, 
   CustomOrderRequest, UserRole, OrderStatus, SizeOption, AddOn,
-  BlogPost, VietQRConfig, TelegramConfig
+  BlogPost, VietQRConfig, TelegramConfig, PaymentStatus
 } from '@/types';
 import { 
   INITIAL_CATEGORIES, INITIAL_PRODUCTS, INITIAL_VOUCHERS, 
