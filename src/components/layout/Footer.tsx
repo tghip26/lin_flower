@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Phone, MapPin, Facebook, Heart, ShieldCheck, Truck, Clock, Sparkles } from 'lucide-react';
+import { LinFlowerLogo } from '@/components/common/LinFlowerLogo';
 
 export const Footer: React.FC = () => {
   return (
@@ -55,10 +56,8 @@ export const Footer: React.FC = () => {
           
           {/* Brand Info */}
           <div className="space-y-4 md:col-span-1">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-brand-600 to-amber-400 flex items-center justify-center font-serif font-bold text-xl text-white shadow-md">
-                L
-              </div>
+            <div className="flex items-center gap-2">
+              <LinFlowerLogo size={42} showText={false} />
               <span className="font-serif font-extrabold text-2xl text-white tracking-wider">
                 LIN <span className="text-brand-400 font-serif">FLOWER</span>
               </span>

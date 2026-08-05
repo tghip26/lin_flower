@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { useStore } from '@/context/StoreContext';
 import { CartDrawer } from '@/components/cart/CartDrawer';
+import { LinFlowerLogo } from '@/components/common/LinFlowerLogo';
 
 export const Navbar: React.FC = () => {
   const pathname = usePathname();
@@ -94,20 +95,8 @@ export const Navbar: React.FC = () => {
             </button>
 
             {/* Brand Logo & Slogan */}
-            <Link href="/" className="flex items-center gap-3 group">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-brand-600 via-brand-500 to-amber-400 p-0.5 shadow-pink-soft group-hover:scale-110 transition-transform duration-300">
-                <div className="w-full h-full bg-white rounded-full flex items-center justify-center">
-                  <span className="font-serif font-bold text-2xl text-brand-700 tracking-tighter">L</span>
-                </div>
-              </div>
-              <div className="flex flex-col">
-                <span className="font-serif font-extrabold text-2xl sm:text-3xl text-stone-800 tracking-wider group-hover:text-brand-600 transition-colors">
-                  LIN <span className="text-brand-600 font-serif">FLOWER</span>
-                </span>
-                <span className="text-[10px] sm:text-xs text-brand-700 font-medium tracking-tight -mt-1 hidden sm:block">
-                  TRAO TRỌN YÊU THƯƠNG – GỬI TRỌN TÂM Ý ♡
-                </span>
-              </div>
+            <Link href="/" className="flex items-center gap-2 group">
+              <LinFlowerLogo size={46} showText={true} />
             </Link>
 
             {/* Desktop Search Bar */}

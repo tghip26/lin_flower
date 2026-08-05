@@ -10,6 +10,11 @@ export const metadata: Metadata = {
   title: 'Lin Flower - Trao Trọn Yêu Thương, Gửi Trọn Tâm Ý ♡',
   description: 'Cửa hàng hoa tươi Lin Flower tại Quế Võ, Bắc Ninh. Chuyên tráp cưới hỏi, giỏ trái cây, lẵng khai trương, bó hoa sinh nhật và trang trí sự kiện trọn gói. Hotline: 0363 819 228.',
   keywords: ['Lin Flower', 'Hoa tươi Bắc Ninh', 'Tráp cưới hỏi Phố Mới', 'Giỏ trái cây Bắc Ninh', 'Lẵng hoa khai trương Quế Võ', 'Hoa tươi Phố Mới Quế Võ'],
+  icons: {
+    icon: '/icon.svg',
+    shortcut: '/icon.svg',
+    apple: '/icon.svg',
+  },
 };
 
 export default function RootLayout({
