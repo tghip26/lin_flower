@@ -81,7 +81,7 @@ export default function HomePage() {
                   </div>
                 </div>
 
-                {/* CTA Action Buttons (Compact & First-Fold Ready) */}
+                {/* CTA Action Buttons */}
                 <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 pt-1">
                   <Link
                     href="/products"
@@ -114,7 +114,7 @@ export default function HomePage() {
                 </div>
               </motion.div>
 
-              {/* Hero Right Photo Frame Showcase (Compact height to fit first fold) */}
+              {/* Hero Right Photo Frame Showcase */}
               <motion.div 
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -123,7 +123,7 @@ export default function HomePage() {
               >
                 <div className="relative mx-auto max-w-sm lg:max-w-none">
                   
-                  {/* Curved Arch Photo Frame with compact max-height */}
+                  {/* Curved Arch Photo Frame */}
                   <div className="relative overflow-hidden rounded-t-[5rem] sm:rounded-t-[8rem] rounded-b-2xl shadow-xl aspect-[4/3] sm:aspect-square max-h-[260px] sm:max-h-[340px] lg:max-h-[380px] border-4 border-white bg-white w-full">
                     <img
                       src="https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?auto=format&fit=crop&q=80&w=1000"
@@ -170,7 +170,7 @@ export default function HomePage() {
         </div>
 
         {/* ======================================================== */}
-        {/* 3. BEST SELLERS & CATEGORY TABS WITH LUXURY SPACING */}
+        {/* 3. BEST SELLERS & CATEGORY TABS (ZERO SCROLL JUMP ON TAB SWITCH) */}
         {/* ======================================================== */}
         <section className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-5 border-b border-pink-200/60 pb-5">
@@ -183,7 +183,7 @@ export default function HomePage() {
               </h2>
             </div>
 
-            {/* Occasion Tabs Filter */}
+            {/* Occasion Tabs Filter with e.preventDefault() to stop scroll jump */}
             <div className="flex flex-wrap gap-2.5">
               {[
                 { id: 'all', label: 'Tất Cả Mẫu Hoa' },
@@ -194,8 +194,12 @@ export default function HomePage() {
               ].map((tab) => (
                 <button
                   key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`px-4 py-2.5 rounded-full text-xs font-semibold transition-all cursor-pointer ${
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setActiveTab(tab.id);
+                  }}
+                  className={`px-4 py-2.5 rounded-full text-xs font-semibold transition-all cursor-pointer select-none ${
                     activeTab === tab.id
                       ? 'bg-gradient-to-r from-brand-600 via-rose-600 to-amber-600 text-white shadow-md scale-105 font-bold'
                       : 'bg-white hover:bg-pink-50 text-stone-700 border border-pink-200/80 shadow-2xs'
@@ -207,22 +211,19 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Products Grid with Anchored Min-Height to Prevent Layout Jump */}
-          <div className="min-h-[580px] sm:min-h-[720px] relative transition-all duration-300">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeTab}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6.5 sm:gap-8 transform-gpu"
-              >
-                {filteredProducts.map((product) => (
-                  <ProductCard key={product.id} product={product} />
-                ))}
-              </motion.div>
-            </AnimatePresence>
+          {/* Products Grid with Anchored Height and Pure Opacity Morphing */}
+          <div className="min-h-[640px] sm:min-h-[780px] relative">
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.2 }}
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6.5 sm:gap-8 transform-gpu"
+            >
+              {filteredProducts.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </motion.div>
           </div>
 
           {/* Radiant Rose Gold Action Button */}
