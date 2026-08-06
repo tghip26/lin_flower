@@ -124,14 +124,16 @@ export interface BlogPost {
   id: string;
   title: string;
   slug: string;
-  excerpt: string;
+  excerpt?: string;
+  summary?: string;
   content: string;
-  coverImage: string;
+  coverImage?: string;
+  image?: string;
   author: string;
-  category: string;
-  readTime: string;
+  category?: string;
+  readTime?: string;
   createdAt: string;
-  tags: string[];
+  tags?: string[];
 }
 
 export interface VietQRConfig {
