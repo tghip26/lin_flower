@@ -85,17 +85,17 @@ export default function HomePage() {
                 <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
                   <Link
                     href="/products"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-gradient-to-r from-brand-600 via-rose-600 to-amber-600 hover:from-brand-700 hover:to-amber-700 text-white font-bold text-base px-9 py-4.5 rounded-full shadow-xl shadow-pink-500/20 active:scale-95 transition-all tracking-wide"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-gradient-to-r from-brand-600 via-rose-600 to-amber-600 hover:from-brand-700 hover:to-amber-700 text-white font-extrabold text-sm sm:text-base px-8 py-3.5 sm:px-9 sm:py-4 rounded-full shadow-xl shadow-pink-500/20 active:scale-95 transition-all tracking-wide min-h-[50px] leading-normal"
                   >
-                    <ShoppingBag className="w-5 h-5" />
+                    <ShoppingBag className="w-5 h-5 flex-shrink-0" />
                     <span>Khám Phá Mẫu Hoa Tươi</span>
                   </Link>
 
                   <Link
                     href="/custom-order"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-white/95 backdrop-blur-md hover:bg-stone-50 text-stone-900 font-bold text-base px-8 py-4.5 rounded-full border-2 border-amber-300/80 hover:border-brand-400 active:scale-95 transition-all shadow-xs"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-white/95 backdrop-blur-md hover:bg-stone-50 text-stone-900 font-extrabold text-sm sm:text-base px-8 py-3.5 sm:px-9 sm:py-4 rounded-full border-2 border-amber-300/80 hover:border-brand-400 active:scale-95 transition-all shadow-xs min-h-[50px] leading-normal"
                   >
-                    <Sparkles className="w-5 h-5 text-amber-500" />
+                    <Sparkles className="w-5 h-5 text-amber-500 flex-shrink-0" />
                     <span>Thiết Kế Theo Mẫu Riêng</span>
                   </Link>
                 </div>
@@ -240,10 +240,10 @@ export default function HomePage() {
           <div className="text-center pt-8">
             <Link
               href="/products"
-              className="inline-flex items-center gap-3 bg-gradient-to-r from-brand-600 via-rose-500 to-amber-500 hover:from-brand-700 hover:to-amber-600 text-white font-bold text-base px-10 py-4.5 rounded-full shadow-xl shadow-pink-500/20 active:scale-95 transition-all tracking-wide"
+              className="inline-flex items-center justify-center gap-3 bg-gradient-to-r from-brand-600 via-rose-500 to-amber-500 hover:from-brand-700 hover:to-amber-600 text-white font-extrabold text-sm sm:text-base px-8 py-3.5 sm:px-10 sm:py-4 rounded-full shadow-xl shadow-pink-500/20 active:scale-95 transition-all tracking-wide min-h-[52px] leading-normal"
             >
               <span>Xem Tất Cả 100+ Mẫu Hoa Lin Flower</span>
-              <ArrowRight className="w-5 h-5" />
+              <ArrowRight className="w-5 h-5 flex-shrink-0" />
             </Link>
           </div>
         </section>

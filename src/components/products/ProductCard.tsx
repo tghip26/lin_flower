@@ -61,13 +61,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           <Heart className={`w-4 h-4 ${isWished ? 'fill-white' : ''}`} />
         </button>
 
-        {/* Quick detail overlay */}
-        <div className="absolute inset-x-0 bottom-0 p-3.5 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex justify-center gap-2 z-10">
+        {/* Quick detail overlay with generous vertical padding */}
+        <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex justify-center gap-2 z-10">
           <Link
             href={`/products/${product.id}`}
-            className="flex items-center gap-1.5 bg-white/95 hover:bg-white text-stone-800 font-bold text-xs px-4.5 py-2 rounded-full backdrop-blur-sm transition-all active:scale-95 shadow-md"
+            className="inline-flex items-center justify-center gap-2 bg-white/95 hover:bg-white text-stone-900 font-extrabold text-xs px-5 py-2.5 rounded-full backdrop-blur-md transition-all active:scale-95 shadow-lg leading-none min-h-[38px]"
           >
-            <Eye className="w-3.5 h-3.5" />
+            <Eye className="w-4 h-4 text-brand-600" />
             <span>Xem Chi Tiết</span>
           </Link>
         </div>
@@ -91,7 +91,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           </p>
         </div>
 
-        {/* Price & Action */}
+        {/* Price & Action Button with Ample Vertical Padding */}
         <div className="pt-3 border-t border-stone-100 flex items-center justify-between">
           <div>
             <div className="font-serif font-extrabold text-lg sm:text-xl text-brand-700">
@@ -106,7 +106,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
           <button
             onClick={() => addToCart(product, defaultSize, [], '')}
-            className="flex items-center gap-1.5 bg-brand-50 hover:bg-brand-600 text-brand-700 hover:text-white font-bold text-xs px-4 py-2.5 rounded-full transition-all active:scale-95 border border-brand-200/80 shadow-2xs"
+            className="inline-flex items-center justify-center gap-1.5 bg-brand-50 hover:bg-brand-600 text-brand-700 hover:text-white font-extrabold text-xs px-4.5 py-2.5 rounded-full transition-all active:scale-95 border border-brand-200/80 shadow-2xs leading-none min-h-[38px]"
             title="Thêm vào giỏ hàng"
           >
             <ShoppingBag className="w-3.5 h-3.5" />
