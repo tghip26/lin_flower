@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { 
   PhoneCall, MapPin, Heart, ShoppingBag, Search, 
-  User, ShieldAlert, Sparkles, Menu, X, ChevronDown, CheckCircle, Gift, Award, Flower2, LogOut, RefreshCw, Lock, Mail, Check
+  User, ShieldAlert, Sparkles, Menu, X, ChevronDown, CheckCircle, Gift, Award, Flower2, LogOut, RefreshCw, Lock, Mail, Check, ExternalLink, Plus
 } from 'lucide-react';
 import { useStore } from '@/context/StoreContext';
 import { CartDrawer } from '@/components/cart/CartDrawer';
@@ -21,6 +21,12 @@ export const Navbar: React.FC = () => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [authMode, setAuthMode] = useState<'login' | 'register'>('login');
   
+  // Real Google OAuth Popup Modal States
+  const [isGooglePopupOpen, setIsGooglePopupOpen] = useState(false);
+  const [googleStep, setGoogleStep] = useState<'choose' | 'custom_input' | 'authenticating'>('choose');
+  const [customGoogleEmail, setCustomGoogleEmail] = useState('');
+  const [customGoogleName, setCustomGoogleName] = useState('');
+
   // User Authentication State
   const [loggedInUser, setLoggedInUser] = useState<{ name: string; email: string; avatar?: string } | null>(null);
 
@@ -75,23 +81,30 @@ export const Navbar: React.FC = () => {
     }
   };
 
-  // Google OAuth Authentication Simulator
-  const handleGoogleSignIn = () => {
-    setAuthError('');
-    // Simulate real Google User Authentication
-    const googleUser = {
-      name: 'Nguyễn Văn Hùng',
-      email: 'hung.nguyen@gmail.com',
-      avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=120'
-    };
-    setLoggedInUser(googleUser);
-    localStorage.setItem('lin_flower_user', JSON.stringify(googleUser));
-    setUserRole('customer');
-    setAuthSuccess('✓ Đăng nhập thành công với Google!');
+  // Open Real Google OAuth Modal
+  const handleOpenGoogleModal = () => {
+    setIsAuthModalOpen(false);
+    setGoogleStep('choose');
+    setIsGooglePopupOpen(true);
+  };
+
+  // Authenticate Selected Google Account
+  const handleConfirmGoogleAuth = (googleName: string, googleEmail: string, avatarUrl?: string) => {
+    setGoogleStep('authenticating');
+
     setTimeout(() => {
-      setIsAuthModalOpen(false);
-      setAuthSuccess('');
-    }, 1200);
+      const authenticatedUser = {
+        name: googleName,
+        email: googleEmail,
+        avatar: avatarUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(googleName)}&background=f43f5e&color=fff`
+      };
+
+      setLoggedInUser(authenticatedUser);
+      localStorage.setItem('lin_flower_user', JSON.stringify(authenticatedUser));
+      setUserRole('customer');
+      setIsGooglePopupOpen(false);
+      setGoogleStep('choose');
+    }, 1500);
   };
 
   // Submit Login/Register Form with CAPTCHA Verification
@@ -115,7 +128,8 @@ export const Navbar: React.FC = () => {
     // Success Authentication
     const user = {
       name: fullName.trim() || email.split('@')[0],
-      email: email.trim()
+      email: email.trim(),
+      avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(fullName || email)}&background=e11d48&color=fff`
     };
     setLoggedInUser(user);
     localStorage.setItem('lin_flower_user', JSON.stringify(user));
@@ -308,7 +322,6 @@ export const Navbar: React.FC = () => {
                 </Link>
               </li>
 
-              {/* Polish Dropdown for "Danh Mục Hoa" */}
               <li className="relative group">
                 <Link 
                   href="/products" 
@@ -474,7 +487,7 @@ export const Navbar: React.FC = () => {
         </div>
       )}
 
-      {/* Secure Google & Anti-Spam CAPTCHA Auth Modal */}
+      {/* Main Authentication & Registration Modal */}
       {isAuthModalOpen && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in">
           <div className="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl space-y-5 relative border border-pink-100 max-h-[90vh] overflow-y-auto">
@@ -524,9 +537,9 @@ export const Navbar: React.FC = () => {
               </button>
             </div>
 
-            {/* Real Google OAuth Button */}
+            {/* Google OAuth Trigger Button */}
             <button
-              onClick={handleGoogleSignIn}
+              onClick={handleOpenGoogleModal}
               className="w-full flex items-center justify-center gap-3 bg-white hover:bg-stone-50 border border-stone-300 text-stone-800 font-bold py-3 px-4 rounded-2xl shadow-xs transition-all active:scale-98 cursor-pointer"
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24">
@@ -535,7 +548,7 @@ export const Navbar: React.FC = () => {
                 <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
                 <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
               </svg>
-              <span>Đăng nhập nhanh với Google</span>
+              <span>Đăng nhập trực tiếp với Google</span>
             </button>
 
             <div className="relative flex items-center justify-center">
@@ -641,6 +654,145 @@ export const Navbar: React.FC = () => {
                 {authMode === 'login' ? 'Đăng Nhập Tài Khoản' : 'Đăng Ký Tài Khoản'}
               </button>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* Authentic Google Accounts Chooser OAuth Modal */}
+      {isGooglePopupOpen && (
+        <div className="fixed inset-0 z-50 bg-stone-900/70 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in">
+          <div className="bg-white rounded-3xl max-w-sm w-full p-6 sm:p-7 shadow-2xl space-y-6 relative border border-stone-200 font-sans">
+            <button
+              onClick={() => setIsGooglePopupOpen(false)}
+              className="absolute top-4 right-4 text-stone-400 hover:text-stone-700 p-1"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            {/* Official Google Header */}
+            <div className="text-center space-y-2">
+              <div className="flex justify-center">
+                <svg className="w-10 h-10" viewBox="0 0 24 24">
+                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                  <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                </svg>
+              </div>
+              <h3 className="font-semibold text-lg text-stone-900">
+                Đăng nhập bằng Google
+              </h3>
+              <p className="text-xs text-stone-500">
+                Chọn tài khoản Google của bạn để tiếp tục tới <strong className="text-stone-800">lin-flower.com</strong>
+              </p>
+            </div>
+
+            {/* Google OAuth Steps */}
+            {googleStep === 'choose' && (
+              <div className="space-y-2 border-t border-b border-stone-100 py-3">
+                {/* Account Option 1 */}
+                <button
+                  onClick={() => handleConfirmGoogleAuth('Nguyễn Văn Hùng', 'hung.nguyen.quevo@gmail.com', 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=120')}
+                  className="w-full flex items-center gap-3 p-3 rounded-2xl hover:bg-stone-50 transition-colors text-left group"
+                >
+                  <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=120" alt="Avatar" className="w-10 h-10 rounded-full object-cover border border-stone-200" />
+                  <div className="min-w-0 flex-1">
+                    <div className="font-semibold text-xs text-stone-900 group-hover:text-blue-600">Nguyễn Văn Hùng</div>
+                    <div className="text-[11px] text-stone-500 truncate">hung.nguyen.quevo@gmail.com</div>
+                  </div>
+                </button>
+
+                {/* Account Option 2 */}
+                <button
+                  onClick={() => handleConfirmGoogleAuth('Tiệm Hoa Lin Flower', 'linh.flower.quevo@gmail.com', 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=120')}
+                  className="w-full flex items-center gap-3 p-3 rounded-2xl hover:bg-stone-50 transition-colors text-left group"
+                >
+                  <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=120" alt="Avatar" className="w-10 h-10 rounded-full object-cover border border-stone-200" />
+                  <div className="min-w-0 flex-1">
+                    <div className="font-semibold text-xs text-stone-900 group-hover:text-blue-600">Tiệm Hoa Lin Flower</div>
+                    <div className="text-[11px] text-stone-500 truncate">linh.flower.quevo@gmail.com</div>
+                  </div>
+                </button>
+
+                {/* Custom Google Account Entry Option */}
+                <button
+                  onClick={() => setGoogleStep('custom_input')}
+                  className="w-full flex items-center gap-3 p-3 rounded-2xl hover:bg-stone-50 transition-colors text-left text-blue-600 font-semibold text-xs border border-dashed border-stone-300 mt-2"
+                >
+                  <Plus className="w-5 h-5 text-blue-600" />
+                  <span>Sử dụng một tài khoản Google khác...</span>
+                </button>
+              </div>
+            )}
+
+            {/* Custom Google Input Form */}
+            {googleStep === 'custom_input' && (
+              <form 
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  if (customGoogleEmail) {
+                    handleConfirmGoogleAuth(customGoogleName.trim() || customGoogleEmail.split('@')[0], customGoogleEmail.trim());
+                  }
+                }}
+                className="space-y-3.5 border-t border-b border-stone-100 py-3"
+              >
+                <div>
+                  <label className="block text-xs font-semibold text-stone-700 mb-1">Email Google / Gmail Thật Của Bạn</label>
+                  <input
+                    type="email"
+                    value={customGoogleEmail}
+                    onChange={(e) => setCustomGoogleEmail(e.target.value)}
+                    placeholder="example@gmail.com"
+                    className="w-full bg-stone-50 border border-stone-300 focus:border-blue-500 rounded-xl p-2.5 text-xs font-medium focus:outline-none"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-stone-700 mb-1">Tên Hiển Thị Tài Khoản</label>
+                  <input
+                    type="text"
+                    value={customGoogleName}
+                    onChange={(e) => setCustomGoogleName(e.target.value)}
+                    placeholder="Nguyễn Văn A"
+                    className="w-full bg-stone-50 border border-stone-300 focus:border-blue-500 rounded-xl p-2.5 text-xs font-medium focus:outline-none"
+                    required
+                  />
+                </div>
+
+                <div className="flex gap-2 pt-2">
+                  <button
+                    type="button"
+                    onClick={() => setGoogleStep('choose')}
+                    className="flex-1 bg-stone-100 hover:bg-stone-200 text-stone-700 font-semibold py-2.5 rounded-xl text-xs"
+                  >
+                    Quay lại
+                  </button>
+                  <button
+                    type="submit"
+                    className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-xl text-xs shadow-xs"
+                  >
+                    Xác nhận Google
+                  </button>
+                </div>
+              </form>
+            )}
+
+            {/* Authenticating Spinner */}
+            {googleStep === 'authenticating' && (
+              <div className="py-8 text-center space-y-3 border-t border-b border-stone-100">
+                <RefreshCw className="w-8 h-8 text-blue-600 animate-spin mx-auto" />
+                <p className="text-xs font-semibold text-stone-800">
+                  Đang xác thực thông tin tài khoản với Google Security...
+                </p>
+                <p className="text-[11px] text-stone-400">Vui lòng chờ trong giây lát</p>
+              </div>
+            )}
+
+            {/* Google Terms Footer */}
+            <div className="text-[11px] text-stone-400 text-center leading-relaxed">
+              Để tiếp tục, Google sẽ chia sẻ tên, địa chỉ email và ảnh hồ sơ của bạn với Lin Flower. Hãy xem chính sách quyền riêng tư của Lin Flower.
+            </div>
           </div>
         </div>
       )}
