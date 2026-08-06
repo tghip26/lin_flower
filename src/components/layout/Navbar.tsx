@@ -52,7 +52,7 @@ export const Navbar: React.FC = () => {
   return (
     <>
       {/* Top Announcement Bar - Clean & Professional */}
-      <div className="bg-gradient-to-r from-brand-900 via-brand-700 to-brand-900 text-white text-xs sm:text-sm py-2 px-4 shadow-sm">
+      <div className="bg-gradient-to-r from-brand-900 via-brand-700 to-brand-900 text-white text-xs sm:text-xs py-1.5 px-4 shadow-sm">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
           <div className="flex items-center gap-4 text-brand-100">
             <span className="flex items-center gap-1.5 font-medium">
@@ -69,7 +69,7 @@ export const Navbar: React.FC = () => {
           <div className="flex items-center gap-3 text-xs">
             <a 
               href="tel:0363819228" 
-              className="flex items-center gap-1.5 bg-brand-gold/20 hover:bg-brand-gold/30 text-amber-200 px-3 py-1 rounded-full border border-amber-300/30 transition-all active:scale-95 font-semibold"
+              className="flex items-center gap-1.5 bg-brand-gold/20 hover:bg-brand-gold/30 text-amber-200 px-3 py-0.5 rounded-full border border-amber-300/30 transition-all active:scale-95 font-semibold"
             >
               <PhoneCall className="w-3.5 h-3.5 animate-pulse text-amber-300" />
               <span>Tư Vấn & Đặt hàng: <strong className="text-white">0363 819 228</strong></span>
@@ -78,7 +78,7 @@ export const Navbar: React.FC = () => {
             {/* Login / User Account Trigger */}
             <button
               onClick={() => setIsAuthModalOpen(true)}
-              className="flex items-center gap-1.5 bg-white/10 hover:bg-white/20 active:scale-95 px-3 py-1 rounded-full transition-all border border-white/20 text-white font-medium"
+              className="flex items-center gap-1.5 bg-white/10 hover:bg-white/20 active:scale-95 px-3 py-0.5 rounded-full transition-all border border-white/20 text-white font-medium"
             >
               <User className="w-3.5 h-3.5 text-amber-300" />
               <span>
@@ -91,7 +91,7 @@ export const Navbar: React.FC = () => {
 
       {/* Main Header */}
       <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-brand-100 shadow-xs transition-all">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 sm:py-2.5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1.5 sm:py-2">
           <div className="flex items-center justify-between gap-4">
             
             {/* Mobile menu trigger */}
@@ -168,7 +168,7 @@ export const Navbar: React.FC = () => {
               {/* Cart Button */}
               <button
                 onClick={() => setIsCartOpen(true)}
-                className="relative flex items-center gap-2 bg-gradient-to-r from-brand-600 to-brand-500 hover:from-brand-700 hover:to-brand-600 active:scale-95 text-white px-4.5 py-2.5 rounded-full shadow-pink-soft hover:shadow-pink-glow transition-all"
+                className="relative flex items-center gap-2 bg-gradient-to-r from-brand-600 to-brand-500 hover:from-brand-700 hover:to-brand-600 active:scale-95 text-white px-5 py-2.5 rounded-full shadow-pink-soft hover:shadow-pink-glow transition-all"
               >
                 <ShoppingBag className="w-4.5 h-4.5" />
                 <span className="text-xs sm:text-sm font-extrabold hidden sm:inline">Giỏ hàng</span>
