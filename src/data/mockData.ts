@@ -415,58 +415,9 @@ export const INITIAL_BLOG_POSTS: BlogPost[] = [
   }
 ];
 
-export const INITIAL_ORDERS: Order[] = [
-  {
-    id: 'ORD-88219',
-    customerName: 'Nguyễn Văn Hùng',
-    customerPhone: '0987654321',
-    customerEmail: 'hung.nguyen@gmail.com',
-    recipientName: 'Trần Thị Thảo',
-    recipientPhone: '0987654321',
-    recipientAddress: 'Số 18, Khu phố 5, Thị trấn Phố Mới, Quế Võ, Bắc Ninh',
-    deliveryDate: '2026-08-06',
-    deliveryTimeSlot: '14:00 - 16:00',
-    isAnonymous: false,
-    cardMessage: 'Chúc mừng sinh nhật em yêu!',
-    items: [
-      {
-        id: 'cart-item-01',
-        product: INITIAL_PRODUCTS[0],
-        selectedSize: { name: 'Tiêu chuẩn', priceMultiplier: 1.0, description: '' },
-        selectedAddOns: [],
-        quantity: 1,
-        cardMessage: 'Chúc mừng sinh nhật em yêu!'
-      }
-    ],
-    subtotal: 550000,
-    discount: 50000,
-    shippingFee: 0,
-    totalPrice: 500000,
-    paymentMethod: 'vietqr',
-    paymentStatus: 'paid',
-    orderStatus: 'shipping',
-    createdAt: '2026-08-05 10:15',
-    statusHistory: [
-      { status: 'pending', timestamp: '2026-08-05 10:15', note: 'Đơn hàng đã khởi tạo' },
-      { status: 'processing', timestamp: '2026-08-05 10:30', note: 'Nghệ nhân đang cắm hoa' },
-      { status: 'shipping', timestamp: '2026-08-05 11:00', note: 'Shipper đang giao hàng' }
-    ]
-  }
-];
+export const INITIAL_ORDERS: Order[] = [];
 
-export const INITIAL_CUSTOM_REQUESTS: CustomOrderRequest[] = [
-  {
-    id: 'REQ-001',
-    customerName: 'Chị Mai Anh',
-    phone: '0912345678',
-    budget: '3.500.000đ',
-    mainColor: 'Đỏ nhung & Trắng',
-    occasion: 'Cưới hỏi',
-    note: 'Muốn thiết kế bộ 5 tráp ăn hỏi tone màu đỏ nhung có hoa sen trắng và hoa hồng Ecuador.',
-    status: 'pending',
-    createdAt: '2026-08-04 16:20'
-  }
-];
+export const INITIAL_CUSTOM_REQUESTS: CustomOrderRequest[] = [];
 
 export const INITIAL_VIETQR_CONFIG: VietQRConfig = {
   accountNo: '0363819228',
