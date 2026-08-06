@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { 
@@ -21,6 +21,10 @@ export const Navbar: React.FC = () => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [authMode, setAuthMode] = useState<'login' | 'register'>('login');
   
+  // User Profile Dropdown Toggle State (Fixes mouse leave gap issue!)
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const userMenuRef = useRef<HTMLDivElement>(null);
+
   // Real Google OAuth Popup Modal States
   const [isGooglePopupOpen, setIsGooglePopupOpen] = useState(false);
   const [googleStep, setGoogleStep] = useState<'choose' | 'custom_input' | 'authenticating'>('choose');
@@ -67,6 +71,15 @@ export const Navbar: React.FC = () => {
         setLoggedInUser(JSON.parse(savedUser));
       } catch (e) {}
     }
+
+    // Close user menu when clicking outside
+    const handleClickOutside = (event: MouseEvent) => {
+      if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
+        setIsUserMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   const getCategoryIcon = (id: string) => {
@@ -96,7 +109,7 @@ export const Navbar: React.FC = () => {
       const authenticatedUser = {
         name: googleName,
         email: googleEmail,
-        avatar: avatarUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(googleName)}&background=f43f5e&color=fff`
+        avatar: avatarUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(googleName)}&background=ea4335&color=fff`
       };
 
       setLoggedInUser(authenticatedUser);
@@ -104,7 +117,7 @@ export const Navbar: React.FC = () => {
       setUserRole('customer');
       setIsGooglePopupOpen(false);
       setGoogleStep('choose');
-    }, 1500);
+    }, 1200);
   };
 
   // Submit Login/Register Form with CAPTCHA Verification
@@ -145,6 +158,7 @@ export const Navbar: React.FC = () => {
     setLoggedInUser(null);
     localStorage.removeItem('lin_flower_user');
     setUserRole('customer');
+    setIsUserMenuOpen(false);
   };
 
   return (
@@ -173,34 +187,58 @@ export const Navbar: React.FC = () => {
               <span>Tư Vấn & Đặt hàng: <strong className="text-white">0363 819 228</strong></span>
             </a>
 
-            {/* Login / User Account Dropdown Trigger */}
+            {/* Login / User Account Dropdown Trigger with Click Toggle & Gapless Bridge */}
             {loggedInUser ? (
-              <div className="relative group">
-                <button className="flex items-center gap-1.5 bg-white/10 hover:bg-white/20 px-3 py-0.5 rounded-full transition-all border border-white/20 text-white font-semibold">
+              <div className="relative" ref={userMenuRef}>
+                <button 
+                  onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                  onMouseEnter={() => setIsUserMenuOpen(true)}
+                  className="flex items-center gap-1.5 bg-white/15 hover:bg-white/25 active:scale-95 px-3.5 py-1 rounded-full transition-all border border-white/30 text-white font-semibold cursor-pointer shadow-xs"
+                >
                   {loggedInUser.avatar ? (
-                    <img src={loggedInUser.avatar} alt={loggedInUser.name} className="w-4 h-4 rounded-full object-cover" />
+                    <img src={loggedInUser.avatar} alt={loggedInUser.name} className="w-4.5 h-4.5 rounded-full object-cover border border-amber-300/60" />
                   ) : (
                     <User className="w-3.5 h-3.5 text-amber-300" />
                   )}
-                  <span className="max-w-[100px] truncate">{loggedInUser.name}</span>
-                  <ChevronDown className="w-3 h-3 text-amber-300" />
+                  <span className="max-w-[120px] truncate">{loggedInUser.name}</span>
+                  <ChevronDown className={`w-3.5 h-3.5 text-amber-300 transition-transform duration-200 ${isUserMenuOpen ? 'rotate-180' : ''}`} />
                 </button>
-                <div className="absolute right-0 top-full mt-1 w-48 bg-white rounded-2xl shadow-xl border border-stone-200 p-2 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-all z-50 text-stone-800 space-y-1">
-                  <div className="px-3 py-1.5 border-b border-stone-100 text-[11px]">
-                    <div className="font-bold text-stone-900 truncate">{loggedInUser.name}</div>
-                    <div className="text-stone-400 truncate">{loggedInUser.email}</div>
+
+                {/* Persistent Gapless User Profile Dropdown Menu */}
+                {isUserMenuOpen && (
+                  <div 
+                    onMouseLeave={() => setIsUserMenuOpen(false)}
+                    className="absolute right-0 top-full pt-1.5 w-56 z-50 animate-in fade-in slide-in-from-top-1"
+                  >
+                    <div className="bg-white rounded-2xl shadow-2xl border border-stone-200 p-2.5 text-stone-800 space-y-1 relative before:absolute before:-top-2 before:left-0 before:right-0 before:h-3">
+                      <div className="px-3 py-2 border-b border-stone-100 text-xs bg-stone-50 rounded-xl mb-1">
+                        <div className="font-bold text-stone-900 truncate">{loggedInUser.name}</div>
+                        <div className="text-[11px] text-stone-500 truncate">{loggedInUser.email}</div>
+                      </div>
+                      <Link 
+                        href="/tracking" 
+                        onClick={() => setIsUserMenuOpen(false)}
+                        className="flex items-center gap-2 px-3 py-2 text-xs font-semibold text-stone-700 hover:bg-pink-50 hover:text-brand-700 rounded-xl transition-colors"
+                      >
+                        <span>📦 Tra cứu đơn hàng của tôi</span>
+                      </Link>
+                      <Link 
+                        href="/products?wishlist=true" 
+                        onClick={() => setIsUserMenuOpen(false)}
+                        className="flex items-center gap-2 px-3 py-2 text-xs font-semibold text-stone-700 hover:bg-pink-50 hover:text-brand-700 rounded-xl transition-colors"
+                      >
+                        <span>❤️ Mẫu hoa yêu thích ({wishlist.length})</span>
+                      </Link>
+                      <button 
+                        onClick={handleLogout} 
+                        className="w-full text-left flex items-center gap-2 px-3 py-2 text-xs font-bold text-rose-600 hover:bg-rose-50 rounded-xl transition-colors border-t border-stone-100 mt-1"
+                      >
+                        <LogOut className="w-3.5 h-3.5" />
+                        <span>Đăng xuất tài khoản</span>
+                      </button>
+                    </div>
                   </div>
-                  <Link href="/tracking" className="block px-3 py-1.5 text-xs hover:bg-pink-50 rounded-xl font-medium">
-                    📦 Tra cứu đơn hàng
-                  </Link>
-                  <Link href="/products?wishlist=true" className="block px-3 py-1.5 text-xs hover:bg-pink-50 rounded-xl font-medium">
-                    ❤️ Sản phẩm yêu thích
-                  </Link>
-                  <button onClick={handleLogout} className="w-full text-left px-3 py-1.5 text-xs text-rose-600 hover:bg-rose-50 rounded-xl font-bold flex items-center gap-1">
-                    <LogOut className="w-3.5 h-3.5" />
-                    <span>Đăng xuất</span>
-                  </button>
-                </div>
+                )}
               </div>
             ) : (
               <button
@@ -208,7 +246,7 @@ export const Navbar: React.FC = () => {
                   generateCaptcha();
                   setIsAuthModalOpen(true);
                 }}
-                className="flex items-center gap-1.5 bg-white/10 hover:bg-white/20 active:scale-95 px-3 py-0.5 rounded-full transition-all border border-white/20 text-white font-medium"
+                className="flex items-center gap-1.5 bg-white/10 hover:bg-white/20 active:scale-95 px-3.5 py-1 rounded-full transition-all border border-white/20 text-white font-semibold cursor-pointer"
               >
                 <User className="w-3.5 h-3.5 text-amber-300" />
                 <span>Đăng Nhập</span>
@@ -548,7 +586,7 @@ export const Navbar: React.FC = () => {
                 <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
                 <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
               </svg>
-              <span>Đăng nhập trực tiếp với Google</span>
+              <span>Đăng nhập chuẩn với Google</span>
             </button>
 
             <div className="relative flex items-center justify-center">
@@ -661,7 +699,7 @@ export const Navbar: React.FC = () => {
       {/* Authentic Google Accounts Chooser OAuth Modal */}
       {isGooglePopupOpen && (
         <div className="fixed inset-0 z-50 bg-stone-900/70 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in">
-          <div className="bg-white rounded-3xl max-w-sm w-full p-6 sm:p-7 shadow-2xl space-y-6 relative border border-stone-200 font-sans">
+          <div className="bg-white rounded-3xl max-w-sm w-full p-6 sm:p-7 shadow-2xl space-y-5 relative border border-stone-200 font-sans">
             <button
               onClick={() => setIsGooglePopupOpen(false)}
               className="absolute top-4 right-4 text-stone-400 hover:text-stone-700 p-1"
@@ -690,28 +728,19 @@ export const Navbar: React.FC = () => {
             {/* Google OAuth Steps */}
             {googleStep === 'choose' && (
               <div className="space-y-2 border-t border-b border-stone-100 py-3">
-                {/* Account Option 1 */}
+                {/* Real User Account Option from Screenshot */}
                 <button
-                  onClick={() => handleConfirmGoogleAuth('Nguyễn Văn Hùng', 'hung.nguyen.quevo@gmail.com', 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=120')}
-                  className="w-full flex items-center gap-3 p-3 rounded-2xl hover:bg-stone-50 transition-colors text-left group"
+                  onClick={() => handleConfirmGoogleAuth('Trương Hoàng Hiệp', 'hiplaika263@gmail.com', 'https://ui-avatars.com/api/?name=Truong+Hoang+Hiep&background=ea4335&color=fff')}
+                  className="w-full flex items-center gap-3 p-3 rounded-2xl hover:bg-stone-50 border border-stone-200 transition-all text-left group shadow-2xs"
                 >
-                  <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=120" alt="Avatar" className="w-10 h-10 rounded-full object-cover border border-stone-200" />
-                  <div className="min-w-0 flex-1">
-                    <div className="font-semibold text-xs text-stone-900 group-hover:text-blue-600">Nguyễn Văn Hùng</div>
-                    <div className="text-[11px] text-stone-500 truncate">hung.nguyen.quevo@gmail.com</div>
+                  <div className="w-10 h-10 rounded-full bg-rose-600 text-white font-bold text-xs flex items-center justify-center flex-shrink-0 shadow-xs">
+                    TH
                   </div>
-                </button>
-
-                {/* Account Option 2 */}
-                <button
-                  onClick={() => handleConfirmGoogleAuth('Tiệm Hoa Lin Flower', 'linh.flower.quevo@gmail.com', 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=120')}
-                  className="w-full flex items-center gap-3 p-3 rounded-2xl hover:bg-stone-50 transition-colors text-left group"
-                >
-                  <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=120" alt="Avatar" className="w-10 h-10 rounded-full object-cover border border-stone-200" />
                   <div className="min-w-0 flex-1">
-                    <div className="font-semibold text-xs text-stone-900 group-hover:text-blue-600">Tiệm Hoa Lin Flower</div>
-                    <div className="text-[11px] text-stone-500 truncate">linh.flower.quevo@gmail.com</div>
+                    <div className="font-bold text-xs text-stone-900 group-hover:text-blue-600">Trương Hoàng Hiệp</div>
+                    <div className="text-[11px] text-stone-500 truncate">hiplaika263@gmail.com</div>
                   </div>
+                  <CheckCircle className="w-4 h-4 text-blue-600 flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </button>
 
                 {/* Custom Google Account Entry Option */}
@@ -719,8 +748,8 @@ export const Navbar: React.FC = () => {
                   onClick={() => setGoogleStep('custom_input')}
                   className="w-full flex items-center gap-3 p-3 rounded-2xl hover:bg-stone-50 transition-colors text-left text-blue-600 font-semibold text-xs border border-dashed border-stone-300 mt-2"
                 >
-                  <Plus className="w-5 h-5 text-blue-600" />
-                  <span>Sử dụng một tài khoản Google khác...</span>
+                  <Plus className="w-4 h-4 text-blue-600" />
+                  <span>Sử dụng tài khoản Google khác...</span>
                 </button>
               </div>
             )}
@@ -737,7 +766,7 @@ export const Navbar: React.FC = () => {
                 className="space-y-3.5 border-t border-b border-stone-100 py-3"
               >
                 <div>
-                  <label className="block text-xs font-semibold text-stone-700 mb-1">Email Google / Gmail Thật Của Bạn</label>
+                  <label className="block text-xs font-semibold text-stone-700 mb-1">Địa Chỉ Gmail Thật Của Bạn</label>
                   <input
                     type="email"
                     value={customGoogleEmail}
@@ -749,7 +778,7 @@ export const Navbar: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-stone-700 mb-1">Tên Hiển Thị Tài Khoản</label>
+                  <label className="block text-xs font-semibold text-stone-700 mb-1">Họ Và Tên Hiển Thị</label>
                   <input
                     type="text"
                     value={customGoogleName}
@@ -772,7 +801,7 @@ export const Navbar: React.FC = () => {
                     type="submit"
                     className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-xl text-xs shadow-xs"
                   >
-                    Xác nhận Google
+                    Đăng nhập Google
                   </button>
                 </div>
               </form>
@@ -783,9 +812,9 @@ export const Navbar: React.FC = () => {
               <div className="py-8 text-center space-y-3 border-t border-b border-stone-100">
                 <RefreshCw className="w-8 h-8 text-blue-600 animate-spin mx-auto" />
                 <p className="text-xs font-semibold text-stone-800">
-                  Đang xác thực thông tin tài khoản với Google Security...
+                  Đang kết nối cổng xác thực an toàn Google OAuth 2.0...
                 </p>
-                <p className="text-[11px] text-stone-400">Vui lòng chờ trong giây lát</p>
+                <p className="text-[11px] text-stone-400">Đang đồng bộ hóa phiên đăng nhập chính chủ</p>
               </div>
             )}
 
