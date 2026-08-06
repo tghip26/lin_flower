@@ -106,7 +106,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
           <button
             onClick={() => addToCart(product, defaultSize, [], '')}
-            className="inline-flex items-center justify-center gap-1.5 bg-brand-50 hover:bg-brand-600 text-brand-700 hover:text-white font-extrabold text-xs px-4.5 py-2.5 rounded-full transition-all active:scale-95 border border-brand-200/80 shadow-2xs leading-none min-h-[38px]"
+            className="inline-flex items-center justify-center gap-1.5 bg-brand-50 hover:bg-brand-600 text-brand-700 hover:text-white font-extrabold text-xs px-5 py-2.5 rounded-full transition-all active:scale-95 border border-brand-200/80 shadow-2xs leading-none min-h-[38px]"
             title="Thêm vào giỏ hàng"
           >
             <ShoppingBag className="w-3.5 h-3.5" />

@@ -101,7 +101,7 @@ export const INITIAL_ADD_ONS: AddOn[] = [
     image: 'https://images.unsplash.com/photo-1549007994-cb92caebd54b?auto=format&fit=crop&q=80&w=400'
   },
   {
-    id: 'candle-aroma',
+    id: 'candle-relax',
     name: 'Nến Thơm Thư Giãn Hương Hoa Hồng',
     price: 180000,
     image: 'https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&q=80&w=400'
@@ -169,7 +169,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     isBestSeller: true,
     isFeatured: true,
     inStock: true,
-    occasions: ['Chúc mừng', 'Tân gia', 'Thăm hỏi', 'Cưới hỏi'],
+    occasions: ['Giỏ trái cây', 'Sinh nhật', 'Chúc mừng', 'Tân gia', 'Thăm hỏi'],
     flowerTypes: ['Hoa hồng', 'Hoa cẩm tú cầu']
   },
   {
@@ -226,6 +226,114 @@ export const INITIAL_PRODUCTS: Product[] = [
     inStock: true,
     occasions: ['Cưới hỏi', 'Sự kiện'],
     flowerTypes: ['Hoa hồng', 'Hoa cẩm tú cầu', 'Hoa baby']
+  },
+  {
+    id: 'lf-007',
+    name: 'Bó Hoa Tulip Hà Lan Trắng Tinh Khôi',
+    slug: 'bo-hoa-tulip-ha-lan-trang-tinh-khoi',
+    categoryId: 'hoa-bo',
+    price: 890000,
+    originalPrice: 1050000,
+    images: [
+      'https://images.unsplash.com/photo-1520763185298-1b434c919102?auto=format&fit=crop&q=80&w=800'
+    ],
+    description: 'Bó hoa Tulip Hà Lan nhập khẩu tone màu trắng ngà thanh lịch, ngọt ngào, phù hợp làm quà tặng sinh nhật hay tỏ tình tinh tế.',
+    flowerComposition: '15 Bông Tulip trắng nhập khẩu, Giấy voan cao cấp',
+    isBestSeller: true,
+    isFeatured: true,
+    inStock: true,
+    occasions: ['Sinh nhật', 'Tình yêu', 'Kỷ niệm'],
+    flowerTypes: ['Tulip']
+  },
+  {
+    id: 'lf-008',
+    name: 'Lẵng Hoa Hướng Dương Rạng Rỡ Nắng Mới',
+    slug: 'lang-hoa-huong-duong-rang-ro',
+    categoryId: 'lang-chuc-mung',
+    price: 790000,
+    originalPrice: 920000,
+    images: [
+       me = 'https://images.unsplash.com/photo-1597848212624-a19eb35e2651?auto=format&fit=crop&q=80&w=800'
+    ],
+    description: 'Lẵng hoa chúc mừng kết hợp hoa hướng dương vàng rực rỡ và hoa hồng kem, mang lại nguồn năng lượng tích cực và may mắn.',
+    flowerComposition: '10 Bông Hướng Dương, Hoa Hồng Kem, Hoa Đồng Tiền Vàng',
+    isBestSeller: true,
+    isFeatured: true,
+    inStock: true,
+    occasions: ['Sinh nhật', 'Khai trương', 'Thăng chức'],
+    flowerTypes: ['Hoa hướng dương', 'Hoa hồng']
+  },
+  {
+    id: 'lf-009',
+    name: 'Bó Hoa Baby Hồng Ngọt Ngào Dreamy Pink',
+    slug: 'bo-hoa-baby-hong-ngot-ngao',
+    categoryId: 'hoa-bo',
+    price: 450000,
+    originalPrice: 550000,
+    images: [
+      'https://images.unsplash.com/photo-1563241527-3004b7be0ffd?auto=format&fit=crop&q=80&w=800'
+    ],
+    description: 'Bó hoa baby hồng phun sương cực kỳ dễ thương, bồng bềnh như mây hồng. Quà tặng ngọt ngào cho bạn gái & bạn bè.',
+    flowerComposition: 'Hoa Baby hồng phun sương Hà Lan, nơ lụa mềm mại',
+    isBestSeller: true,
+    isFeatured: false,
+    inStock: true,
+    occasions: ['Sinh nhật', 'Tình yêu', 'Tốt nghiệp'],
+    flowerTypes: ['Hoa baby']
+  },
+  {
+    id: 'lf-010',
+    name: 'Giỏ Trái Cây Kèm Hoa Hồng Ecuador Lin VIP',
+    slug: 'gio-trai-cay-kem-hoa-hong-ecuador',
+    categoryId: 'gio-lang-trai-cay',
+    price: 1450000,
+    originalPrice: 1650000,
+    images: [
+      'https://images.unsplash.com/photo-1610832958506-aa56368176cf?auto=format&fit=crop&q=80&w=800'
+    ],
+    description: 'Giỏ trái cây cao cấp kết hợp dưa lưới Nhật, kiwi xanh, lê Nam Phi cùng hoa hồng Ecuador nhung đỏ sang trọng.',
+    flowerComposition: 'Trái cây nhập khẩu chọn lọc loại 1, Hoa hồng Ecuador',
+    isBestSeller: true,
+    isFeatured: true,
+    inStock: true,
+    occasions: ['Giỏ trái cây', 'Sinh nhật', 'Chúc mừng', 'Biếu tặng'],
+    flowerTypes: ['Hoa hồng']
+  },
+  {
+    id: 'lf-011',
+    name: 'Lẵng Hoa Hồng Kem & Cẩm Tú Cầu Sang Trọng',
+    slug: 'lang-hoa-hong-kem-cam-tu-cau',
+    categoryId: 'lang-chuc-mung',
+    price: 950000,
+    originalPrice: 1100000,
+    images: [
+      'https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&q=80&w=800'
+    ],
+    description: 'Lẵng hoa tươi tone pastel hiện đại nhẹ nhàng, sự kết hợp giữa hoa cẩm tú cầu xanh và hoa hồng kem dâu quý phái.',
+    flowerComposition: 'Hoa Cẩm Tú Cầu, Hoa Hồng Kem Dâu, Hoa Cát Tường',
+    isBestSeller: true,
+    isFeatured: true,
+    inStock: true,
+    occasions: ['Sinh nhật', 'Khai trương', 'Sự kiện'],
+    flowerTypes: ['Hoa cẩm tú cầu', 'Hoa hồng']
+  },
+  {
+    id: 'lf-012',
+    name: 'Bó Hoa Hồng Ecuador Đỏ Nhung 99 Bông VIP',
+    slug: 'bo-hoa-hong-ecuador-99-bong-vip',
+    categoryId: 'hoa-bo',
+    price: 3500000,
+    originalPrice: 3900000,
+    images: [
+      'https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?auto=format&fit=crop&q=80&w=800'
+    ],
+    description: 'Bó hoa 99 bông hồng đỏ nhung Ecuador kiêu sa, tượng trưng cho tình yêu vĩnh cửu. Món quà cầu hôn & kỷ niệm đỉnh cao.',
+    flowerComposition: '99 Bông Hồng Đỏ Ecuador nhập khẩu, lá đô la bạc',
+    isBestSeller: true,
+    isFeatured: true,
+    inStock: true,
+    occasions: ['Sinh nhật', 'Tình yêu', 'Kỷ niệm', 'Valentine'],
+    flowerTypes: ['Hoa hồng']
   }
 ];
 
@@ -248,18 +356,10 @@ export const INITIAL_VOUCHERS: Voucher[] = [
     active: true
   },
   {
-    code: 'FREESHIPBN',
+    code: 'VIPGIAOHANG',
     fixedDiscount: 30000,
-    minOrderValue: 200000,
-    description: 'Miễn phí vận chuyển toàn tỉnh Bắc Ninh',
-    expiryDate: '2026-12-31',
-    active: true
-  },
-  {
-    code: 'THIEP3D',
-    fixedDiscount: 20000,
-    minOrderValue: 100000,
-    description: 'Tặng thiệp chúc mừng 3D cao cấp',
+    minOrderValue: 400000,
+    description: 'Hỗ trợ 30.000đ phí vận chuyển hoả tốc',
     expiryDate: '2026-12-31',
     active: true
   }
@@ -267,175 +367,116 @@ export const INITIAL_VOUCHERS: Voucher[] = [
 
 export const INITIAL_REVIEWS: Review[] = [
   {
-    id: 'rev-1',
-    productId: 'lf-001',
-    customerName: 'Chị Minh Anh (Quế Võ)',
+    id: 'rev-01',
+    customerName: 'Chị Hoàng Mai Phượng',
     rating: 5,
-    comment: 'Hoa giao cực kỳ nhanh, tươi rói rực rỡ luôn! Thiệp chúc mừng in chữ rất đẹp và sang trọng. Sẽ ủng hộ Lin Flower dài dài!',
-    createdAt: '2026-08-01'
+    comment: 'Shop cắm lẵng hoa khai trương siêu đẹp, tone màu đỏ vàng rất tươi và may mắn! Giao hoa đúng giờ hẹn tại Quế Võ, bác chủ nhà mừng lắm.',
+    createdAt: '02/08/2026'
   },
   {
-    id: 'rev-2',
-    productId: 'lf-003',
-    customerName: 'Anh Hoàng Nam (TP Bắc Ninh)',
+    id: 'rev-02',
+    customerName: 'Anh Trần Minh Khoa',
     rating: 5,
-    comment: 'Giỏ trái cây đầy đặn, trái cây nhập khẩu ngọt lịm. Hoa đính kèm tươi nguyên 3 ngày vẫn đẹp. Dịch vụ tuyệt vời 10/10.',
-    createdAt: '2026-08-03'
+    comment: 'Bó hoa hồng đỏ nhân dịp sinh nhật bà xã đẹp xuất sắc, hoa rất tươi giữ được hơn 5 ngày. Dịch vụ tặng thiệp chữ nổi của Lin Flower rất tinh tế.',
+    createdAt: '01/08/2026'
   },
   {
-    id: 'rev-3',
-    productId: 'lf-004',
-    customerName: 'Chị Thu Trang (Phố Mới, Quế Võ)',
+    id: 'rev-03',
+    customerName: 'Cô Nguyễn Thu Hà',
     rating: 5,
-    comment: 'Bộ tráp cưới 7 lễ rồng phượng của Lin Flower siêu lộng lẫy! Họ nhà trai và nhà gái ai cũng khen nức nở vì vừa sang vừa tỉ mỉ.',
-    createdAt: '2026-08-04'
-  },
-  {
-    id: 'rev-4',
-    productId: 'lf-002',
-    customerName: 'Anh Đức Anh (Từ Sơn, Bắc Ninh)',
-    rating: 5,
-    comment: 'Lẵng hoa khai trương màu sắc phối rực rỡ hồng phát. Nhân viên tư vấn nhiệt tình, giao hoa chuẩn giờ tận nơi!',
-    createdAt: '2026-08-05'
-  }
-];
-
-export const INITIAL_ORDERS: Order[] = [
-  {
-    id: 'LF-884920',
-    customerName: 'Nguyễn Văn Hùng',
-    customerPhone: '0988123456',
-    customerEmail: 'hung.nguyen@gmail.com',
-    recipientName: 'Trần Thu Hà',
-    recipientPhone: '0977888999',
-    recipientAddress: 'Số 15 đường Phố Mới, Thị trấn Phố Mới, Quế Võ, Bắc Ninh',
-    deliveryDate: '2026-08-05',
-    deliveryTimeSlot: '14:00 - 16:00',
-    isAnonymous: false,
-    cardMessage: 'Chúc em yêu sinh nhật vui vẻ, luôn rạng rỡ như những bông hoa hồng này!',
-    bannerText: 'Mừng Sinh Nhật Em Yêu - Thu Hà',
-    items: [
-      {
-        id: 'cart-item-1',
-        product: INITIAL_PRODUCTS[0],
-        quantity: 1,
-        selectedSize: { name: 'Cao cấp (+30%)', priceMultiplier: 1.3, description: 'Tăng 30% số lượng hoa' },
-        selectedAddOns: [INITIAL_ADD_ONS[0]],
-        cardMessage: 'Chúc em yêu sinh nhật vui vẻ'
-      }
-    ],
-    subtotal: 865000,
-    discount: 50000,
-    voucherCode: 'XINCHAO',
-    shippingFee: 0,
-    totalPrice: 815000,
-    paymentMethod: 'vietqr',
-    paymentStatus: 'paid',
-    orderStatus: 'shipping',
-    createdAt: '2026-08-05T08:30:00Z',
-    statusHistory: [
-      { status: 'pending', timestamp: '2026-08-05 08:30', note: 'Đã nhận đơn hàng từ website' },
-      { status: 'processing', timestamp: '2026-08-05 08:45', note: 'Đang thiết kế hoa tại cửa hàng Phố Mới' },
-      { status: 'shipping', timestamp: '2026-08-05 09:15', note: 'Shipper Lin Flower đang giao hoa tới người nhận' }
-    ],
-    photoProofUrl: 'https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?auto=format&fit=crop&q=80&w=600'
+    comment: 'Đặt bộ 7 tráp ăn hỏi rồng phượng ở đây cực kỳ ưng ý. Hoa tươi kết chắc chắn, quả tươi ngon. Ai ở Bắc Ninh nên ghé tiệm Lin Flower ủng hộ nhé!',
+    createdAt: '28/07/2026'
   }
 ];
 
 export const INITIAL_BLOG_POSTS: BlogPost[] = [
   {
-    id: 'blog-1',
-    title: 'Bí Quyết Giữ Bình Hoa Tươi Rực Rỡ Đến 10 Ngày Tại Nhà',
-    slug: 'cach-giu-hoa-tuoi-lau-tai-nha',
-    excerpt: 'Mẹo cắt gốc xéo 45 độ, pha dung dịch dưỡng hoa thần thánh và chọn vị trí đặt bình hoa tránh héo quắt đơn giản nhất.',
-    content: `
-Hoa tươi mang lại sức sống và hương thơm ngọt ngào cho không gian sống. Tuy nhiên, nếu không chăm sóc đúng cách, hoa rất dễ bị héo chỉ sau 2-3 ngày. Dưới đây là bí quyết giữ hoa tươi đến 10 ngày từ các nghệ nhân Lin Flower:
-
-### 1. Cắt Gốc Xéo 45 Độ Trong Nước
-Khi mua hoa về hoặc nhận bó hoa từ Lin Flower, hãy nhúng phần gốc cành hoa vào một chậu nước sạch rồi dùng kéo thật sắc cắt chéo một góc 45 độ. Lược bỏ bớt lá ngập nước để tránh vi khuẩn phân hủy làm đục nước.
-
-### 2. Dung Dịch Dưỡng Hoa Tự Nhiên
-Pha vào bình nước sạch 1 thìa đường nhỏ (giúp cung cấp dưỡng chất cho hoa) và 2-3 giọt nước chanh tươi hoặc giấm trắng (giúp kháng khuẩn tiêu diệt vi sinh vật gây thối gốc).
-
-### 3. Vị Trí Đặt Bình Hoa
-Tránh đặt hoa gần quạt gió thổi trực tiếp, điều hòa lạnh hoặc ánh nắng mặt trời gay gắt. Nhiệt độ mát mẻ khoảng 22-25 độ C là môi trường lý tưởng nhất để hoa duy trì độ tươi và màu sắc rạng rỡ.
-    `,
-    coverImage: 'https://images.unsplash.com/photo-1563241527-3004b7be0ffd?auto=format&fit=crop&q=80&w=800',
-    author: 'Lin Flower Master Florist',
-    category: 'Mẹo Chăm Hoa',
-    readTime: '4 phút đọc',
-    createdAt: '2026-08-02',
-    tags: ['Hoa Tươi', 'Mẹo Chăm Hoa', 'Bảo Quản Hoa', 'Lin Flower']
+    id: 'blog-01',
+    title: 'Bí Quyết Chọn Hoa Khai Trương Hồng Phát Mang Lại Tài Lộc Thượng Hạng',
+    slug: 'bi-quyet-chon-hoa-khai-truong-hong-phat',
+    summary: 'Hướng dẫn lựa chọn loại hoa, màu sắc và kiểu dáng lẵng hoa khai trương phù hợp với phong thủy của gia chủ.',
+    content: 'Hoa chúc mừng khai trương là món quà tinh thần mang giá trị phong thủy lớn...',
+    image: 'https://images.unsplash.com/photo-1563241527-3004b7be0ffd?auto=format&fit=crop&q=80&w=800',
+    createdAt: '2026-08-01',
+    author: 'Lin Flower Master Floral'
   },
   {
-    id: 'blog-2',
-    title: 'Giải Mã Ý Nghĩa Số Lượng Bông Hoa Hồng Khi Tặng Người Yêu',
-    slug: 'y-nghia-so-luong-hoa-hong',
-    excerpt: 'Tặng 1 bông là "Em là duy nhất", 9 bông là "Tình yêu vĩnh cửu", 99 bông là "Yêu em trọn đời"... Bỏ túi ngay bí kíp chọn hoa tình yêu.',
-    content: `
-Hoa hồng luôn được mệnh danh là nữ hoàng của các loài hoa tình yêu. Nhưng bạn có biết số lượng bông hoa hồng trong một bó hoa cũng chứa đựng những thông điệp lãng mạn vô cùng tinh tế?
+    id: 'blog-02',
+    title: 'Ý Nghĩa Số Lượng Bông Hoa Hồng Khi Làm Quà Tặng Tình Yêu & Sinh Nhật',
+    slug: 'y-nghia-so-luong-bong-hoa-hong',
+    summary: 'Khám phá thông điệp đằng sau 1 bông, 12 bông, 99 bông hồng đỏ khi trao tặng người thương.',
+    content: 'Mỗi số lượng bông hồng mang một thông điệp tình yêu độc đáo...',
+    image: 'https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?auto=format&fit=crop&q=80&w=800',
+    createdAt: '2026-07-25',
+    author: 'Lin Flower'
+  }
+];
 
-- **1 Bông**: "Em là duy nhất trong trái tim anh."
-- **9 Bông**: "Anh yêu em vĩnh cửu, không bao giờ thay đổi."
-- **11 Bông**: "Anh chỉ yêu duy nhất một mình em."
-- **20 Bông**: "Tình yêu chân thành xuất phát từ con tim."
-- **99 Bông**: "Tình yêu chúng ta trường tồn cùng thời gian."
-
-Hãy chọn số lượng bông hoa phù hợp tại Lin Flower để nhắn gửi trọn vẹn tâm tư tới nửa kia của bạn nhé!
-    `,
-    coverImage: 'https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?auto=format&fit=crop&q=80&w=800',
-    author: 'Lin Flower Editor',
-    category: 'Cẩm Nang Tình Yêu',
-    readTime: '3 phút đọc',
-    createdAt: '2026-08-03',
-    tags: ['Hoa Hồng', 'Tình Yêu', 'Bó Hoa Sinh Nhật', 'Ý Nghĩa Hoa']
+export const INITIAL_ORDERS: Order[] = [
+  {
+    id: 'ORD-88219',
+    customerName: 'Nguyễn Văn Hùng',
+    customerPhone: '0987654321',
+    customerAddress: 'Số 18, Khu phố 5, Thị trấn Phố Mới, Quế Võ, Bắc Ninh',
+    deliveryTime: 'Hôm nay (14:30)',
+    items: [
+      {
+        product: INITIAL_PRODUCTS[0],
+        selectedSize: { name: 'Tiêu chuẩn', priceMultiplier: 1.0, description: '' },
+        selectedAddOns: [],
+        quantity: 1,
+        customCardText: 'Chúc mừng sinh nhật em yêu!'
+      }
+    ],
+    totalAmount: 550000,
+    discountAmount: 50000,
+    finalAmount: 500000,
+    paymentMethod: 'vietqr',
+    paymentStatus: 'paid',
+    orderStatus: 'delivering',
+    createdAt: '2026-08-05 10:15'
   }
 ];
 
 export const INITIAL_CUSTOM_REQUESTS: CustomOrderRequest[] = [
   {
-    id: 'REQ-101',
-    customerName: 'Chị Mai Chi',
-    phone: '0966554433',
-    budget: '1.500.000đ - 2.000.000đ',
-    mainColor: 'Tone Hồng Pastel & White',
-    occasion: 'Kỷ niệm 5 năm ngày cưới',
-    note: 'Cần lẵng hoa cắm sang trọng, nhiều hoa Tulip và Hồng Ecuador',
-    status: 'contacted',
-    createdAt: '2026-08-04'
+    id: 'REQ-001',
+    customerName: 'Chị Mai Anh',
+    customerPhone: '0912345678',
+    occasion: 'Cưới hỏi',
+    budget: 3500000,
+    description: 'Muốn thiết kế bộ 5 tráp ăn hỏi tone màu đỏ nhung có hoa sen trắng và hoa hồng Ecuador.',
+    status: 'pending',
+    createdAt: '2026-08-04 16:20'
   }
 ];
 
 export const INITIAL_VIETQR_CONFIG: VietQRConfig = {
+  bankId: 'MB',
   accountNo: '0363819228',
-  accountName: 'LIN FLOWER - BAC NINH',
-  bankCode: 'MBBANK',
-  bankName: 'Ngân Hàng Quân Đội (MB Bank)',
-  enabled: true
+  accountName: 'LINH FLOWER QUE VO',
+  template: 'compact2'
 };
 
 export const INITIAL_TELEGRAM_CONFIG: TelegramConfig = {
-  botToken: '7123456789:AAF_mock_token_lin_flower_bot',
-  chatId: '-100987654321',
-  enabled: true,
-  notifyOnNewOrder: true,
-  notifyOnStatusChange: true
+  botToken: '',
+  chatId: '',
+  enabled: false
 };
 
 export const INITIAL_GEMINI_CONFIG: GeminiConfig = {
   apiKey: '',
-  model: 'gemini-1.5-flash',
-  systemPrompt: 'Bạn là Trợ lý Tư vấn Hoa Tươi Lin Flower tại Quế Võ, Bắc Ninh. Hãy tư vấn nhiệt tình, lãng mạn, chu đáo các mẫu hoa sinh nhật, lẵng hoa khai trương, giỏ trái cây, tráp cưới và mẹo giữ hoa tươi cho khách hàng.',
-  enabled: true
+  enabled: false
 };
 
 export const INITIAL_LUCKY_WHEEL_CONFIG: LuckyWheelConfig = {
   enabled: true,
-  dailyLimit: 1,
-  prizes: [
-    { id: 'p1', code: 'LINFLOWER10', label: 'Giảm 10% Tổng Đơn', discountText: 'Giảm 10% tối đa 100.000đ', color: '#e63963', probability: 40, active: true },
-    { id: 'p2', code: 'XINCHAO', label: 'Giảm Trực Tiếp 50.000đ', discountText: 'Trừ 50k cho đơn từ 500k', color: '#d97706', probability: 30, active: true },
-    { id: 'p3', code: 'FREESHIPBN', label: 'Miễn Phí Vận Chuyển 0đ', discountText: 'Free ship toàn tỉnh Bắc Ninh', color: '#10b981', probability: 20, active: true },
-    { id: 'p4', code: 'THIEP3D', label: 'Tặng Thiệp 3D Cao Cấp', discountText: 'Tặng thiệp mừng 3D hoa nổi', color: '#8b5cf6', probability: 10, active: true }
+  dailyFreeSpins: 1,
+  slices: [
+    { id: 's1', label: 'Voucher 50K', value: 50000, type: 'voucher', probability: 30 },
+    { id: 's2', label: 'Voucher 100K', value: 100000, type: 'voucher', probability: 15 },
+    { id: 's3', label: 'Chúc Bạn May Mắn', value: 0, type: 'luck', probability: 40 },
+    { id: 's4', label: 'Miễn Phí Ship', value: 30000, type: 'voucher', probability: 15 }
   ]
 };
+

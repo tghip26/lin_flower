@@ -207,15 +207,15 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Products Grid with Generous Spacing */}
-          <div className="min-h-[540px] sm:min-h-[660px] relative">
+          {/* Products Grid with Anchored Min-Height to Prevent Layout Jump */}
+          <div className="min-h-[580px] sm:min-h-[720px] relative transition-all duration-300">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeTab}
-                initial={{ opacity: 0, y: 12 }}
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -12 }}
-                transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
                 className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6.5 sm:gap-8 transform-gpu"
               >
                 {filteredProducts.map((product) => (
