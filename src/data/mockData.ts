@@ -253,7 +253,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     price: 790000,
     originalPrice: 920000,
     images: [
-       me = 'https://images.unsplash.com/photo-1597848212624-a19eb35e2651?auto=format&fit=crop&q=80&w=800'
+      'https://images.unsplash.com/photo-1597848212624-a19eb35e2651?auto=format&fit=crop&q=80&w=800'
     ],
     description: 'Lẵng hoa chúc mừng kết hợp hoa hướng dương vàng rực rỡ và hoa hồng kem, mang lại nguồn năng lượng tích cực và may mắn.',
     flowerComposition: '10 Bông Hướng Dương, Hoa Hồng Kem, Hoa Đồng Tiền Vàng',
