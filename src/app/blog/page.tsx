@@ -17,7 +17,7 @@ export default function BlogPage() {
         <div className="text-center space-y-3 border-b border-pink-100 pb-8">
           <div className="inline-flex items-center gap-1.5 bg-pink-100 text-brand-800 text-xs font-bold px-4 py-1.5 rounded-full border border-pink-200">
             <Sparkles className="w-4 h-4 text-amber-500" />
-            <span>Cẩm Nang 花 Lin Flower</span>
+            <span>Cẩm Nang Lin Flower</span>
           </div>
           <h1 className="font-serif font-black text-3xl sm:text-5xl text-stone-900 leading-tight">
             Kinh Nghiệm Chọn & Bảo Quản Hoa Tươi 🌸
@@ -39,54 +39,56 @@ export default function BlogPage() {
                 {/* Image */}
                 <div className="aspect-[16/9] overflow-hidden rounded-2xl bg-stone-100 relative">
                   <img 
-                    src={post.coverImage} 
+                    src={post.coverImage || post.image || 'https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?auto=format&fit=crop&q=80&w=800'} 
                     alt={post.title} 
                     loading="lazy"
                     decoding="async"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" 
                   />
                   <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-md text-brand-700 font-extrabold text-[11px] px-3 py-1 rounded-full shadow-xs border border-pink-200">
-                    {post.category}
+                    {post.category || 'Mẹo Chọn Hoa'}
                   </div>
                 </div>
 
-                {/* Metadata */}
-                <div className="flex items-center gap-3 text-xs text-stone-500 font-medium">
-                  <span className="flex items-center gap-1">
-                    <Calendar className="w-3.5 h-3.5 text-stone-400" /> {post.createdAt}
-                  </span>
-                  <span>•</span>
-                  <span className="flex items-center gap-1">
-                    <User className="w-3.5 h-3.5 text-stone-400" /> {post.author}
-                  </span>
-                  <span>•</span>
-                  <span className="flex items-center gap-1 text-amber-700 font-semibold">
-                    <BookOpen className="w-3.5 h-3.5" /> {post.readTime || '4 phút đọc'}
-                  </span>
+                {/* Content */}
+                <div className="space-y-2">
+                  <div className="flex items-center gap-4 text-xs text-stone-500 font-medium">
+                    <span className="flex items-center gap-1">
+                      <User className="w-3.5 h-3.5 text-brand-600" />
+                      {post.author}
+                    </span>
+                    <span>•</span>
+                    <span className="flex items-center gap-1">
+                      <Calendar className="w-3.5 h-3.5 text-amber-600" />
+                      {post.createdAt}
+                    </span>
+                  </div>
+
+                  <h3 className="font-serif font-bold text-xl text-stone-900 group-hover:text-brand-600 transition-colors line-clamp-2">
+                    {post.title}
+                  </h3>
+
+                  <p className="text-xs sm:text-sm text-stone-600 line-clamp-3 leading-relaxed font-normal">
+                    {post.excerpt || post.summary || ''}
+                  </p>
                 </div>
-
-                {/* Title */}
-                <h2 className="font-serif font-bold text-xl sm:text-2xl text-stone-900 group-hover:text-brand-600 transition-colors leading-snug">
-                  {post.title}
-                </h2>
-
-                {/* Excerpt */}
-                <p className="text-xs sm:text-sm text-stone-600 line-clamp-3 leading-relaxed font-normal">
-                  {post.excerpt}
-                </p>
               </div>
 
-              {/* Action Link Footer */}
-              <div className="pt-4 mt-4 border-t border-stone-100 flex items-center justify-between">
-                <span className="inline-flex items-center gap-1.5 text-xs font-extrabold text-brand-600 group-hover:text-brand-700 group-hover:translate-x-1 transition-all">
-                  <span>Đọc bài viết chi tiết</span>
+              {/* Action Button Link */}
+              <div className="pt-4 mt-4 border-t border-stone-100 flex items-center justify-between text-xs font-bold text-brand-600">
+                <span className="flex items-center gap-1">
+                  <BookOpen className="w-4 h-4 text-brand-500" />
+                  <span>Đọc bài viết ({post.readTime || '3 phút đọc'})</span>
+                </span>
+                <span className="group-hover:translate-x-1 transition-transform flex items-center gap-1 text-brand-600 font-extrabold">
+                  <span>Xem chi tiết</span>
                   <ArrowRight className="w-4 h-4" />
                 </span>
-                <span className="text-[11px] text-stone-400 font-mono">Xem ngay ➔</span>
               </div>
             </Link>
           ))}
         </div>
+
       </div>
     </PageTransition>
   );

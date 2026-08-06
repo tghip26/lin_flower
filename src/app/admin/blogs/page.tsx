@@ -26,7 +26,7 @@ export default function AdminBlogsPage() {
 
   const filteredPosts = blogPosts.filter((b) =>
     b.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    b.category.toLowerCase().includes(searchQuery.toLowerCase())
+    (b.category || b.summary || '').toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const handleOpenAddModal = () => {
@@ -47,11 +47,11 @@ export default function AdminBlogsPage() {
     setEditingPost(post);
     setTitle(post.title);
     setSlug(post.slug);
-    setExcerpt(post.excerpt);
-    setContent(post.content);
-    setCoverImage(post.coverImage);
-    setAuthor(post.author);
-    setCategory(post.category);
+    setExcerpt(post.excerpt || post.summary || '');
+    setContent(post.content || '');
+    setCoverImage(post.coverImage || post.image || '');
+    setAuthor(post.author || 'Lin Flower Florist');
+    setCategory(post.category || 'Mẹo Chăm Hoa');
     setReadTime(post.readTime || '4 phút đọc');
     setTagsInput(post.tags ? post.tags.join(', ') : 'Hoa Tươi, Lin Flower');
   };

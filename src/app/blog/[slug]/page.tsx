@@ -48,7 +48,7 @@ export default function BlogDetailPage() {
             <span>Quay lại Cẩm Nang Chọn Hoa</span>
           </Link>
           <span className="bg-brand-50 text-brand-700 font-bold text-xs px-3 py-1 rounded-full">
-            {post.category}
+            {post.category || 'Mẹo Chọn Hoa'}
           </span>
         </div>
 
@@ -86,88 +86,73 @@ export default function BlogDetailPage() {
 
         {/* Cover Image */}
         <div className="aspect-[16/9] overflow-hidden rounded-3xl border border-stone-200 shadow-md">
-          <img src={post.coverImage} alt={post.title} className="w-full h-full object-cover" />
+          <img 
+            src={post.coverImage || post.image || 'https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?auto=format&fit=crop&q=80&w=800'} 
+            alt={post.title} 
+            className="w-full h-full object-cover" 
+          />
         </div>
 
         {/* Excerpt Lead Box */}
-        <div className="bg-brand-50/70 p-5 rounded-2xl border border-brand-200 text-sm font-semibold text-stone-800 italic leading-relaxed">
-          "{post.excerpt}"
-        </div>
+        {(post.excerpt || post.summary) && (
+          <div className="bg-brand-50/70 p-5 rounded-2xl border border-brand-200 text-sm font-semibold text-stone-800 italic leading-relaxed">
+            "{post.excerpt || post.summary}"
+          </div>
+        )}
 
         {/* Article Body Content */}
         <div className="prose prose-stone max-w-none text-sm sm:text-base text-stone-700 leading-relaxed space-y-4">
           {post.content.split('\n\n').map((paragraph, idx) => {
             if (paragraph.startsWith('### ')) {
               return (
-                <h3 key={idx} className="font-serif font-bold text-xl text-stone-900 pt-3 border-b border-stone-100 pb-2">
+                <h3 key={idx} className="font-serif font-bold text-xl sm:text-2xl text-stone-900 pt-4 border-t border-stone-100">
                   {paragraph.replace('### ', '')}
                 </h3>
-              );
-            }
-            if (paragraph.startsWith('- ')) {
-              const items = paragraph.split('\n');
-              return (
-                <ul key={idx} className="space-y-1.5 list-disc pl-5 text-sm">
-                  {items.map((it, i) => (
-                    <li key={i}>{it.replace('- ', '')}</li>
-                  ))}
-                </ul>
               );
             }
             return <p key={idx}>{paragraph}</p>;
           })}
         </div>
 
-        {/* Tags */}
-        {post.tags && post.tags.length > 0 && (
-          <div className="flex flex-wrap items-center gap-2 pt-4 border-t border-stone-200">
-            <Bookmark className="w-4 h-4 text-stone-400" />
-            <span className="text-xs font-bold text-stone-500">Thẻ:</span>
-            {post.tags.map((tag, idx) => (
-              <span key={idx} className="text-xs bg-stone-100 text-stone-700 px-3 py-1 rounded-full font-medium">
-                #{tag}
-              </span>
-            ))}
+        {/* Store Guarantee Box */}
+        <div className="bg-gradient-to-r from-amber-500/10 via-pink-500/15 to-amber-500/10 p-6 rounded-3xl border border-amber-300/60 space-y-3">
+          <div className="flex items-center gap-2 text-stone-900 font-extrabold text-base font-serif">
+            <Sparkles className="w-5 h-5 text-amber-500 animate-spin" />
+            <span>Tiệm Hoa Tươi Lin Flower Bắc Ninh</span>
           </div>
-        )}
-
-        {/* CTA Callout */}
-        <div className="bg-gradient-to-r from-stone-900 via-brand-900 to-stone-900 text-white p-6 sm:p-8 rounded-3xl shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div>
-            <div className="flex items-center gap-1.5 text-amber-300 font-bold text-xs uppercase tracking-wider">
-              <Sparkles className="w-4 h-4" /> Dịch Vụ Hoa Tươi Bắc Ninh
-            </div>
-            <h4 className="font-serif font-bold text-xl text-white mt-1">Bạn Cần Tìm Bó Hoa Tươi Thắm Nhất?</h4>
-            <p className="text-xs text-stone-300">Khám phá ngay bộ sưu tập lẵng hoa khai trương, bó hoa sinh nhật tại Lin Flower</p>
+          <p className="text-xs sm:text-sm text-stone-700 leading-relaxed">
+            Cam kết 100% hoa tươi nhập khẩu loại 1, chụp ảnh duyệt thực tế trước khi giao. Hỗ trợ giao nhanh trong vòng 2H tại Quế Võ & toàn khu vực tỉnh Bắc Ninh.
+          </p>
+          <div className="pt-2 flex flex-wrap gap-4 text-xs font-bold text-brand-700">
+            <a href="tel:0363819228" className="hover:underline">📞 Hotline: 0363 819 228</a>
+            <Link href="/products" className="hover:underline">💐 Xem tất cả mẫu hoa tươi</Link>
           </div>
-          <Link
-            href="/products"
-            className="bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs px-6 py-3 rounded-full shadow-pink-soft whitespace-nowrap active:scale-95 transition-all"
-          >
-            Xem Mẫu Hoa Ngay
-          </Link>
         </div>
 
-        {/* Related Posts */}
+        {/* Related Articles */}
         {relatedPosts.length > 0 && (
-          <div className="pt-8 border-t border-stone-200 space-y-6">
-            <h3 className="font-serif font-bold text-xl text-stone-900">Các Bài Viết Cẩm Nang Khác</h3>
-            
+          <div className="pt-10 border-t border-stone-200 space-y-6">
+            <h3 className="font-serif font-bold text-2xl text-stone-900">
+              Bài Viết Liên Quan 📖
+            </h3>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {relatedPosts.slice(0, 2).map((rel) => (
+              {relatedPosts.map((rel) => (
                 <Link
                   key={rel.id}
                   href={`/blog/${rel.slug}`}
-                  className="group bg-white p-4 rounded-2xl border border-stone-200 shadow-sm hover:shadow-md transition-all flex gap-4 items-center"
+                  className="group bg-white p-4 rounded-2xl border border-stone-200 shadow-xs hover:shadow-md transition-all flex gap-4 items-center"
                 >
-                  <img src={rel.coverImage} alt="" className="w-20 h-20 object-cover rounded-xl flex-shrink-0" />
-                  <div className="flex-1 min-w-0">
-                    <span className="text-[10px] bg-brand-50 text-brand-700 font-bold px-2 py-0.5 rounded-md">
-                      {rel.category}
-                    </span>
-                    <h5 className="font-bold text-xs text-stone-800 group-hover:text-brand-600 line-clamp-2 mt-1">
+                  <img 
+                    src={rel.coverImage || rel.image || 'https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?auto=format&fit=crop&q=80&w=800'} 
+                    alt={rel.title} 
+                    className="w-20 h-20 object-cover rounded-xl flex-shrink-0" 
+                  />
+                  <div className="space-y-1 min-w-0">
+                    <span className="text-[10px] font-bold text-brand-600 uppercase">{rel.category || 'Mẹo chọn hoa'}</span>
+                    <h4 className="font-serif font-bold text-sm text-stone-900 group-hover:text-brand-600 transition-colors line-clamp-2">
                       {rel.title}
-                    </h5>
+                    </h4>
                   </div>
                 </Link>
               ))}
