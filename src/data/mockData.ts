@@ -420,24 +420,37 @@ export const INITIAL_ORDERS: Order[] = [
     id: 'ORD-88219',
     customerName: 'Nguyễn Văn Hùng',
     customerPhone: '0987654321',
-    customerAddress: 'Số 18, Khu phố 5, Thị trấn Phố Mới, Quế Võ, Bắc Ninh',
-    deliveryTime: 'Hôm nay (14:30)',
+    customerEmail: 'hung.nguyen@gmail.com',
+    recipientName: 'Trần Thị Thảo',
+    recipientPhone: '0987654321',
+    recipientAddress: 'Số 18, Khu phố 5, Thị trấn Phố Mới, Quế Võ, Bắc Ninh',
+    deliveryDate: '2026-08-06',
+    deliveryTimeSlot: '14:00 - 16:00',
+    isAnonymous: false,
+    cardMessage: 'Chúc mừng sinh nhật em yêu!',
     items: [
       {
+        id: 'cart-item-01',
         product: INITIAL_PRODUCTS[0],
         selectedSize: { name: 'Tiêu chuẩn', priceMultiplier: 1.0, description: '' },
         selectedAddOns: [],
         quantity: 1,
-        customCardText: 'Chúc mừng sinh nhật em yêu!'
+        cardMessage: 'Chúc mừng sinh nhật em yêu!'
       }
     ],
-    totalAmount: 550000,
-    discountAmount: 50000,
-    finalAmount: 500000,
+    subtotal: 550000,
+    discount: 50000,
+    shippingFee: 0,
+    totalPrice: 500000,
     paymentMethod: 'vietqr',
     paymentStatus: 'paid',
-    orderStatus: 'delivering',
-    createdAt: '2026-08-05 10:15'
+    orderStatus: 'shipping',
+    createdAt: '2026-08-05 10:15',
+    statusHistory: [
+      { status: 'pending', timestamp: '2026-08-05 10:15', note: 'Đơn hàng đã khởi tạo' },
+      { status: 'processing', timestamp: '2026-08-05 10:30', note: 'Nghệ nhân đang cắm hoa' },
+      { status: 'shipping', timestamp: '2026-08-05 11:00', note: 'Shipper đang giao hàng' }
+    ]
   }
 ];
 
@@ -445,41 +458,47 @@ export const INITIAL_CUSTOM_REQUESTS: CustomOrderRequest[] = [
   {
     id: 'REQ-001',
     customerName: 'Chị Mai Anh',
-    customerPhone: '0912345678',
+    phone: '0912345678',
+    budget: '3.500.000đ',
+    mainColor: 'Đỏ nhung & Trắng',
     occasion: 'Cưới hỏi',
-    budget: 3500000,
-    description: 'Muốn thiết kế bộ 5 tráp ăn hỏi tone màu đỏ nhung có hoa sen trắng và hoa hồng Ecuador.',
+    note: 'Muốn thiết kế bộ 5 tráp ăn hỏi tone màu đỏ nhung có hoa sen trắng và hoa hồng Ecuador.',
     status: 'pending',
     createdAt: '2026-08-04 16:20'
   }
 ];
 
 export const INITIAL_VIETQR_CONFIG: VietQRConfig = {
-  bankId: 'MB',
   accountNo: '0363819228',
   accountName: 'LINH FLOWER QUE VO',
-  template: 'compact2'
+  bankCode: 'MB',
+  bankName: 'MBBank - Ngân hàng Quân Đội',
+  enabled: true
 };
 
 export const INITIAL_TELEGRAM_CONFIG: TelegramConfig = {
   botToken: '',
   chatId: '',
-  enabled: false
+  enabled: false,
+  notifyOnNewOrder: true,
+  notifyOnStatusChange: true
 };
 
 export const INITIAL_GEMINI_CONFIG: GeminiConfig = {
   apiKey: '',
+  model: 'gemini-1.5-flash',
+  systemPrompt: 'Bạn là trợ lý tư vấn hoa tươi Lin Flower tại Quế Võ, Bắc Ninh.',
   enabled: false
 };
 
 export const INITIAL_LUCKY_WHEEL_CONFIG: LuckyWheelConfig = {
   enabled: true,
-  dailyFreeSpins: 1,
-  slices: [
-    { id: 's1', label: 'Voucher 50K', value: 50000, type: 'voucher', probability: 30 },
-    { id: 's2', label: 'Voucher 100K', value: 100000, type: 'voucher', probability: 15 },
-    { id: 's3', label: 'Chúc Bạn May Mắn', value: 0, type: 'luck', probability: 40 },
-    { id: 's4', label: 'Miễn Phí Ship', value: 30000, type: 'voucher', probability: 15 }
+  dailyLimit: 1,
+  prizes: [
+    { id: 's1', code: 'LINFLOWER10', label: 'Voucher 10%', discountText: 'Giảm 10%', color: '#f43f5e', probability: 30, active: true },
+    { id: 's2', code: 'XINCHAO', label: 'Voucher 50K', discountText: 'Giảm 50.000đ', color: '#f59e0b', probability: 20, active: true },
+    { id: 's3', code: 'VIPGIAOHANG', label: 'Miễn Phí Ship', discountText: 'Giảm 30.000đ ship', color: '#10b981', probability: 20, active: true },
+    { id: 's4', code: 'CHUCMAYMAN', label: 'Chúc Bạn May Mắn Lần Sau', discountText: 'Thêm lượt ngày mai', color: '#6b7280', probability: 30, active: true }
   ]
 };
 
