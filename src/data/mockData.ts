@@ -368,6 +368,7 @@ export const INITIAL_VOUCHERS: Voucher[] = [
 export const INITIAL_REVIEWS: Review[] = [
   {
     id: 'rev-01',
+    productId: 'lf-002',
     customerName: 'Chị Hoàng Mai Phượng',
     rating: 5,
     comment: 'Shop cắm lẵng hoa khai trương siêu đẹp, tone màu đỏ vàng rất tươi và may mắn! Giao hoa đúng giờ hẹn tại Quế Võ, bác chủ nhà mừng lắm.',
@@ -375,6 +376,7 @@ export const INITIAL_REVIEWS: Review[] = [
   },
   {
     id: 'rev-02',
+    productId: 'lf-001',
     customerName: 'Anh Trần Minh Khoa',
     rating: 5,
     comment: 'Bó hoa hồng đỏ nhân dịp sinh nhật bà xã đẹp xuất sắc, hoa rất tươi giữ được hơn 5 ngày. Dịch vụ tặng thiệp chữ nổi của Lin Flower rất tinh tế.',
@@ -382,6 +384,7 @@ export const INITIAL_REVIEWS: Review[] = [
   },
   {
     id: 'rev-03',
+    productId: 'lf-004',
     customerName: 'Cô Nguyễn Thu Hà',
     rating: 5,
     comment: 'Đặt bộ 7 tráp ăn hỏi rồng phượng ở đây cực kỳ ưng ý. Hoa tươi kết chắc chắn, quả tươi ngon. Ai ở Bắc Ninh nên ghé tiệm Lin Flower ủng hộ nhé!',

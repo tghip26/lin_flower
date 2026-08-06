@@ -100,7 +100,7 @@ export interface Voucher {
 
 export interface Review {
   id: string;
-  productId: string;
+  productId?: string;
   customerName: string;
   rating: number; // 1-5
   comment: string;
