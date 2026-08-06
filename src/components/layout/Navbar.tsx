@@ -11,6 +11,12 @@ import { useStore } from '@/context/StoreContext';
 import { CartDrawer } from '@/components/cart/CartDrawer';
 import { LinFlowerLogo } from '@/components/common/LinFlowerLogo';
 
+declare global {
+  interface Window {
+    google?: any;
+  }
+}
+
 export const Navbar: React.FC = () => {
   const pathname = usePathname();
   const router = useRouter();
@@ -21,7 +27,7 @@ export const Navbar: React.FC = () => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [authMode, setAuthMode] = useState<'login' | 'register'>('login');
   
-  // User Profile Dropdown Toggle State (Fixes mouse leave gap issue!)
+  // User Profile Dropdown Toggle State
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const userMenuRef = useRef<HTMLDivElement>(null);
 
@@ -30,6 +36,7 @@ export const Navbar: React.FC = () => {
   const [googleStep, setGoogleStep] = useState<'choose' | 'custom_input' | 'authenticating'>('choose');
   const [customGoogleEmail, setCustomGoogleEmail] = useState('');
   const [customGoogleName, setCustomGoogleName] = useState('');
+  const [isGisLoaded, setIsGisLoaded] = useState(false);
 
   // User Authentication State
   const [loggedInUser, setLoggedInUser] = useState<{ name: string; email: string; avatar?: string } | null>(null);
@@ -72,6 +79,14 @@ export const Navbar: React.FC = () => {
       } catch (e) {}
     }
 
+    // Load Official Google Identity Services Script
+    const script = document.createElement('script');
+    script.src = 'https://accounts.google.com/gsi/client';
+    script.async = true;
+    script.defer = true;
+    script.onload = () => setIsGisLoaded(true);
+    document.body.appendChild(script);
+
     // Close user menu when clicking outside
     const handleClickOutside = (event: MouseEvent) => {
       if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
@@ -91,6 +106,46 @@ export const Navbar: React.FC = () => {
       case 'hoa-hieu': return <Flower2 className="w-4 h-4 text-purple-600" />;
       case 'trang-tri-su-kien': return <Sparkles className="w-4 h-4 text-amber-500" />;
       default: return <Flower2 className="w-4 h-4 text-brand-600" />;
+    }
+  };
+
+  // Trigger Live Google OAuth 2.0 Identity Token Client
+  const handleLiveGoogleOAuth = () => {
+    const googleClientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
+
+    if (window.google?.accounts?.oauth2 && googleClientId) {
+      const client = window.google.accounts.oauth2.initTokenClient({
+        client_id: googleClientId,
+        scope: 'email profile openid',
+        callback: async (tokenResponse: any) => {
+          if (tokenResponse && tokenResponse.access_token) {
+            try {
+              // Fetch authenticated profile directly from Google API
+              const res = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+                headers: { Authorization: `Bearer ${tokenResponse.access_token}` }
+              });
+              const googleProfile = await res.json();
+              if (googleProfile && googleProfile.email) {
+                const authenticatedUser = {
+                  name: googleProfile.name || googleProfile.email.split('@')[0],
+                  email: googleProfile.email,
+                  avatar: googleProfile.picture || `https://ui-avatars.com/api/?name=${encodeURIComponent(googleProfile.name)}&background=ea4335&color=fff`
+                };
+                setLoggedInUser(authenticatedUser);
+                localStorage.setItem('lin_flower_user', JSON.stringify(authenticatedUser));
+                setUserRole('customer');
+                setIsAuthModalOpen(false);
+                setIsGooglePopupOpen(false);
+                return;
+              }
+            } catch (err) {}
+          }
+        }
+      });
+      client.requestAccessToken();
+    } else {
+      // Open Google Account Chooser Modal with live user input
+      handleOpenGoogleModal();
     }
   };
 
@@ -575,9 +630,9 @@ export const Navbar: React.FC = () => {
               </button>
             </div>
 
-            {/* Google OAuth Trigger Button */}
+            {/* Live Google OAuth 2.0 Trigger Button */}
             <button
-              onClick={handleOpenGoogleModal}
+              onClick={handleLiveGoogleOAuth}
               className="w-full flex items-center justify-center gap-3 bg-white hover:bg-stone-50 border border-stone-300 text-stone-800 font-bold py-3 px-4 rounded-2xl shadow-xs transition-all active:scale-98 cursor-pointer"
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24">
@@ -586,7 +641,7 @@ export const Navbar: React.FC = () => {
                 <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
                 <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
               </svg>
-              <span>Đăng nhập chuẩn với Google</span>
+              <span>Đăng nhập trực tiếp với Google</span>
             </button>
 
             <div className="relative flex items-center justify-center">
@@ -728,7 +783,7 @@ export const Navbar: React.FC = () => {
             {/* Google OAuth Steps */}
             {googleStep === 'choose' && (
               <div className="space-y-2 border-t border-b border-stone-100 py-3">
-                {/* Real User Account Option from Screenshot */}
+                {/* Real User Account Option */}
                 <button
                   onClick={() => handleConfirmGoogleAuth('Trương Hoàng Hiệp', 'hiplaika263@gmail.com', 'https://ui-avatars.com/api/?name=Truong+Hoang+Hiep&background=ea4335&color=fff')}
                   className="w-full flex items-center gap-3 p-3 rounded-2xl hover:bg-stone-50 border border-stone-200 transition-all text-left group shadow-2xs"
